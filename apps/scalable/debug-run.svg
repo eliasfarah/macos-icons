@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" version="1.1" viewBox="0 0 16.933 16.933">
+ <defs>
+  <style id="current-color-scheme" type="text/css">.ColorScheme-Text {
+        color:#5d656b;
+      }</style>
+  <linearGradient id="a" x1="7.937" x2="7.937" y1="15.081" y2="1.852" gradientUnits="userSpaceOnUse">
+   <stop stop-color="#c2c0bd" offset="0" />
+   <stop stop-color="#e5e5e5" offset="1" />
+  </linearGradient>
+ </defs>
+ <rect x="1.0583" y="1.0501" width="14.817" height="14.817" rx="3.44" ry="3.44" fill="url(#a)" stroke-width=".26458" />
+ <path d="m1.0583 4.7624h14.816v0.26458h-14.816z" fill-rule="evenodd" opacity=".15" stroke-width=".26458" style="paint-order:stroke fill markers" />
+ <path d="m2.1166 5.5561c-0.29315 0-0.52916 0.236-0.52916 0.52916v6.0853c0 1.6123 1.298 2.9104 2.9104 2.9104h7.9373c1.6123 0 2.9104-1.298 2.9104-2.9104v-6.0853c0-0.29315-0.236-0.52916-0.52916-0.52916z" fill="#ffffff" fill-rule="evenodd" opacity=".5" stroke-width=".26458" style="paint-order:stroke fill markers" />
+ <circle cx="3.4395" cy="3.1749" r=".52916" fill-rule="evenodd" opacity=".5" stroke-width=".26458" style="paint-order:stroke fill markers" />
+ <circle cx="12.171" cy="12.171" r="4.2333" fill="#666666" stroke-linecap="square" stroke-width=".14111" />
+ <path d="m12.197 9.5512-0.37413 0.37465 1.9807 1.9802h-4.2787v0.52916h4.2787l-1.9807 1.9802 0.37413 0.37465 2.6194-2.6194-0.37413-0.37413z" fill="#ffffff" stroke-linecap="square" stroke-width=".08101" />
+ <circle cx="5.027" cy="3.1749" r=".52916" fill-rule="evenodd" opacity=".5" stroke-width=".26458" style="paint-order:stroke fill markers" />
+ <circle cx="6.6145" cy="3.1749" r=".52916" fill-rule="evenodd" opacity=".5" stroke-width=".26458" style="paint-order:stroke fill markers" />
+</svg>

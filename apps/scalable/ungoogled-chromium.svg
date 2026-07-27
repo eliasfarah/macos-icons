@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="none" version="1.1">
+ <defs>
+  <linearGradient id="d" x1=".5" x2=".5" y2="1">
+   <stop stop-color="#fbaeae" offset="0" />
+   <stop stop-color="#f88c8c" offset="1" />
+  </linearGradient>
+  <pattern id="e" x="32.001" y="21.966" width="20.007" height="30.01" patternUnits="userSpaceOnUse">
+   <rect width="20.007" height="30.01" fill="url(&quot;#d&quot;)" />
+  </pattern>
+  <linearGradient id="h" x1=".093" x2=".71" y1="-.018" y2=".977">
+   <stop stop-color="#f66161" offset="0" />
+   <stop stop-color="#f44444" offset="1" />
+  </linearGradient>
+  <pattern id="i" x="11.994" y="21.969" width="28.67" height="30.008" patternUnits="userSpaceOnUse">
+   <rect width="28.67" height="30.008" fill="url(&quot;#h&quot;)" />
+  </pattern>
+ </defs>
+ <rect x="4" y="3.969" width="56.002" height="56.002" rx="13.002" ry="13.002" fill="#ffffff" />
+ <path class="fills" d="m32 32 8.663 5.001-8.663 15.005c11.05 0 20.007-8.957 20.007-20.006 0-3.645-0.98-7.06-2.683-10.004h-17.324z" fill="url(#e)" />
+ <path class="fills" d="m32 11.994c-7.405 0-13.866 4.026-17.325 10.006l8.661 15.002 8.664-5.001v-10.004h17.324c-3.46-5.978-9.92-10.003-17.324-10.003z" fill="#e11919" />
+ <path class="fills" d="m11.993 32c0 11.049 8.957 20.006 20.007 20.006l8.663-15.005-8.663-5.001-8.663 5.001-8.662-15.002c-1.703 2.942-2.682 6.356-2.682 10.001z" fill="url(#i)" />
+ <path class="fills" d="m42.004 32c0 5.524-4.479 10.003-10.004 10.003s-10.004-4.479-10.004-10.003c0-5.525 4.479-10.004 10.004-10.004s10.004 4.479 10.004 10.004z" fill="#ffffff" />
+ <path class="fills" d="m40.128 32c0 4.489-3.639 8.128-8.128 8.128s-8.128-3.639-8.128-8.128 3.639-8.128 8.128-8.128 8.128 3.639 8.128 8.128z" fill="#ee2d2d" />
+</svg>
