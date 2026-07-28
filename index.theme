@@ -1,6 +1,6 @@
 [Icon Theme]
-Name=AZ-OS-3D
-Comment=MacOSX style icon theme for linux.
+Name=macos-icons
+Comment=MacOSX 3D Glassmorphism style icon theme for Linux.
 Inherits=Adwaita,hicolor,breeze
 Example=folder
 
@@ -43,5 +43,3 @@ Context=Places
 MinSize=32
 MaxSize=512
 Type=Scalable
-
-

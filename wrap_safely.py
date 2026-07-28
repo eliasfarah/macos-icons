@@ -54,7 +54,7 @@ def wrap_svg(filepath):
         return False
 
 def main():
-    target_dir = Path("/home/farah/Projects/AZ-OS-3D-Prime-Icons/apps/scalable")
+    target_dir = Path(__file__).parent.resolve() / "apps/scalable"
     modified_count = 0
     for svg_file in target_dir.glob("*.svg"):
         if svg_file.is_file() and not svg_file.is_symlink():

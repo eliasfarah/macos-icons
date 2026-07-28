@@ -33,7 +33,7 @@ def process_file(filepath):
         print(f"Erro ao processar {filepath}: {e}")
 
 def main():
-    target_dir = Path("/home/farah/Projects/AZ-OS-3D-Prime-Icons/apps/scalable")
+    target_dir = Path(__file__).parent.resolve() / "apps/scalable"
     for svg_file in target_dir.glob("*.svg"):
         if svg_file.is_file() and not svg_file.is_symlink():
             process_file(svg_file)

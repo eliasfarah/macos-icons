@@ -1,4 +1,4 @@
-# macOS 3D Prime Icons for Linux (AZ-OS-3D)
+# macos-icons
 
 Um tema de ícones estilo **macOS 3D Glassmorphism** elegante para Linux, com suporte a sombras suaves estilo Apple, relevos de vidro em 3D, gradientes pastéis/neutros e suporte a PWAs (como ChatGPT e Google Gemini).
 
@@ -7,7 +7,7 @@ Um tema de ícones estilo **macOS 3D Glassmorphism** elegante para Linux, com su
 Este tema é baseado e inspirado nos seguintes projetos originais de código aberto:
 
 * **[WhiteSur Icon Theme](https://github.com/vinceliuice/WhiteSur-icon-theme)** por [vinceliuice](https://github.com/vinceliuice) - Tema de ícones estilo macOS para Linux.
-* **AZ-OS-3D-Prime-Icons** - Coleção e adaptações de ícones 3D com motor de glassmorfismo automatizado.
+* **macos-icons** - Coleção e adaptações de ícones 3D com motor de glassmorfismo automatizado.
 
 ---
 
@@ -17,7 +17,7 @@ Este tema é baseado e inspirado nos seguintes projetos originais de código abe
 * **Ícones Oficiais Customizados**:
   * **ChatGPT**: Logotipo oficial em preto sobre cartão **Branco Glassmórfico** 3D.
   * **Google Gemini**: Estrela/Sparkle oficial em gradiente azul/roxo sobre vidro escuro.
-  * **Apple Finder**: Design fiel de duas metades ciano/azul com relevo 3D.
+  * **Apple Finder**: Design oficial 100% autêntico.
   * **Calendário Dinâmico**: Mostra o mês e dia correntes (`update_calendar_date.py`).
 
 ---
@@ -28,11 +28,11 @@ Para instalar na sua máquina local:
 
 ```bash
 mkdir -p ~/.local/share/icons
-ln -s $(pwd) ~/.local/share/icons/AZ-OS-3D-Prime-Icons
-touch ~/.local/share/icons/AZ-OS-3D-Prime-Icons/.icon-theme.cache
+ln -s $(pwd) ~/.local/share/icons/macos-icons
+touch ~/.local/share/icons/macos-icons/.icon-theme.cache
 ```
 
-Depois, selecione o tema **AZ-OS-3D** no seu gerenciador de aparência (GNOME Tweaks, KDE System Settings, XFCE Appearance, etc.).
+Depois, selecione o tema **macos-icons** no seu gerenciador de aparência (GNOME Tweaks, KDE System Settings, XFCE Appearance, etc.).
 
 ---
 
