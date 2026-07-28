@@ -1,35 +1,51 @@
-<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <!-- Elegant Apple-style Drop Shadow -->
     <filter id="glass-shadow" x="-20%" y="-20%" width="140%" height="140%">
       <feDropShadow dx="0" dy="2.5" stdDeviation="2.5" flood-color="#000000" flood-opacity="0.25" />
     </filter>
-    
-    <!-- 3D Bevel/Glass Highlights -->
     <linearGradient id="inner-bevel" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.6" />
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.7" />
       <stop offset="25%" stop-color="#ffffff" stop-opacity="0.0" />
       <stop offset="75%" stop-color="#000000" stop-opacity="0.0" />
-      <stop offset="100%" stop-color="#000000" stop-opacity="0.25" />
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.2" />
     </linearGradient>
-    
-    <!-- Premium Soft Background Gradient -->
-    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#f6d365" />
-      <stop offset="100%" stop-color="#fda085" />
+    <linearGradient id="paper-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fffde7" />
+      <stop offset="100%" stop-color="#fef08a" />
     </linearGradient>
-
-    <!-- Unified Squircle Mask -->
+    <linearGradient id="yellow-header" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#facc15" />
+      <stop offset="100%" stop-color="#eab308" />
+    </linearGradient>
     <clipPath id="squircle-clip">
       <rect width="56" height="56" x="4" y="4" rx="14" ry="14" />
     </clipPath>
   </defs>
+
   <g filter="url(#glass-shadow)">
     <g clip-path="url(#squircle-clip)">
-      <image href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiPjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iYiI+PHN0b3Agb2Zmc2V0PSIwIiBzdHlsZT0ic3RvcC1jb2xvcjojZmZmO3N0b3Atb3BhY2l0eToxIiAvPjxzdG9wIG9mZnNldD0iMSIgc3R5bGU9InN0b3AtY29sb3I6I2ZmZjtzdG9wLW9wYWNpdHk6LjI1IiAvPjwvbGluZWFyR3JhZGllbnQ+PGxpbmVhckdyYWRpZW50IGlkPSJhIj48c3RvcCBvZmZzZXQ9IjAiIHN0eWxlPSJzdG9wLWNvbG9yOiM0MDU4ZjA7c3RvcC1vcGFjaXR5OjEiIC8+PHN0b3Agb2Zmc2V0PSIxIiBzdHlsZT0ic3RvcC1jb2xvcjojNDY2ZGY4O3N0b3Atb3BhY2l0eToxIiAvPjwvbGluZWFyR3JhZGllbnQ+PGxpbmVhckdyYWRpZW50IHhsaW5rOmhyZWY9IiNhIiBpZD0iZCIgeDE9IjMyIiB4Mj0iMzIiIHkxPSIxOC4wMDQiIHkyPSI0NS45OTgiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIiAvPjxsaW5lYXJHcmFkaWVudCBpZD0iYyIgeDE9IjcuOTM3IiB4Mj0iNy45MzciIHkxPSIxNS4wODEiIHkyPSIxLjg1MiIgZ3JhZGllbnRUcmFuc2Zvcm09InNjYWxlKDMuNzc5NikiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiNmMWVmZWIiIC8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjZmRmY2ZjIiAvPjwvbGluZWFyR3JhZGllbnQ+PHJhZGlhbEdyYWRpZW50IHhsaW5rOmhyZWY9IiNiIiBpZD0iZSIgY3g9IjM0LjM0OCIgY3k9IjI5LjY1MSIgcj0iMTMuMzE4IiBmeD0iMzQuMzQ4IiBmeT0iMjkuNjUxIiBncmFkaWVudFRyYW5zZm9ybT0ibWF0cml4KDEgMCAwIC45NDIwOCAuMzg2IC41NikiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIiAvPjxmaWx0ZXIgaWQ9ImYiIHdpZHRoPSIxLjI4NSIgaGVpZ2h0PSIxLjMwMyIgeD0iLS4xNDMiIHk9Ii0uMTUyIiBzdHlsZT0iY29sb3ItaW50ZXJwb2xhdGlvbi1maWx0ZXJzOnNSR0IiPjxmZUdhdXNzaWFuQmx1ciBzdGREZXZpYXRpb249IjEuNTg0IiAvPjwvZmlsdGVyPjwvZGVmcz48cmVjdCB3aWR0aD0iNTYiIGhlaWdodD0iNTYiIHg9IjQiIHk9IjQiIGZpbGw9InVybCgjYykiIHJ4PSIxMyIgcnk9IjEzIiBzdHlsZT0iZmlsbDp1cmwoI2MpIiAvPjxwYXRoIGZpbGw9IiNhMDc2ZmUiIGQ9Ik0zMy40MzQgMTUuNDY1aC4xM0ExNi41MDQgMTYuNTA0IDAgMCAxIDUwLjA2NyAzMS45N2ExNi41NyAxNi41NyAwIDAgMS0xNi42MzMgMTYuNTA0SDIxLjI0NmE0LjQ0NSA0LjQ0NSAwIDAgMS00LjQ0Ni00LjQ0NlYzMi4xYTE2LjYzNCAxNi42MzQgMCAwIDEgMTYuNjM0LTE2LjYzNCIgc3R5bGU9ImZpbGw6dXJsKCNkKTtmaWxsLW9wYWNpdHk6MSIgLz48ZWxsaXBzZSBjeD0iMzQuNzM0IiBjeT0iMjguNDk0IiByeD0iMTMuMzE4IiByeT0iMTIuNTQ3IiBzdHlsZT0ib3BhY2l0eTouNTtmaWxsOnVybCgjZSk7c3Ryb2tlOm5vbmU7c3Ryb2tlLXdpZHRoOjA7c3Ryb2tlLWxpbmVjYXA6c3F1YXJlO3BhaW50LW9yZGVyOmZpbGwgbWFya2VycyBzdHJva2U7ZmlsdGVyOnVybCgjZikiIC8+PC9zdmc+" x="0" y="0" width="64" height="64" />
+      <rect width="56" height="56" x="4" y="4" fill="url(#paper-bg)" />
+      
+      <!-- Top Yellow Header -->
+      <rect width="56" height="12" x="4" y="4" fill="url(#yellow-header)" />
+      
+      <!-- Notebook Lined Paper Lines -->
+      <line x1="12" y1="22" x2="52" y2="22" stroke="#eab308" stroke-width="1" opacity="0.5" />
+      <line x1="12" y1="29" x2="52" y2="29" stroke="#eab308" stroke-width="1" opacity="0.5" />
+      <line x1="12" y1="36" x2="52" y2="36" stroke="#eab308" stroke-width="1" opacity="0.5" />
+      <line x1="12" y1="43" x2="52" y2="43" stroke="#eab308" stroke-width="1" opacity="0.5" />
+      <line x1="12" y1="50" x2="52" y2="50" stroke="#eab308" stroke-width="1" opacity="0.5" />
+      
+      <!-- Pencil Diagonal -->
+      <g transform="translate(18, 12) rotate(-35)">
+        <rect x="0" y="0" width="6" height="30" rx="1" fill="#f97316" />
+        <path d="M 0 30 L 3 36 L 6 30 Z" fill="#fde047" />
+        <path d="M 2 34 L 3 36 L 4 34 Z" fill="#1e293b" />
+        <rect x="0" y="-3" width="6" height="3" fill="#cbd5e1" />
+        <rect x="0" y="-7" width="6" height="4" rx="1" fill="#f43f5e" />
+      </g>
     </g>
   </g>
-  
-  <!-- Glass Bevel Overlay matching the clip boundary exactly -->
+
   <rect width="56" height="56" x="4" y="4" rx="14" ry="14" fill="none" stroke="url(#inner-bevel)" stroke-width="1.5" />
 </svg>
