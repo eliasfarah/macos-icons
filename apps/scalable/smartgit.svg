@@ -1,1 +1,35 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64"><defs><linearGradient id="d" x1="401.58" x2="401.92" y1="513.81" y2="532.44" gradientTransform="translate(-580.81 -753.64)scale(1.4999)" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#9559b6" /><stop offset="1" stop-color="#8e44ad" /></linearGradient><linearGradient id="c" x1="417.87" x2="417.53" y1="516.47" y2="533.46" gradientTransform="translate(-580.81 -753.64)scale(1.4999)" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#1d99f3" /><stop offset="1" stop-color="#2972a7" /></linearGradient><linearGradient id="a" x1="7.937" x2="7.937" y1="15.081" y2="1.852" gradientTransform="scale(3.7796)" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#f1efeb" /><stop offset="1" stop-color="#fdfcfc" /></linearGradient><filter id="b" width="1.1" height="1.151" x="-.05" y="-.075" color-interpolation-filters="sRGB"><feGaussianBlur stdDeviation=".936" /></filter></defs><rect width="56.002" height="56.002" x="4" y="3.969" fill="url(#a)" rx="13.002" ry="13.002" /><g stroke-width="1.071" filter="url(#b)" opacity=".15" transform="translate(2.134 2.206)scale(.93337)"><path d="m37.472 20.644-1.291 6.436 7.816 4.884-10.055 6.283-1.724 8.597 22.279-14.852zm-5.474-3.645L9.5 31.998l17.27 11.513 1.303-6.498L20 31.97l10.388-6.491 1.688-8.425z" /></g><g stroke-width="1.071"><path fill="url(#c)" d="m37.472 20.644-1.291 6.436 7.816 4.884-10.055 6.283-1.724 8.597 22.279-14.852z" transform="translate(2.134 2.206)scale(.93337)" /><path fill="url(#d)" d="M31.998 16.999 9.5 31.998l17.27 11.513 1.303-6.498L20 31.97l10.388-6.491 1.688-8.425z" transform="translate(2.134 2.206)scale(.93337)" /></g></svg>
+<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <defs>
+    <!-- Elegant Apple-style Drop Shadow -->
+    <filter id="glass-shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="2.5" stdDeviation="2.5" flood-color="#000000" flood-opacity="0.25" />
+    </filter>
+    
+    <!-- 3D Bevel/Glass Highlights -->
+    <linearGradient id="inner-bevel" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.6" />
+      <stop offset="25%" stop-color="#ffffff" stop-opacity="0.0" />
+      <stop offset="75%" stop-color="#000000" stop-opacity="0.0" />
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.25" />
+    </linearGradient>
+    
+    <!-- Premium Soft Background Gradient -->
+    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff9a9e" />
+      <stop offset="100%" stop-color="#fecfef" />
+    </linearGradient>
+
+    <!-- Unified Squircle Mask -->
+    <clipPath id="squircle-clip">
+      <rect width="56" height="56" x="4" y="4" rx="14" ry="14" />
+    </clipPath>
+  </defs>
+  <g filter="url(#glass-shadow)">
+    <g clip-path="url(#squircle-clip)">
+      <image href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJkIiB4MT0iNDAxLjU4IiB4Mj0iNDAxLjkyIiB5MT0iNTEzLjgxIiB5Mj0iNTMyLjQ0IiBncmFkaWVudFRyYW5zZm9ybT0idHJhbnNsYXRlKC01ODAuODEgLTc1My42NClzY2FsZSgxLjQ5OTkpIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjOTU1OWI2IiAvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzhlNDRhZCIgLz48L2xpbmVhckdyYWRpZW50PjxsaW5lYXJHcmFkaWVudCBpZD0iYyIgeDE9IjQxNy44NyIgeDI9IjQxNy41MyIgeTE9IjUxNi40NyIgeTI9IjUzMy40NiIgZ3JhZGllbnRUcmFuc2Zvcm09InRyYW5zbGF0ZSgtNTgwLjgxIC03NTMuNjQpc2NhbGUoMS40OTk5KSIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPjxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iIzFkOTlmMyIgLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiMyOTcyYTciIC8+PC9saW5lYXJHcmFkaWVudD48bGluZWFyR3JhZGllbnQgaWQ9ImEiIHgxPSI3LjkzNyIgeDI9IjcuOTM3IiB5MT0iMTUuMDgxIiB5Mj0iMS44NTIiIGdyYWRpZW50VHJhbnNmb3JtPSJzY2FsZSgzLjc3OTYpIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjZjFlZmViIiAvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iI2ZkZmNmYyIgLz48L2xpbmVhckdyYWRpZW50PjxmaWx0ZXIgaWQ9ImIiIHdpZHRoPSIxLjEiIGhlaWdodD0iMS4xNTEiIHg9Ii0uMDUiIHk9Ii0uMDc1IiBjb2xvci1pbnRlcnBvbGF0aW9uLWZpbHRlcnM9InNSR0IiPjxmZUdhdXNzaWFuQmx1ciBzdGREZXZpYXRpb249Ii45MzYiIC8+PC9maWx0ZXI+PC9kZWZzPjxyZWN0IHdpZHRoPSI1Ni4wMDIiIGhlaWdodD0iNTYuMDAyIiB4PSI0IiB5PSIzLjk2OSIgZmlsbD0idXJsKCNhKSIgcng9IjEzLjAwMiIgcnk9IjEzLjAwMiIgLz48ZyBzdHJva2Utd2lkdGg9IjEuMDcxIiBmaWx0ZXI9InVybCgjYikiIG9wYWNpdHk9Ii4xNSIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMi4xMzQgMi4yMDYpc2NhbGUoLjkzMzM3KSI+PHBhdGggZD0ibTM3LjQ3MiAyMC42NDQtMS4yOTEgNi40MzYgNy44MTYgNC44ODQtMTAuMDU1IDYuMjgzLTEuNzI0IDguNTk3IDIyLjI3OS0xNC44NTJ6bS01LjQ3NC0zLjY0NUw5LjUgMzEuOTk4bDE3LjI3IDExLjUxMyAxLjMwMy02LjQ5OEwyMCAzMS45N2wxMC4zODgtNi40OTEgMS42ODgtOC40MjV6IiAvPjwvZz48ZyBzdHJva2Utd2lkdGg9IjEuMDcxIj48cGF0aCBmaWxsPSJ1cmwoI2MpIiBkPSJtMzcuNDcyIDIwLjY0NC0xLjI5MSA2LjQzNiA3LjgxNiA0Ljg4NC0xMC4wNTUgNi4yODMtMS43MjQgOC41OTcgMjIuMjc5LTE0Ljg1MnoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDIuMTM0IDIuMjA2KXNjYWxlKC45MzMzNykiIC8+PHBhdGggZmlsbD0idXJsKCNkKSIgZD0iTTMxLjk5OCAxNi45OTkgOS41IDMxLjk5OGwxNy4yNyAxMS41MTMgMS4zMDMtNi40OThMMjAgMzEuOTdsMTAuMzg4LTYuNDkxIDEuNjg4LTguNDI1eiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMi4xMzQgMi4yMDYpc2NhbGUoLjkzMzM3KSIgLz48L2c+PC9zdmc+" x="0" y="0" width="64" height="64" />
+    </g>
+  </g>
+  
+  <!-- Glass Bevel Overlay matching the clip boundary exactly -->
+  <rect width="56" height="56" x="4" y="4" rx="14" ry="14" fill="none" stroke="url(#inner-bevel)" stroke-width="1.5" />
+</svg>

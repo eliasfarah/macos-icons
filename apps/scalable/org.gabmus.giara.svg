@@ -1,1 +1,35 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64"><defs><linearGradient id="a" x1="7.937" x2="7.937" y1="15.081" y2="1.852" gradientTransform="scale(3.7796)" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#f54800" /><stop offset="1" stop-color="#ffb200" /></linearGradient></defs><rect width="64" height="64" fill="none" rx="0" ry="0" style="paint-order:stroke fill markers" /><rect width="56.002" height="56.002" x="4" y="3.969" fill="url(#a)" rx="13.002" ry="13.002" /><circle cx="32.02" cy="32.044" r="30.001" fill="none" /><path fill="#fff" d="M29.431 13.25c-.63 0-1.14.484-1.14 1.083v4.336c0 2.462-2.148 5.899-4.223 9.153-2.194 3.437-6.577 6.992-7.005 10.296A8.5 8.5 0 0 0 17 39.302c13.684.455 25.805-7.211 25.936-7.295l1.042-.67c-.686-1.176-2.396-2.457-3.534-3.74-2.75-3.102-4.61-6.51-4.61-8.929v-4.335c0-.6-.512-1.084-1.141-1.084zm15.821 19.963-.83.528c-6.864 4.371-17.373 7.838-27.152 7.648 1.385 5.028 6.9 8.422 7.182 8.589.184.108 1.48.772 7.42.772 5.938 0 7.436-.664 7.618-.772.343-.2 8.338-5.07 7.44-11.932-.206-1.567-.84-3.19-1.678-4.833" /></svg>
+<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <defs>
+    <!-- Elegant Apple-style Drop Shadow -->
+    <filter id="glass-shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="2.5" stdDeviation="2.5" flood-color="#000000" flood-opacity="0.25" />
+    </filter>
+    
+    <!-- 3D Bevel/Glass Highlights -->
+    <linearGradient id="inner-bevel" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.6" />
+      <stop offset="25%" stop-color="#ffffff" stop-opacity="0.0" />
+      <stop offset="75%" stop-color="#000000" stop-opacity="0.0" />
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.25" />
+    </linearGradient>
+    
+    <!-- Premium Soft Background Gradient -->
+    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#e6e9f0" />
+      <stop offset="100%" stop-color="#eef1f5" />
+    </linearGradient>
+
+    <!-- Unified Squircle Mask -->
+    <clipPath id="squircle-clip">
+      <rect width="56" height="56" x="4" y="4" rx="14" ry="14" />
+    </clipPath>
+  </defs>
+  <g filter="url(#glass-shadow)">
+    <g clip-path="url(#squircle-clip)">
+      <image href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJhIiB4MT0iNy45MzciIHgyPSI3LjkzNyIgeTE9IjE1LjA4MSIgeTI9IjEuODUyIiBncmFkaWVudFRyYW5zZm9ybT0ic2NhbGUoMy43Nzk2KSIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPjxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iI2Y1NDgwMCIgLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNmZmIyMDAiIC8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSJub25lIiByeD0iMCIgcnk9IjAiIHN0eWxlPSJwYWludC1vcmRlcjpzdHJva2UgZmlsbCBtYXJrZXJzIiAvPjxyZWN0IHdpZHRoPSI1Ni4wMDIiIGhlaWdodD0iNTYuMDAyIiB4PSI0IiB5PSIzLjk2OSIgZmlsbD0idXJsKCNhKSIgcng9IjEzLjAwMiIgcnk9IjEzLjAwMiIgLz48Y2lyY2xlIGN4PSIzMi4wMiIgY3k9IjMyLjA0NCIgcj0iMzAuMDAxIiBmaWxsPSJub25lIiAvPjxwYXRoIGZpbGw9IiNmZmYiIGQ9Ik0yOS40MzEgMTMuMjVjLS42MyAwLTEuMTQuNDg0LTEuMTQgMS4wODN2NC4zMzZjMCAyLjQ2Mi0yLjE0OCA1Ljg5OS00LjIyMyA5LjE1My0yLjE5NCAzLjQzNy02LjU3NyA2Ljk5Mi03LjAwNSAxMC4yOTZBOC41IDguNSAwIDAgMCAxNyAzOS4zMDJjMTMuNjg0LjQ1NSAyNS44MDUtNy4yMTEgMjUuOTM2LTcuMjk1bDEuMDQyLS42N2MtLjY4Ni0xLjE3Ni0yLjM5Ni0yLjQ1Ny0zLjUzNC0zLjc0LTIuNzUtMy4xMDItNC42MS02LjUxLTQuNjEtOC45Mjl2LTQuMzM1YzAtLjYtLjUxMi0xLjA4NC0xLjE0MS0xLjA4NHptMTUuODIxIDE5Ljk2My0uODMuNTI4Yy02Ljg2NCA0LjM3MS0xNy4zNzMgNy44MzgtMjcuMTUyIDcuNjQ4IDEuMzg1IDUuMDI4IDYuOSA4LjQyMiA3LjE4MiA4LjU4OS4xODQuMTA4IDEuNDguNzcyIDcuNDIuNzcyIDUuOTM4IDAgNy40MzYtLjY2NCA3LjYxOC0uNzcyLjM0My0uMiA4LjMzOC01LjA3IDcuNDQtMTEuOTMyLS4yMDYtMS41NjctLjg0LTMuMTktMS42NzgtNC44MzMiIC8+PC9zdmc+" x="0" y="0" width="64" height="64" />
+    </g>
+  </g>
+  
+  <!-- Glass Bevel Overlay matching the clip boundary exactly -->
+  <rect width="56" height="56" x="4" y="4" rx="14" ry="14" fill="none" stroke="url(#inner-bevel)" stroke-width="1.5" />
+</svg>

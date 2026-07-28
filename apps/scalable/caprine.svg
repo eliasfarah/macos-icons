@@ -1,1 +1,35 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 16.933 16.933"><defs><radialGradient id="b" cx="13.114" cy="9.296" r="5.964" gradientTransform="matrix(2.3085 1.1481 -.89007 1.7896 -16.86 -17.876)" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#0794ff" /><stop offset=".615" stop-color="#a033fd" /><stop offset="1" stop-color="#ff6969" /></radialGradient><linearGradient id="a" x1="7.937" x2="7.937" y1="15.081" y2="1.852" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#f1f1f1" /><stop offset="1" stop-color="#fff" /></linearGradient></defs><rect width="14.817" height="14.817" x="1.058" y="1.05" fill="url(#a)" rx="3.44" ry="3.44" /><g stroke-width="1.129"><path fill="url(#b)" d="M4.6 14.05c-.04-.2-.056-.552-.056-.552-.014-.348-.043-.68-.064-.74-.023-.058-.186-.258-.362-.443a7.5 7.5 0 0 1-.715-.862 3.6 3.6 0 0 1-.322-.578l-.189-.496c-.528-1.389-.519-2.94.024-4.245.069-.166.152-.374.186-.462.164-.436.562-.959 1.24-1.626.429-.422.575-.517 1.501-.99.24-.122.964-.357 1.35-.438a6.5 6.5 0 0 1 2.569.002c.431.096 1.115.328 1.402.475.873.445 1.015.541 1.435.957.832.824 1.047 1.135 1.402 2.029.553 1.39.573 2.878.054 4.243l-.191.508a2.8 2.8 0 0 1-.354.63l-.25.336c-.17.225-.878.979-.923.979-.014 0-.176.101-.359.225a6.2 6.2 0 0 1-2.5 1.015c-.729.118-1.775.08-2.472-.09a4 4 0 0 0-.428-.085c-.04 0-.217.061-.397.137-.966.41-1.042.447-1.202.442-.218-.005-.339-.169-.378-.371z" transform="matrix(.88723 0 0 .887 .955 .966)" /><path fill="#fff" d="m5.696 10.123.265-.18c.07-.049.14-.103.157-.122.018-.02.263-.207.543-.418.28-.21.558-.425.614-.477.075-.068.133-.093.22-.093.12 0 .116-.004 1.258.867.264.202.43.267.683.266.315 0 .577-.164.754-.472.046-.077.215-.342.377-.587a6 6 0 0 0 .295-.475c0-.026.37-.61.706-1.115.183-.275.2-.396.076-.521-.14-.14-.27-.114-.556.111-.613.486-.765.602-.783.602-.032 0-.557.398-.638.486-.09.096-.252.134-.35.082a6.791 6.79 0 0 1-.404-.29 4.815 4.814 0 0 0-.384-.271.2.2 0 0 1-.078-.056c-.1-.12-.577-.429-.731-.474-.347-.1-.67.04-.929.404-.232.326-.688 1.057-.688 1.103a.4.4 0 0 1-.09.15c-.05.06-.182.26-.295.441s-.27.433-.351.558c-.178.274-.188.378-.05.495.126.107.21.103.38-.015z" /></g></svg>
+<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <defs>
+    <!-- Elegant Apple-style Drop Shadow -->
+    <filter id="glass-shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="2.5" stdDeviation="2.5" flood-color="#000000" flood-opacity="0.25" />
+    </filter>
+    
+    <!-- 3D Bevel/Glass Highlights -->
+    <linearGradient id="inner-bevel" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.6" />
+      <stop offset="25%" stop-color="#ffffff" stop-opacity="0.0" />
+      <stop offset="75%" stop-color="#000000" stop-opacity="0.0" />
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.25" />
+    </linearGradient>
+    
+    <!-- Premium Soft Background Gradient -->
+    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffd194" />
+      <stop offset="100%" stop-color="#70e1f5" />
+    </linearGradient>
+
+    <!-- Unified Squircle Mask -->
+    <clipPath id="squircle-clip">
+      <rect width="56" height="56" x="4" y="4" rx="14" ry="14" />
+    </clipPath>
+  </defs>
+  <g filter="url(#glass-shadow)">
+    <g clip-path="url(#squircle-clip)">
+      <image href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgdmlld0JveD0iMCAwIDE2LjkzMyAxNi45MzMiPjxkZWZzPjxyYWRpYWxHcmFkaWVudCBpZD0iYiIgY3g9IjEzLjExNCIgY3k9IjkuMjk2IiByPSI1Ljk2NCIgZ3JhZGllbnRUcmFuc2Zvcm09Im1hdHJpeCgyLjMwODUgMS4xNDgxIC0uODkwMDcgMS43ODk2IC0xNi44NiAtMTcuODc2KSIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPjxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iIzA3OTRmZiIgLz48c3RvcCBvZmZzZXQ9Ii42MTUiIHN0b3AtY29sb3I9IiNhMDMzZmQiIC8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjZmY2OTY5IiAvPjwvcmFkaWFsR3JhZGllbnQ+PGxpbmVhckdyYWRpZW50IGlkPSJhIiB4MT0iNy45MzciIHgyPSI3LjkzNyIgeTE9IjE1LjA4MSIgeTI9IjEuODUyIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjZjFmMWYxIiAvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iI2ZmZiIgLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB3aWR0aD0iMTQuODE3IiBoZWlnaHQ9IjE0LjgxNyIgeD0iMS4wNTgiIHk9IjEuMDUiIGZpbGw9InVybCgjYSkiIHJ4PSIzLjQ0IiByeT0iMy40NCIgLz48ZyBzdHJva2Utd2lkdGg9IjEuMTI5Ij48cGF0aCBmaWxsPSJ1cmwoI2IpIiBkPSJNNC42IDE0LjA1Yy0uMDQtLjItLjA1Ni0uNTUyLS4wNTYtLjU1Mi0uMDE0LS4zNDgtLjA0My0uNjgtLjA2NC0uNzQtLjAyMy0uMDU4LS4xODYtLjI1OC0uMzYyLS40NDNhNy41IDcuNSAwIDAgMS0uNzE1LS44NjIgMy42IDMuNiAwIDAgMS0uMzIyLS41NzhsLS4xODktLjQ5NmMtLjUyOC0xLjM4OS0uNTE5LTIuOTQuMDI0LTQuMjQ1LjA2OS0uMTY2LjE1Mi0uMzc0LjE4Ni0uNDYyLjE2NC0uNDM2LjU2Mi0uOTU5IDEuMjQtMS42MjYuNDI5LS40MjIuNTc1LS41MTcgMS41MDEtLjk5LjI0LS4xMjIuOTY0LS4zNTcgMS4zNS0uNDM4YTYuNSA2LjUgMCAwIDEgMi41NjkuMDAyYy40MzEuMDk2IDEuMTE1LjMyOCAxLjQwMi40NzUuODczLjQ0NSAxLjAxNS41NDEgMS40MzUuOTU3LjgzMi44MjQgMS4wNDcgMS4xMzUgMS40MDIgMi4wMjkuNTUzIDEuMzkuNTczIDIuODc4LjA1NCA0LjI0M2wtLjE5MS41MDhhMi44IDIuOCAwIDAgMS0uMzU0LjYzbC0uMjUuMzM2Yy0uMTcuMjI1LS44NzguOTc5LS45MjMuOTc5LS4wMTQgMC0uMTc2LjEwMS0uMzU5LjIyNWE2LjIgNi4yIDAgMCAxLTIuNSAxLjAxNWMtLjcyOS4xMTgtMS43NzUuMDgtMi40NzItLjA5YTQgNCAwIDAgMC0uNDI4LS4wODVjLS4wNCAwLS4yMTcuMDYxLS4zOTcuMTM3LS45NjYuNDEtMS4wNDIuNDQ3LTEuMjAyLjQ0Mi0uMjE4LS4wMDUtLjMzOS0uMTY5LS4zNzgtLjM3MXoiIHRyYW5zZm9ybT0ibWF0cml4KC44ODcyMyAwIDAgLjg4NyAuOTU1IC45NjYpIiAvPjxwYXRoIGZpbGw9IiNmZmYiIGQ9Im01LjY5NiAxMC4xMjMuMjY1LS4xOGMuMDctLjA0OS4xNC0uMTAzLjE1Ny0uMTIyLjAxOC0uMDIuMjYzLS4yMDcuNTQzLS40MTguMjgtLjIxLjU1OC0uNDI1LjYxNC0uNDc3LjA3NS0uMDY4LjEzMy0uMDkzLjIyLS4wOTMuMTIgMCAuMTE2LS4wMDQgMS4yNTguODY3LjI2NC4yMDIuNDMuMjY3LjY4My4yNjYuMzE1IDAgLjU3Ny0uMTY0Ljc1NC0uNDcyLjA0Ni0uMDc3LjIxNS0uMzQyLjM3Ny0uNTg3YTYgNiAwIDAgMCAuMjk1LS40NzVjMC0uMDI2LjM3LS42MS43MDYtMS4xMTUuMTgzLS4yNzUuMi0uMzk2LjA3Ni0uNTIxLS4xNC0uMTQtLjI3LS4xMTQtLjU1Ni4xMTEtLjYxMy40ODYtLjc2NS42MDItLjc4My42MDItLjAzMiAwLS41NTcuMzk4LS42MzguNDg2LS4wOS4wOTYtLjI1Mi4xMzQtLjM1LjA4MmE2Ljc5MSA2Ljc5IDAgMCAxLS40MDQtLjI5IDQuODE1IDQuODE0IDAgMCAwLS4zODQtLjI3MS4yLjIgMCAwIDEtLjA3OC0uMDU2Yy0uMS0uMTItLjU3Ny0uNDI5LS43MzEtLjQ3NC0uMzQ3LS4xLS42Ny4wNC0uOTI5LjQwNC0uMjMyLjMyNi0uNjg4IDEuMDU3LS42ODggMS4xMDNhLjQuNCAwIDAgMS0uMDkuMTVjLS4wNS4wNi0uMTgyLjI2LS4yOTUuNDQxcy0uMjcuNDMzLS4zNTEuNTU4Yy0uMTc4LjI3NC0uMTg4LjM3OC0uMDUuNDk1LjEyNi4xMDcuMjEuMTAzLjM4LS4wMTV6IiAvPjwvZz48L3N2Zz4=" x="0" y="0" width="64" height="64" />
+    </g>
+  </g>
+  
+  <!-- Glass Bevel Overlay matching the clip boundary exactly -->
+  <rect width="56" height="56" x="4" y="4" rx="14" ry="14" fill="none" stroke="url(#inner-bevel)" stroke-width="1.5" />
+</svg>

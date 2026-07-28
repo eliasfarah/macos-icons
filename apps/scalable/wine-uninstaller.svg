@@ -1,1 +1,35 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64"><defs><linearGradient id="a" x1="7.937" x2="7.937" y1="15.081" y2="1.852" gradientTransform="scale(3.7796)" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#1560ff" /><stop offset="1" stop-color="#15afff" /></linearGradient><linearGradient id="b" x1="46" x2="46" y1="60" y2="30" gradientTransform="translate(-.002 1)" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#ff425e" /><stop offset="1" stop-color="#ff6e4f" /></linearGradient></defs><rect width="56.002" height="56.002" x="4" y="3.969" fill="url(#a)" rx="13.002" ry="13.002" /><path fill="#fff" d="m18.339 31-.011-9.751 10.938-1.63V31zm12.752-11.671 14.578-2.328v14H31.091zM45.673 33l-.004 14-14.578-2.249v-11.75zM29.27 44.498l-10.931-1.644v-9.857h10.927v11.498z" /><circle cx="46" cy="46" r="16" fill="url(#b)" /><path fill="#fff" d="m53.778 39.636-1.414-1.414L46 44.586l-6.364-6.364-1.414 1.414L44.586 46l-6.364 6.364 1.414 1.414L46 47.414l6.364 6.364 1.414-1.414L47.414 46z" style="paint-order:markers stroke fill" /></svg>
+<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <defs>
+    <!-- Elegant Apple-style Drop Shadow -->
+    <filter id="glass-shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="2.5" stdDeviation="2.5" flood-color="#000000" flood-opacity="0.25" />
+    </filter>
+    
+    <!-- 3D Bevel/Glass Highlights -->
+    <linearGradient id="inner-bevel" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.6" />
+      <stop offset="25%" stop-color="#ffffff" stop-opacity="0.0" />
+      <stop offset="75%" stop-color="#000000" stop-opacity="0.0" />
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.25" />
+    </linearGradient>
+    
+    <!-- Premium Soft Background Gradient -->
+    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffecd2" />
+      <stop offset="100%" stop-color="#fcb69f" />
+    </linearGradient>
+
+    <!-- Unified Squircle Mask -->
+    <clipPath id="squircle-clip">
+      <rect width="56" height="56" x="4" y="4" rx="14" ry="14" />
+    </clipPath>
+  </defs>
+  <g filter="url(#glass-shadow)">
+    <g clip-path="url(#squircle-clip)">
+      <image href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJhIiB4MT0iNy45MzciIHgyPSI3LjkzNyIgeTE9IjE1LjA4MSIgeTI9IjEuODUyIiBncmFkaWVudFRyYW5zZm9ybT0ic2NhbGUoMy43Nzk2KSIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPjxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iIzE1NjBmZiIgLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiMxNWFmZmYiIC8+PC9saW5lYXJHcmFkaWVudD48bGluZWFyR3JhZGllbnQgaWQ9ImIiIHgxPSI0NiIgeDI9IjQ2IiB5MT0iNjAiIHkyPSIzMCIgZ3JhZGllbnRUcmFuc2Zvcm09InRyYW5zbGF0ZSgtLjAwMiAxKSIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPjxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iI2ZmNDI1ZSIgLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNmZjZlNGYiIC8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3Qgd2lkdGg9IjU2LjAwMiIgaGVpZ2h0PSI1Ni4wMDIiIHg9IjQiIHk9IjMuOTY5IiBmaWxsPSJ1cmwoI2EpIiByeD0iMTMuMDAyIiByeT0iMTMuMDAyIiAvPjxwYXRoIGZpbGw9IiNmZmYiIGQ9Im0xOC4zMzkgMzEtLjAxMS05Ljc1MSAxMC45MzgtMS42M1YzMXptMTIuNzUyLTExLjY3MSAxNC41NzgtMi4zMjh2MTRIMzEuMDkxek00NS42NzMgMzNsLS4wMDQgMTQtMTQuNTc4LTIuMjQ5di0xMS43NXpNMjkuMjcgNDQuNDk4bC0xMC45MzEtMS42NDR2LTkuODU3aDEwLjkyN3YxMS40OTh6IiAvPjxjaXJjbGUgY3g9IjQ2IiBjeT0iNDYiIHI9IjE2IiBmaWxsPSJ1cmwoI2IpIiAvPjxwYXRoIGZpbGw9IiNmZmYiIGQ9Im01My43NzggMzkuNjM2LTEuNDE0LTEuNDE0TDQ2IDQ0LjU4NmwtNi4zNjQtNi4zNjQtMS40MTQgMS40MTRMNDQuNTg2IDQ2bC02LjM2NCA2LjM2NCAxLjQxNCAxLjQxNEw0NiA0Ny40MTRsNi4zNjQgNi4zNjQgMS40MTQtMS40MTRMNDcuNDE0IDQ2eiIgc3R5bGU9InBhaW50LW9yZGVyOm1hcmtlcnMgc3Ryb2tlIGZpbGwiIC8+PC9zdmc+" x="0" y="0" width="64" height="64" />
+    </g>
+  </g>
+  
+  <!-- Glass Bevel Overlay matching the clip boundary exactly -->
+  <rect width="56" height="56" x="4" y="4" rx="14" ry="14" fill="none" stroke="url(#inner-bevel)" stroke-width="1.5" />
+</svg>

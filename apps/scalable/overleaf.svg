@@ -1,1 +1,35 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" class="icon" viewBox="0 0 1024 1024"><defs><linearGradient id="a" x1="7.937" x2="7.937" y1="15.081" y2="1.852" gradientTransform="scale(60.4736)" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#f1efeb" /><stop offset="1" stop-color="#fdfcfc" /></linearGradient></defs><rect width="896" height="896" x="64" y="64" fill="url(#a)" rx="208" ry="208" style="fill:url(#a);stroke-width:16" /><path fill="#47a141" d="M388.29 352.69c-88.491 53.419-147.75 147.49-151.87 255.67l-.021.58c.1 123.2 99.995 223.06 223.22 223.06 123.28 0 223.22-99.935 223.22-223.22 0-94.633-58.9-175.52-142.03-207.99l-1.52-.52a202.6 202.6 0 0 0-77.187-15.006l-2.16.021h.1a331.7 331.7 0 0 0-111.44 127.96l-.86 1.94a146.61 146.61 0 1 1 112.34 240.8h-.521.02-.26a146.3 146.3 0 0 1-111.4-51.278l-.16-.2a175.26 175.26 0 0 1-44.995-117.58c0-10.884.98-21.547 2.881-31.891l-.16 1.08c28.63-171.26 233.78-269.87 385.68-308.19-78.487 38.034-144.83 76.867-207.87 120.16l5.362-3.48c183.6 70.884 213.12-83.65 298.96-152.8-85.41-33.451-398.88-45.776-399.34 140.91z" /></svg>
+<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <defs>
+    <!-- Elegant Apple-style Drop Shadow -->
+    <filter id="glass-shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="2.5" stdDeviation="2.5" flood-color="#000000" flood-opacity="0.25" />
+    </filter>
+    
+    <!-- 3D Bevel/Glass Highlights -->
+    <linearGradient id="inner-bevel" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.6" />
+      <stop offset="25%" stop-color="#ffffff" stop-opacity="0.0" />
+      <stop offset="75%" stop-color="#000000" stop-opacity="0.0" />
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.25" />
+    </linearGradient>
+    
+    <!-- Premium Soft Background Gradient -->
+    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#e6e9f0" />
+      <stop offset="100%" stop-color="#eef1f5" />
+    </linearGradient>
+
+    <!-- Unified Squircle Mask -->
+    <clipPath id="squircle-clip">
+      <rect width="56" height="56" x="4" y="4" rx="14" ry="14" />
+    </clipPath>
+  </defs>
+  <g filter="url(#glass-shadow)">
+    <g clip-path="url(#squircle-clip)">
+      <image href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgY2xhc3M9Imljb24iIHZpZXdCb3g9IjAgMCAxMDI0IDEwMjQiPjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iYSIgeDE9IjcuOTM3IiB4Mj0iNy45MzciIHkxPSIxNS4wODEiIHkyPSIxLjg1MiIgZ3JhZGllbnRUcmFuc2Zvcm09InNjYWxlKDYwLjQ3MzYpIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjZjFlZmViIiAvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iI2ZkZmNmYyIgLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB3aWR0aD0iODk2IiBoZWlnaHQ9Ijg5NiIgeD0iNjQiIHk9IjY0IiBmaWxsPSJ1cmwoI2EpIiByeD0iMjA4IiByeT0iMjA4IiBzdHlsZT0iZmlsbDp1cmwoI2EpO3N0cm9rZS13aWR0aDoxNiIgLz48cGF0aCBmaWxsPSIjNDdhMTQxIiBkPSJNMzg4LjI5IDM1Mi42OWMtODguNDkxIDUzLjQxOS0xNDcuNzUgMTQ3LjQ5LTE1MS44NyAyNTUuNjdsLS4wMjEuNThjLjEgMTIzLjIgOTkuOTk1IDIyMy4wNiAyMjMuMjIgMjIzLjA2IDEyMy4yOCAwIDIyMy4yMi05OS45MzUgMjIzLjIyLTIyMy4yMiAwLTk0LjYzMy01OC45LTE3NS41Mi0xNDIuMDMtMjA3Ljk5bC0xLjUyLS41MmEyMDIuNiAyMDIuNiAwIDAgMC03Ny4xODctMTUuMDA2bC0yLjE2LjAyMWguMWEzMzEuNyAzMzEuNyAwIDAgMC0xMTEuNDQgMTI3Ljk2bC0uODYgMS45NGExNDYuNjEgMTQ2LjYxIDAgMSAxIDExMi4zNCAyNDAuOGgtLjUyMS4wMi0uMjZhMTQ2LjMgMTQ2LjMgMCAwIDEtMTExLjQtNTEuMjc4bC0uMTYtLjJhMTc1LjI2IDE3NS4yNiAwIDAgMS00NC45OTUtMTE3LjU4YzAtMTAuODg0Ljk4LTIxLjU0NyAyLjg4MS0zMS44OTFsLS4xNiAxLjA4YzI4LjYzLTE3MS4yNiAyMzMuNzgtMjY5Ljg3IDM4NS42OC0zMDguMTktNzguNDg3IDM4LjAzNC0xNDQuODMgNzYuODY3LTIwNy44NyAxMjAuMTZsNS4zNjItMy40OGMxODMuNiA3MC44ODQgMjEzLjEyLTgzLjY1IDI5OC45Ni0xNTIuOC04NS40MS0zMy40NTEtMzk4Ljg4LTQ1Ljc3Ni0zOTkuMzQgMTQwLjkxeiIgLz48L3N2Zz4=" x="0" y="0" width="64" height="64" />
+    </g>
+  </g>
+  
+  <!-- Glass Bevel Overlay matching the clip boundary exactly -->
+  <rect width="56" height="56" x="4" y="4" rx="14" ry="14" fill="none" stroke="url(#inner-bevel)" stroke-width="1.5" />
+</svg>
