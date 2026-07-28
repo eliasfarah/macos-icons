@@ -63,7 +63,7 @@ def main():
                 
     print(f"Total de ícones envelopados de forma segura: {modified_count}")
 
-    # Também envelopar o ícone do Antigravity IDE (copiando do /usr/share/pixmaps)
+    # Também gerar o ícone do Antigravity IDE (copiando do /usr/share/pixmaps)
     antigravity_src = Path("/usr/share/pixmaps/antigravity-ide.png")
     antigravity_dest = target_dir / "antigravity-ide.svg"
     if antigravity_src.exists():
@@ -72,16 +72,27 @@ def main():
         b64_img = base64.b64encode(img_data).decode('utf-8')
         png_data_uri = f"data:image/png;base64,{b64_img}"
         
-        color1, color2 = ("#1a2a6c", "#b21f1f")
         ag_svg = f'''<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
   <defs>
-    <linearGradient id="ag_grad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="{color1}"/>
-      <stop offset="100%" stop-color="{color2}"/>
+    <filter id="glass-shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="2.5" stdDeviation="2.5" flood-color="#000000" flood-opacity="0.25" />
+    </filter>
+    <linearGradient id="inner-bevel" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.6" />
+      <stop offset="25%" stop-color="#ffffff" stop-opacity="0.0" />
+      <stop offset="75%" stop-color="#000000" stop-opacity="0.0" />
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.25" />
     </linearGradient>
+    <clipPath id="squircle-clip">
+      <rect width="56" height="56" x="4" y="4" rx="14" ry="14" />
+    </clipPath>
   </defs>
-  <rect width="56" height="56" x="4" y="4" rx="13" ry="13" fill="url(#ag_grad)"/>
-  <image href="{png_data_uri}" x="12" y="12" width="40" height="40"/>
+  <g filter="url(#glass-shadow)">
+    <g clip-path="url(#squircle-clip)">
+      <image href="{png_data_uri}" x="0" y="0" width="64" height="64" />
+    </g>
+  </g>
+  <rect width="56" height="56" x="4" y="4" rx="14" ry="14" fill="none" stroke="url(#inner-bevel)" stroke-width="1.5" />
 </svg>'''
         with open(antigravity_dest, 'w', encoding='utf-8') as f:
             f.write(ag_svg)

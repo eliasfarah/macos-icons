@@ -21,9 +21,11 @@ PREMIUM_GRADIENTS = [
     ("#84fab0", "#8fd3f4")  # Aqua
 ]
 
-def get_alphas(filepath):
-    # Check inner boundary edges to detect if it's flat/circle vs full squircle
-    cmd = f"rsvg-convert -w 64 -h 64 '{filepath}' 2>/dev/null | magick - -format '%[fx:u.p{{32,8}}.a] %[fx:u.p{{32,56}}.a] %[fx:u.p{{8,32}}.a] %[fx:u.p{{56,32}}.a] %[fx:u.p{{14,14}}.a] %[fx:u.p{{50,14}}.a] %[fx:u.p{{14,50}}.a] %[fx:u.p{{50,50}}.a]' info: 2>/dev/null"
+def get_alphas(filepath, is_png=False):
+    if is_png:
+        cmd = f"magick '{filepath}' -resize 64x64! -format '%[fx:u.p{{32,8}}.a] %[fx:u.p{{32,56}}.a] %[fx:u.p{{8,32}}.a] %[fx:u.p{{56,32}}.a] %[fx:u.p{{14,14}}.a] %[fx:u.p{{50,14}}.a] %[fx:u.p{{14,50}}.a] %[fx:u.p{{50,50}}.a]' info: 2>/dev/null"
+    else:
+        cmd = f"rsvg-convert -w 64 -h 64 '{filepath}' 2>/dev/null | magick - -format '%[fx:u.p{{32,8}}.a] %[fx:u.p{{32,56}}.a] %[fx:u.p{{8,32}}.a] %[fx:u.p{{56,32}}.a] %[fx:u.p{{14,14}}.a] %[fx:u.p{{50,14}}.a] %[fx:u.p{{14,50}}.a] %[fx:u.p{{50,50}}.a]' info: 2>/dev/null"
     try:
         res = subprocess.run(cmd, shell=True, capture_output=True, text=True)
         vals = res.stdout.strip().split()
@@ -34,20 +36,20 @@ def get_alphas(filepath):
     return [0.0]*8
 
 def get_gradient(filename):
-    # Deterministic gradient based on filename
     idx = int(hashlib.md5(filename.encode()).hexdigest(), 16) % len(PREMIUM_GRADIENTS)
     return PREMIUM_GRADIENTS[idx]
 
-def apply_glassmorphism(filepath, content):
+def apply_glassmorphism(filepath, bytes_data, is_png=False):
     filename = filepath.name
-    alphas = get_alphas(str(filepath))
-    b64_content = base64.b64encode(content.encode('utf-8')).decode('utf-8')
-    data_uri = f"data:image/svg+xml;base64,{b64_content}"
+    alphas = get_alphas(str(filepath), is_png=is_png)
+    
+    b64_content = base64.b64encode(bytes_data).decode('utf-8')
+    mime_type = "image/png" if is_png else "image/svg+xml"
+    data_uri = f"data:{mime_type};base64,{b64_content}"
     
     is_flat = any(a < 0.5 for a in alphas)
     color1, color2 = get_gradient(filename)
     
-    # Base SVG envelope with 3D glass definitions
     svg_header = f'''<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
   <defs>
     <!-- Elegant Apple-style Drop Shadow -->
@@ -76,7 +78,6 @@ def apply_glassmorphism(filepath, content):
   </defs>'''
 
     if is_flat:
-        # Puts the flat logo onto a premium 3D squircle base
         body = f'''
   <!-- Background with Shadow -->
   <rect width="56" height="56" x="4" y="4" rx="14" ry="14" fill="url(#bg-grad)" filter="url(#glass-shadow)" />
@@ -88,7 +89,6 @@ def apply_glassmorphism(filepath, content):
   <rect width="56" height="56" x="4" y="4" rx="14" ry="14" fill="none" stroke="url(#inner-bevel)" stroke-width="1.5" />
 </svg>'''
     else:
-        # Clips the full-bleed logo and injects the 3D glass borders over it
         body = f'''
   <g filter="url(#glass-shadow)">
     <g clip-path="url(#squircle-clip)">
@@ -100,68 +100,77 @@ def apply_glassmorphism(filepath, content):
   <rect width="56" height="56" x="4" y="4" rx="14" ry="14" fill="none" stroke="url(#inner-bevel)" stroke-width="1.5" />
 </svg>'''
 
-    with open(filepath, 'w', encoding='utf-8') as f:
+    target_svg_path = filepath if filepath.suffix.lower() == '.svg' else filepath.with_suffix('.svg')
+    with open(target_svg_path, 'w', encoding='utf-8') as f:
         f.write(svg_header + body)
         
-    return is_flat
+    return target_svg_path, is_flat
 
-def main():
-    target_dir = Path("apps/scalable")
+def process_directory(dir_path):
     flat_count = 0
     clip_count = 0
+    processed_count = 0
     
-    for svg_file in target_dir.glob("*.svg"):
-        if not svg_file.is_file() or svg_file.is_symlink():
-            continue
-            
+    # 1. Clean up Apple sidecar files (._*)
+    for junk in dir_path.glob("._*"):
         try:
-            with open(svg_file, 'r', encoding='utf-8') as f:
-                content = f.read()
-                
-            if 'data:image/svg+xml;base64' in content:
-                continue
-                
-            is_flat = apply_glassmorphism(svg_file, content)
-            if is_flat:
-                flat_count += 1
-            else:
-                clip_count += 1
-                
-        except Exception as e:
+            junk.unlink()
+        except Exception:
             pass
             
-    print(f"Ícones Planos (Glassmorphism Base): {flat_count}")
-    print(f"Ícones Preenchidos (Glassmorphism Overlay): {clip_count}")
+    # 2. Iterate through files
+    for file_path in dir_path.glob("*"):
+        if not file_path.is_file() or file_path.is_symlink():
+            continue
+            
+        bytes_data = file_path.read_bytes()
+        is_png = bytes_data.startswith(b'\x89PNG')
+        
+        # If it's an SVG file, check if it's already glassmorphic
+        if not is_png and file_path.suffix.lower() == '.svg':
+            text = bytes_data.decode('utf-8', errors='ignore')
+            if 'glass-shadow' in text and 'inner-bevel' in text:
+                continue
+                
+        target_svg, is_flat = apply_glassmorphism(file_path, bytes_data, is_png=is_png)
+        processed_count += 1
+        if is_flat:
+            flat_count += 1
+        else:
+            clip_count += 1
+            
+        # If original file was a .png file, render glassmorphic PNG fallback matching the SVG
+        if file_path.suffix.lower() == '.png':
+            try:
+                subprocess.run(f"rsvg-convert -w 64 -h 64 '{target_svg}' -o '{file_path}' 2>/dev/null", shell=True)
+            except Exception:
+                pass
 
-    # Generate Antigravity IDE icon with this engine!
-    ag_png = Path("/usr/share/pixmaps/antigravity-ide.png")
-    if ag_png.exists():
-        with open(ag_png, 'rb') as f:
-            b64 = base64.b64encode(f.read()).decode('utf-8')
-        # Simulate a flat icon wrapping for it
-        svg_header = f'''<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-  <defs>
-    <filter id="glass-shadow" x="-20%" y="-20%" width="140%" height="140%">
-      <feDropShadow dx="0" dy="2.5" stdDeviation="2.5" flood-color="#000000" flood-opacity="0.25" />
-    </filter>
-    <linearGradient id="inner-bevel" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.6" />
-      <stop offset="25%" stop-color="#ffffff" stop-opacity="0.0" />
-      <stop offset="75%" stop-color="#000000" stop-opacity="0.0" />
-      <stop offset="100%" stop-color="#000000" stop-opacity="0.25" />
-    </linearGradient>
-    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#1a2a6c" />
-      <stop offset="100%" stop-color="#b21f1f" />
-    </linearGradient>
-  </defs>'''
-        body = f'''
-  <rect width="56" height="56" x="4" y="4" rx="14" ry="14" fill="url(#bg-grad)" filter="url(#glass-shadow)" />
-  <image href="data:image/png;base64,{b64}" x="12" y="12" width="40" height="40"/>
-  <rect width="56" height="56" x="4" y="4" rx="14" ry="14" fill="none" stroke="url(#inner-bevel)" stroke-width="1.5" />
-</svg>'''
-        with open(target_dir / "antigravity-ide.svg", 'w') as f:
-            f.write(svg_header + body)
+    return processed_count, flat_count, clip_count
+
+def main():
+    apps_dir = Path("apps/scalable")
+    
+    print("Processando apps/scalable...")
+    apps_total, apps_flat, apps_clip = process_directory(apps_dir)
+    print(f"Apps: {apps_total} ícones novos processados ({apps_flat} planos, {apps_clip} preenchidos)")
+    
+    # Custom/System Pixmap Icons (Antigravity IDE & BB Launcher)
+    pixmaps_to_convert = [
+        ("antigravity-ide.png", ["antigravity-ide.svg"]),
+        ("bb_launcher.png", ["bb_launcher.svg", "bb-launcher.svg"])
+    ]
+    for src_name, dest_names in pixmaps_to_convert:
+        src_path = Path("/usr/share/pixmaps") / src_name
+        if src_path.exists():
+            bytes_data = src_path.read_bytes()
+            for dest_name in dest_names:
+                target_svg = apps_dir / dest_name
+                apply_glassmorphism(target_svg, bytes_data, is_png=True)
+                print(f"Ícone {dest_name} gerado/atualizado com sucesso!")
+        
+    print("Atualizando cache do tema de ícones...")
+    subprocess.run("touch .icon-theme.cache 2>/dev/null", shell=True)
 
 if __name__ == "__main__":
     main()

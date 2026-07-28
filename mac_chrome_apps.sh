@@ -1,8 +1,7 @@
 #!/bin/bash
-# Apply macOS squircle mask to all Chrome PWA icons
+# Apply macOS 3D Glassmorphism mask to all Chrome PWA icons
 
-find ~/.local/share/icons -name "chrome-*.png" | while read -r icon; do
-    # Create a temporary file
+find ~/.local/share/icons -name "chrome-*.png" 2>/dev/null | while read -r icon; do
     tmp_icon="${icon}.tmp.png"
     
     # Apply squircle mask
@@ -11,7 +10,6 @@ find ~/.local/share/icons -name "chrome-*.png" | while read -r icon; do
          -draw "roundrectangle 0,0 %[fx:w-1],%[fx:h-1] %[fx:w*0.22],%[fx:h*0.22]" \) \
       -compose DstIn -composite "$tmp_icon"
       
-    # Replace original
     mv "$tmp_icon" "$icon"
-    echo "Squircled: $icon"
+    echo "Glassmorphic Chrome PWA: $icon"
 done
