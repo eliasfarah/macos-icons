@@ -5,26 +5,31 @@
       <feDropShadow dx="0" dy="2.5" stdDeviation="2.5" flood-color="#000000" flood-opacity="0.3" />
     </filter>
 
+    <!-- Smile Drop Shadow -->
+    <filter id="smile-shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="1.2" stdDeviation="1" flood-color="#000000" flood-opacity="0.35" />
+    </filter>
+
     <!-- 3D Bevel/Glass Highlights -->
     <linearGradient id="inner-bevel" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.65" />
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.7" />
       <stop offset="25%" stop-color="#ffffff" stop-opacity="0.0" />
       <stop offset="75%" stop-color="#000000" stop-opacity="0.0" />
       <stop offset="100%" stop-color="#000000" stop-opacity="0.25" />
     </linearGradient>
 
-    <!-- macOS Finder Left Half (Bright Cyan Gradient) -->
-    <linearGradient id="finder-left" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#4bc4f7" />
-      <stop offset="50%" stop-color="#2bb1f5" />
-      <stop offset="100%" stop-color="#1d9bf0" />
+    <!-- Left Half Cyan/Blue Gradient -->
+    <linearGradient id="finder-cyan-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00bdff" />
+      <stop offset="45%" stop-color="#1ea1f7" />
+      <stop offset="100%" stop-color="#1271e6" />
     </linearGradient>
 
-    <!-- macOS Finder Right Half (Deep Royal Blue Gradient) -->
-    <linearGradient id="finder-right" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#1977f2" />
-      <stop offset="50%" stop-color="#1260e6" />
-      <stop offset="100%" stop-color="#0945c7" />
+    <!-- Right Half White/Light Gray Gradient -->
+    <linearGradient id="finder-white-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="60%" stop-color="#f8fafc" />
+      <stop offset="100%" stop-color="#e2e8f0" />
     </linearGradient>
 
     <!-- Squircle Clip -->
@@ -36,23 +41,25 @@
   <!-- Background Base with Shadow -->
   <g filter="url(#glass-shadow)">
     <g clip-path="url(#squircle-clip)">
-      <!-- Right Half Base (Deep Royal Blue) -->
-      <rect width="56" height="56" x="4" y="4" fill="url(#finder-right)" />
+      <!-- Right Half (White / Light Silver Gray) -->
+      <rect width="56" height="56" x="4" y="4" fill="url(#finder-white-grad)" />
       
-      <!-- Left Half Base (Cyan Blue with Nose Curve) -->
-      <path d="M 4 4 H 32 C 32 4 25 18 27 27 C 29 34 36 37 32 60 H 4 Z" fill="url(#finder-left)" />
+      <!-- Left Half (Cyan / Sky Blue) with Face Profile Curve -->
+      <path d="M 4 4 H 30.5 L 27.5 28.5 H 31.5 V 36 C 31.5 36 30 48 32.5 60 H 4 Z" fill="url(#finder-cyan-grad)" />
       
-      <!-- Center Nose/Dividing Line (Dark Charcoal Stroke) -->
-      <path d="M 32 4 C 32 4 25 18 27 27 C 29 34 36 37 32 60" fill="none" stroke="#081c38" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.9" />
+      <!-- Face Profile Contour / Nose Line -->
+      <path d="M 30.5 4 L 27.5 28.5 H 31.5 V 36 C 31.5 36 30 48 32.5 60" fill="none" stroke="#1e293b" stroke-width="1.8" stroke-linecap="square" stroke-linejoin="miter" opacity="0.8" />
       
-      <!-- Left Eye (Dark Navy) -->
-      <ellipse cx="20.5" cy="24.5" rx="3.2" ry="3.5" fill="#081c38" />
+      <!-- Left Eye (Vertical Pill Capsule) -->
+      <rect x="20" y="19" width="4" height="9.5" rx="2" ry="2" fill="#1e293b" />
       
-      <!-- Right Eye (Pure White) -->
-      <ellipse cx="43.5" cy="24.5" rx="3.2" ry="3.5" fill="#ffffff" />
+      <!-- Right Eye (Vertical Pill Capsule) -->
+      <rect x="40" y="19" width="4" height="9.5" rx="2" ry="2" fill="#1e293b" />
 
-      <!-- Smile Arc (Dark Navy) -->
-      <path d="M 16.5 36.5 C 22.5 46.5 41.5 46.5 47.5 36.5" fill="none" stroke="#081c38" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" />
+      <!-- Smile Arc with Soft Shadow -->
+      <g filter="url(#smile-shadow)">
+        <path d="M 19 35.5 C 24 44.5 40 44.5 45 35.5" fill="none" stroke="#1e293b" stroke-width="3.2" stroke-linecap="round" />
+      </g>
     </g>
   </g>
 
