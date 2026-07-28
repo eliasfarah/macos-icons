@@ -111,6 +111,9 @@ def process_directory(dir_path):
     clip_count = 0
     processed_count = 0
     
+    if not dir_path.exists():
+        return 0, 0, 0
+        
     # 1. Clean up Apple sidecar files (._*)
     for junk in dir_path.glob("._*"):
         try:
@@ -119,18 +122,22 @@ def process_directory(dir_path):
             pass
             
     # 2. Iterate through files
-    for file_path in dir_path.glob("*"):
-        if not file_path.is_file() or file_path.is_symlink():
+    for file_path in list(dir_path.glob("*")):
+        if not file_path.is_file() or file_path.is_symlink() or file_path.name.startswith("._"):
             continue
             
         bytes_data = file_path.read_bytes()
         is_png = bytes_data.startswith(b'\x89PNG')
         
-        # If it's an SVG file, check if it's already glassmorphic
-        if not is_png and file_path.suffix.lower() == '.svg':
-            text = bytes_data.decode('utf-8', errors='ignore')
-            if 'glass-shadow' in text and 'inner-bevel' in text:
-                continue
+        # Check if corresponding SVG already has glassmorphism
+        target_svg_path = file_path if file_path.suffix.lower() == '.svg' else file_path.with_suffix('.svg')
+        if target_svg_path.exists():
+            try:
+                svg_text = target_svg_path.read_text(encoding='utf-8', errors='ignore')
+                if 'glass-shadow' in svg_text and 'inner-bevel' in svg_text:
+                    continue
+            except Exception:
+                pass
                 
         target_svg, is_flat = apply_glassmorphism(file_path, bytes_data, is_png=is_png)
         processed_count += 1
@@ -149,17 +156,27 @@ def process_directory(dir_path):
     return processed_count, flat_count, clip_count
 
 def main():
-    apps_dir = Path("apps/scalable")
+    # Fix misnamed files if present
+    misnamed_builder = Path("apps/scalable/gnome-buildersvg")
+    if misnamed_builder.exists():
+        misnamed_builder.rename("apps/scalable/gnome-builder.svg")
+        print("Renomeado gnome-buildersvg -> gnome-builder.svg")
+        
+    dirs_to_process = [
+        Path("apps/scalable")
+    ]
     
-    print("Processando apps/scalable...")
-    apps_total, apps_flat, apps_clip = process_directory(apps_dir)
-    print(f"Apps: {apps_total} ícones novos processados ({apps_flat} planos, {apps_clip} preenchidos)")
+    for dir_path in dirs_to_process:
+        print(f"Processando {dir_path}...")
+        total, flat, clip = process_directory(dir_path)
+        print(f"{dir_path}: {total} ícones novos processados ({flat} planos, {clip} preenchidos)")
     
     # Custom/System Pixmap Icons (Antigravity IDE & BB Launcher)
     pixmaps_to_convert = [
         ("antigravity-ide.png", ["antigravity-ide.svg"]),
         ("bb_launcher.png", ["bb_launcher.svg", "bb-launcher.svg"])
     ]
+    apps_dir = Path("apps/scalable")
     for src_name, dest_names in pixmaps_to_convert:
         src_path = Path("/usr/share/pixmaps") / src_name
         if src_path.exists():
@@ -171,6 +188,7 @@ def main():
         
     print("Atualizando cache do tema de ícones...")
     subprocess.run("touch .icon-theme.cache 2>/dev/null", shell=True)
+    subprocess.run("gtk-update-icon-cache -f -t . 2>/dev/null", shell=True)
 
 if __name__ == "__main__":
     main()
