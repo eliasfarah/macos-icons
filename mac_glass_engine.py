@@ -1,10 +1,12 @@
 import os
+import sys
 import subprocess
 import base64
 import hashlib
 from pathlib import Path
+import shutil
 
-# Premium, soft pastel and neutral gradients for flat logos
+# Premium, soft pastel and neutral gradients for flat logos (Light Mode)
 PREMIUM_GRADIENTS = [
     ("#fdfbfb", "#ebedee"), # Very light gray/white
     ("#e0c3fc", "#8ec5fc"), # Soft lavender to blue
@@ -21,6 +23,15 @@ PREMIUM_GRADIENTS = [
     ("#84fab0", "#8fd3f4")  # Aqua
 ]
 
+# Premium Dark Gradients for Dark Mode
+PREMIUM_DARK_GRADIENTS = [
+    ("#2c2d30", "#18181b"), # Standard Mac Dark Gray
+    ("#1e1f24", "#0f1013"), # Deep Dark (Gemini style)
+    ("#1a1a1c", "#000000"), # Pitch Black
+    ("#222327", "#121315"), # Soft Midnight
+    ("#191a21", "#0d0e15"), # Deep Blue Black
+]
+
 def get_alphas(filepath, is_png=False):
     if is_png:
         cmd = f"magick '{filepath}' -resize 64x64! -format '%[fx:u.p{{32,8}}.a] %[fx:u.p{{32,56}}.a] %[fx:u.p{{8,32}}.a] %[fx:u.p{{56,32}}.a] %[fx:u.p{{14,14}}.a] %[fx:u.p{{50,14}}.a] %[fx:u.p{{14,50}}.a] %[fx:u.p{{50,50}}.a]' info: 2>/dev/null"
@@ -35,11 +46,12 @@ def get_alphas(filepath, is_png=False):
         pass
     return [0.0]*8
 
-def get_gradient(filename):
-    idx = int(hashlib.md5(filename.encode()).hexdigest(), 16) % len(PREMIUM_GRADIENTS)
-    return PREMIUM_GRADIENTS[idx]
+def get_gradient(filename, is_dark=False):
+    gradients = PREMIUM_DARK_GRADIENTS if is_dark else PREMIUM_GRADIENTS
+    idx = int(hashlib.md5(filename.encode()).hexdigest(), 16) % len(gradients)
+    return gradients[idx]
 
-def apply_glassmorphism(filepath, bytes_data, is_png=False):
+def apply_glassmorphism(filepath, bytes_data, is_png=False, is_dark=False, out_dir=None):
     filename = filepath.name
     alphas = get_alphas(str(filepath), is_png=is_png)
     
@@ -48,21 +60,35 @@ def apply_glassmorphism(filepath, bytes_data, is_png=False):
     data_uri = f"data:{mime_type};base64,{b64_content}"
     
     is_flat = any(a < 0.5 for a in alphas)
-    color1, color2 = get_gradient(filename)
+    color1, color2 = get_gradient(filename, is_dark)
+    
+    # Customize bevel for Dark vs Light mode
+    if is_dark:
+        bevel_top = "#ffffff"
+        bevel_top_op = "0.3"
+        bevel_bot = "#000000"
+        bevel_bot_op = "0.8"
+        shadow_op = "0.5"
+    else:
+        bevel_top = "#ffffff"
+        bevel_top_op = "0.6"
+        bevel_bot = "#000000"
+        bevel_bot_op = "0.25"
+        shadow_op = "0.25"
     
     svg_header = f'''<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
   <defs>
     <!-- Elegant Apple-style Drop Shadow -->
     <filter id="glass-shadow" x="-20%" y="-20%" width="140%" height="140%">
-      <feDropShadow dx="0" dy="2.5" stdDeviation="2.5" flood-color="#000000" flood-opacity="0.25" />
+      <feDropShadow dx="0" dy="2.5" stdDeviation="2.5" flood-color="#000000" flood-opacity="{shadow_op}" />
     </filter>
     
     <!-- 3D Bevel/Glass Highlights -->
     <linearGradient id="inner-bevel" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.6" />
-      <stop offset="25%" stop-color="#ffffff" stop-opacity="0.0" />
-      <stop offset="75%" stop-color="#000000" stop-opacity="0.0" />
-      <stop offset="100%" stop-color="#000000" stop-opacity="0.25" />
+      <stop offset="0%" stop-color="{bevel_top}" stop-opacity="{bevel_top_op}" />
+      <stop offset="25%" stop-color="{bevel_top}" stop-opacity="0.0" />
+      <stop offset="75%" stop-color="{bevel_bot}" stop-opacity="0.0" />
+      <stop offset="100%" stop-color="{bevel_bot}" stop-opacity="{bevel_bot_op}" />
     </linearGradient>
     
     <!-- Premium Soft Background Gradient -->
@@ -77,11 +103,17 @@ def apply_glassmorphism(filepath, bytes_data, is_png=False):
     </clipPath>
   </defs>'''
 
+    # Optional glow behind the logo in dark mode so dark logos don't disappear
+    glow_element = ''
+    if is_dark:
+        glow_element = '<circle cx="32" cy="32" r="20" fill="#ffffff" filter="blur(8px)" opacity="0.15" />'
+
     if is_flat:
         body = f'''
   <!-- Background with Shadow -->
   <rect width="56" height="56" x="4" y="4" rx="14" ry="14" fill="url(#bg-grad)" filter="url(#glass-shadow)" />
   
+  {glow_element}
   <!-- Centered Icon -->
   <image href="{data_uri}" x="12" y="12" width="40" height="40"/>
   
@@ -100,19 +132,29 @@ def apply_glassmorphism(filepath, bytes_data, is_png=False):
   <rect width="56" height="56" x="4" y="4" rx="14" ry="14" fill="none" stroke="url(#inner-bevel)" stroke-width="1.5" />
 </svg>'''
 
-    target_svg_path = filepath if filepath.suffix.lower() == '.svg' else filepath.with_suffix('.svg')
+    if out_dir:
+        target_svg_path = out_dir / (filepath.stem + '.svg')
+    else:
+        target_svg_path = filepath if filepath.suffix.lower() == '.svg' else filepath.with_suffix('.svg')
+        
     with open(target_svg_path, 'w', encoding='utf-8') as f:
         f.write(svg_header + body)
         
     return target_svg_path, is_flat
 
-def process_directory(dir_path):
+def process_directory(dir_path, is_dark=False):
     flat_count = 0
     clip_count = 0
     processed_count = 0
     
     if not dir_path.exists():
         return 0, 0, 0
+        
+    # Determine output directory
+    out_dir = None
+    if is_dark:
+        out_dir = Path("apps-dark/scalable")
+        out_dir.mkdir(parents=True, exist_ok=True)
         
     # 1. Clean up Apple sidecar files (._*)
     for junk in dir_path.glob("._*"):
@@ -129,25 +171,26 @@ def process_directory(dir_path):
         bytes_data = file_path.read_bytes()
         is_png = bytes_data.startswith(b'\x89PNG')
         
-        # Check if corresponding SVG already has glassmorphism
-        target_svg_path = file_path if file_path.suffix.lower() == '.svg' else file_path.with_suffix('.svg')
-        if target_svg_path.exists():
-            try:
-                svg_text = target_svg_path.read_text(encoding='utf-8', errors='ignore')
-                if 'glass-shadow' in svg_text and 'inner-bevel' in svg_text:
-                    continue
-            except Exception:
-                pass
+        # Check if corresponding SVG already has glassmorphism (only skip for light mode in place)
+        if not is_dark:
+            target_svg_path = file_path if file_path.suffix.lower() == '.svg' else file_path.with_suffix('.svg')
+            if target_svg_path.exists():
+                try:
+                    svg_text = target_svg_path.read_text(encoding='utf-8', errors='ignore')
+                    if 'glass-shadow' in svg_text and 'inner-bevel' in svg_text:
+                        continue
+                except Exception:
+                    pass
                 
-        target_svg, is_flat = apply_glassmorphism(file_path, bytes_data, is_png=is_png)
+        target_svg, is_flat = apply_glassmorphism(file_path, bytes_data, is_png=is_png, is_dark=is_dark, out_dir=out_dir)
         processed_count += 1
         if is_flat:
             flat_count += 1
         else:
             clip_count += 1
             
-        # If original file was a .png file, render glassmorphic PNG fallback matching the SVG
-        if file_path.suffix.lower() == '.png':
+        # If original file was a .png file and we are doing in-place light mode, render fallback
+        if not is_dark and file_path.suffix.lower() == '.png':
             try:
                 subprocess.run(f"rsvg-convert -w 64 -h 64 '{target_svg}' -o '{file_path}' 2>/dev/null", shell=True)
             except Exception:
@@ -156,6 +199,8 @@ def process_directory(dir_path):
     return processed_count, flat_count, clip_count
 
 def main():
+    is_dark = "--dark" in sys.argv
+    
     # Fix misnamed files if present
     misnamed_builder = Path("apps/scalable/gnome-buildersvg")
     if misnamed_builder.exists():
@@ -167,26 +212,29 @@ def main():
     ]
     
     for dir_path in dirs_to_process:
-        print(f"Processando {dir_path}...")
-        total, flat, clip = process_directory(dir_path)
-        print(f"{dir_path}: {total} ícones novos processados ({flat} planos, {clip} preenchidos)")
+        print(f"Processando {dir_path} (Modo: {'Escuro' if is_dark else 'Claro'})...")
+        total, flat, clip = process_directory(dir_path, is_dark=is_dark)
+        out_msg = f"apps-dark/scalable" if is_dark else str(dir_path)
+        print(f"{out_msg}: {total} ícones novos processados ({flat} planos, {clip} preenchidos)")
     
     # Custom/System Pixmap Icons (Antigravity IDE & BB Launcher)
-    pixmaps_to_convert = [
-        ("antigravity-ide.png", ["antigravity-ide.svg"]),
-        ("bb_launcher.png", ["bb_launcher.svg", "bb-launcher.svg"])
-    ]
-    apps_dir = Path("apps/scalable")
-    for src_name, dest_names in pixmaps_to_convert:
-        src_path = Path("/usr/share/pixmaps") / src_name
-        if src_path.exists():
-            bytes_data = src_path.read_bytes()
-            for dest_name in dest_names:
-                target_svg = apps_dir / dest_name
-                apply_glassmorphism(target_svg, bytes_data, is_png=True)
-                print(f"Ícone {dest_name} gerado/atualizado com sucesso!")
-        
+    if not is_dark: # Only do system pixmap injection for light mode to avoid permission issues or confusion
+        pixmaps_to_convert = [
+            ("antigravity-ide.png", ["antigravity-ide.svg"]),
+            ("bb_launcher.png", ["bb_launcher.svg", "bb-launcher.svg"])
+        ]
+        apps_dir = Path("apps/scalable")
+        for src_name, dest_names in pixmaps_to_convert:
+            src_path = Path("/usr/share/pixmaps") / src_name
+            if src_path.exists():
+                bytes_data = src_path.read_bytes()
+                for dest_name in dest_names:
+                    target_svg = apps_dir / dest_name
+                    apply_glassmorphism(target_svg, bytes_data, is_png=True, is_dark=False)
+                    print(f"Ícone {dest_name} gerado/atualizado com sucesso!")
+            
     print("Atualizando cache do tema de ícones...")
+    # Cache update for the current directory
     subprocess.run("touch .icon-theme.cache 2>/dev/null", shell=True)
     subprocess.run("gtk-update-icon-cache -f -t . 2>/dev/null", shell=True)
 
