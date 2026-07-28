@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>macOS Icons Theme for Linux - Premium 3D Glassmorphism</title>
+    <meta name="description" content="Um tema de ícones estilo macOS 3D Glassmorphism elegante para Linux, com suporte a sombras suaves, relevos de vidro e PWAs.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="background-effects">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <nav class="navbar glass-panel">
+        <div class="logo">
+            <img src="assets/icons/finder.svg" alt="macOS Icons Logo" class="logo-icon">
+            <span>macOS Icons</span>
+        </div>
+        <div class="nav-links">
+            <a href="#features">Features</a>
+            <a href="#gallery">Gallery</a>
+            <a href="https://github.com/eliasfarah/macos-icons" class="btn btn-primary" target="_blank">View on GitHub</a>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-content">
+            <span class="badge glass-panel">Premium Linux Theme</span>
+            <h1 class="hero-title">Experience <span class="gradient-text">Glassmorphism</span> on Linux</h1>
+            <p class="hero-subtitle">
+                An elegant 3D macOS style icon theme featuring soft Apple-style shadows, 3D glass bevels, and automated support for PWAs like ChatGPT and Google Gemini.
+            </p>
+            <div class="hero-buttons">
+                <a href="#install" class="btn btn-primary btn-large">Install Now</a>
+                <a href="#gallery" class="btn btn-secondary btn-large">View Gallery</a>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <div class="icon-showcase glass-panel">
+                <img src="assets/icons/chatgpt.svg" alt="ChatGPT Icon" class="floating-icon icon-1">
+                <img src="assets/icons/finder.svg" alt="Finder Icon" class="floating-icon icon-2">
+                <img src="assets/icons/gemini.svg" alt="Google Gemini Icon" class="floating-icon icon-3">
+            </div>
+        </div>
+    </header>
+
+    <section id="features" class="features">
+        <h2 class="section-title">Why macOS Icons?</h2>
+        <div class="features-grid">
+            <div class="feature-card glass-panel">
+                <div class="feature-icon">✨</div>
+                <h3>Automated Glass Engine</h3>
+                <p>Our unique <code>mac_glass_engine.py</code> automatically applies 3D glass and drop shadows to your application icons.</p>
+            </div>
+            <div class="feature-card glass-panel">
+                <div class="feature-icon">🌐</div>
+                <h3>PWA Support</h3>
+                <p>Seamlessly integrate Chrome, Brave, or Edge Web Apps with our automated <code>mac_chrome_apps.sh</code> script.</p>
+            </div>
+            <div class="feature-card glass-panel">
+                <div class="feature-icon">🎨</div>
+                <h3>Premium Custom Designs</h3>
+                <p>Exclusive, handcrafted icons for ChatGPT and Google Gemini, designed with deep dark mode glass and official aesthetics.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="gallery" class="gallery">
+        <h2 class="section-title">Icon Gallery</h2>
+        <p class="section-subtitle">A glimpse of the stunning 3D glass icons.</p>
+        <div class="gallery-grid">
+            <div class="gallery-item glass-panel">
+                <img src="assets/icons/chatgpt.svg" alt="ChatGPT" loading="lazy">
+                <span>ChatGPT</span>
+            </div>
+            <div class="gallery-item glass-panel">
+                <img src="assets/icons/gemini.svg" alt="Gemini" loading="lazy">
+                <span>Google Gemini</span>
+            </div>
+            <div class="gallery-item glass-panel">
+                <img src="assets/icons/vscode.svg" alt="VS Code" loading="lazy">
+                <span>VS Code</span>
+            </div>
+            <div class="gallery-item glass-panel">
+                <img src="assets/icons/firefox.svg" alt="Firefox" loading="lazy">
+                <span>Firefox</span>
+            </div>
+            <div class="gallery-item glass-panel">
+                <img src="assets/icons/spotify.svg" alt="Spotify" loading="lazy">
+                <span>Spotify</span>
+            </div>
+            <div class="gallery-item glass-panel">
+                <img src="assets/icons/discord.svg" alt="Discord" loading="lazy">
+                <span>Discord</span>
+            </div>
+        </div>
+    </section>
+
+    <section id="install" class="install-section">
+        <div class="install-container glass-panel">
+            <h2 class="section-title">Quick Installation</h2>
+            <p>Get the premium glassmorphism experience on your Linux desktop in seconds.</p>
+            <div class="code-block">
+                <button class="copy-btn" id="copyBtn">Copy</button>
+                <pre><code>mkdir -p ~/.local/share/icons
+ln -s $(pwd) ~/.local/share/icons/macos-icons
+touch ~/.local/share/icons/macos-icons/.icon-theme.cache</code></pre>
+            </div>
+            <p class="install-note">Then select <strong>macos-icons</strong> in your appearance manager (GNOME Tweaks, KDE, etc.).</p>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="glass-panel footer-content">
+            <p>© 2026 macos-icons Theme. Based on WhiteSur by vinceliuice.</p>
+            <p>Licensed under GPL-3.0 / MIT</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
