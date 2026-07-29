@@ -32,6 +32,8 @@ import sys
 import tempfile
 from pathlib import Path
 
+import dark_handdrawn as HD
+
 try:
     import numpy as np
     from PIL import Image
@@ -805,6 +807,32 @@ def dark_text_editor_svg():
 </svg>"""
 
 
+def dark_mono_glyph_svg(art, is_png, top, bottom, glow):
+    """Re-ink a black-on-white logo as a white one.
+
+    Cutting the white card away leaves a grey halo on the mark's antialiased
+    edges.  Reading the card's own luminance as the glyph's alpha instead
+    gives a mark with no halo at all — the strands stay as crisp as the
+    original, they just change colour.
+    """
+    rgba = rasterize(art, is_png)
+    if rgba is None:
+        return None
+    lum = rgba[..., :3] @ LUM
+    alpha = rgba[..., 3] * np.clip(1.0 - lum, 0.0, 1.0)
+    alpha = np.clip((alpha - 0.10) / 0.80, 0.0, 1.0)
+
+    glyph = np.zeros_like(rgba)
+    glyph[..., :3] = 1.0
+    glyph[..., 3] = alpha
+    glyph, _ = reframe(glyph)
+
+    # Inset to the tile itself, so the mark keeps a margin like a logo on a
+    # card rather than running off the corners.
+    body = f'    <image href="{png_href(glyph)}" x="9" y="9" width="46" height="46" />'
+    return HD.tile(body, top=top, bottom=bottom, glow=glow)
+
+
 CALENDAR_NAMES = {
     "calendar.svg", "org.gnome.Calendar.svg", "org.gnome.calendar.svg",
     "gnome-calendar.svg", "google-calendar.svg", "web-google-calendar.svg",
@@ -818,10 +846,6 @@ CALENDAR_NAMES = {
 }
 
 
-def is_chrome(name):
-    return "chrom" in name.lower()
-
-
 def is_finder(name):
     return name.lower() in {"finder.svg", "apple-finder.svg", "mac-finder.svg", "finder-mac.svg"}
 
@@ -832,9 +856,6 @@ def is_gemini(name):
         "google-gemini-desktop.svg", "gemini-cli.svg",
     }
 
-
-def is_chatgpt(name):
-    return "chatgpt" in name.lower()
 
 
 # --------------------------------------------------------------------------
@@ -875,15 +896,39 @@ def process(names=None, out_dir=None, verbose=False):
     now = datetime.datetime.now()
     cal_svg = dark_calendar_svg(now.strftime("%a"), str(now.day))
 
-    # Icons we drew ourselves get a hand-drawn dark counterpart rather than an
-    # automatic one.  Keyed on artwork, so every alias that embeds the same
-    # drawing (code.svg, kate.svg, …) picks it up too.
+    # Icons whose card *is* their artwork get a hand-drawn dark counterpart
+    # rather than an automatic one.  Keyed on artwork, so every alias that
+    # embeds the same drawing (nautilus.svg, chatgpt-desktop.svg, …) picks it
+    # up too.
+    def art_key(path):
+        art, _ = source_art(path)
+        return hashlib.md5(art).hexdigest()
+
     handdrawn = {}
-    for src, svg in (("accessories-text-editor.svg", dark_text_editor_svg()),
-                     ("calendar.svg", cal_svg)):
+    builders = {"accessories-text-editor.svg": dark_text_editor_svg,
+                "calendar.svg": lambda: cal_svg}
+    builders.update(HD.HANDDRAWN)
+    for src, build in builders.items():
         p = LIGHT_DIR / src
         if p.exists():
-            handdrawn[hashlib.md5(p.read_bytes()).hexdigest()] = svg
+            handdrawn[art_key(p)] = build()
+
+    # ChatGPT is drawn from its own artwork rather than by hand: the knot is
+    # too intricate to redraw, but it is pure black ink and re-inks cleanly.
+    p = LIGHT_DIR / "chatgpt.svg"
+    if p.exists():
+        art, is_png = source_art(p)
+        svg = dark_mono_glyph_svg(art, is_png, "#26262b", "#0b0b0d", ("#ffffff", 0.06))
+        if svg:
+            handdrawn[art_key(p)] = svg
+
+    # Artwork that must reach dark mode untouched: Apple ships one Finder
+    # icon, and its face *is* the card, so there is nothing to cut away.
+    verbatim = set()
+    for src in HD.VERBATIM:
+        p = LIGHT_DIR / src
+        if p.exists():
+            verbatim.add(art_key(p))
 
     if names:
         files = []
@@ -904,7 +949,10 @@ def process(names=None, out_dir=None, verbose=False):
                 target.write_text(cal_svg, encoding="utf-8")
                 stats["calendar"] = stats.get("calendar", 0) + 1
                 continue
-            if is_finder(name) or is_chrome(name) or is_gemini(name):
+            art, is_png = source_art(p)
+            key = hashlib.md5(art).hexdigest()
+
+            if key in verbatim or is_finder(name) or is_gemini(name):
                 # Kept as-is: exact official artwork, or already dark by spec.
                 # A couple of these are PNGs carrying an .svg name, so wrap
                 # rather than copy — otherwise the file will not render at all.
@@ -916,8 +964,7 @@ def process(names=None, out_dir=None, verbose=False):
                 stats["verbatim"] = stats.get("verbatim", 0) + 1
                 continue
 
-            art, is_png = source_art(p)
-            hand = handdrawn.get(hashlib.md5(art).hexdigest())
+            hand = handdrawn.get(key)
             if hand:
                 target.write_text(hand, encoding="utf-8")
                 stats["handdrawn"] = stats.get("handdrawn", 0) + 1

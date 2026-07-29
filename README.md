@@ -40,8 +40,14 @@ seguindo as regras que a Apple usa nas variantes escuras do macOS/iOS:
   então só a *luminosidade* dela é invertida — matiz e saturação ficam.
 * **Ícones que já são escuros** (terminais, IDEs, OBS, Antigravity,
   bb-launcher) são detectados e passam intactos.
-* **Calendário e bloco de notas** têm versões escuras desenhadas à mão, não
-  automáticas.
+* **Quando o cartão *é* a arte, desenhamos à mão** (`dark_handdrawn.py`).
+  Recortar o cartão do rosto do Finder ou do "A" da App Store deixa um buraco
+  irregular, então essas variantes são desenhadas: Chrome, App Store,
+  visualizador de imagens, Tour, engrenagem de ajustes, peça de extensões,
+  reprodutor de vídeo, Mapas, Câmera, além do calendário e do bloco de notas.
+  O registro é por nome do arquivo claro, mas a busca é pelo *hash da arte* —
+  assim todo apelido que embute o mesmo desenho é atendido junto.
+* **Finder passa intacto**: a Apple entrega um único ícone do Finder.
 
 ```bash
 # requer: python3 (numpy, pillow) e rsvg-convert

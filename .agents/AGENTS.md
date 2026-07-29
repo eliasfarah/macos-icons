@@ -34,6 +34,38 @@ Design rules, in priority order:
 Icons that are already dark (terminals, IDEs, OBS, Antigravity, bb-launcher)
 are detected by their own background luminance and passed through untouched.
 
-Hand-drawn icons get hand-drawn dark counterparts, not automatic ones —
-currently the Calendar and the text-editor notepad, keyed on artwork hash so
-every alias that embeds the same drawing picks it up too.
+### Hand-drawn dark icons (`dark_handdrawn.py`)
+
+The automatic route cuts the light card away from the artwork, which only
+works when the card and the artwork are two different things. Where the card
+**is** the artwork — Finder's face, the App Store "A", a full-bleed photo —
+the cut leaves a ragged hole, so the dark variant is drawn by hand in
+`dark_handdrawn.py` and registered in its `HANDDRAWN` map.
+
+Registration is by *light source filename*, but lookup is by **artwork hash**,
+so every alias that embeds the same drawing follows along: one entry for
+`softwarecenter.svg` also covers `gnome-software.svg` and
+`system-software-install.svg`, and the ChatGPT entry covers the Chrome web-app
+shortcut `chrome-cadlkienfkclaiaibeoongdcgmdikeeg-Default.svg`.
+
+Currently hand-drawn: Calendar, text-editor notepad, Chrome, App Store,
+image viewer, GNOME Tour, settings cog, extensions puzzle, video player,
+Maps, Camera, Contacts. ChatGPT is generated from its own artwork
+(`dark_mono_glyph_svg`): the knot is pure black ink on a white card, so
+reading the card's luminance as the mark's *alpha* re-inks it white with no
+halo — a plain card-cut would leave grey fringing on every strand.
+
+`HD.VERBATIM` lists artwork that must reach dark mode untouched. Finder is
+there because Apple ships one Finder icon, not two.
+
+Do **not** blanket-exempt a whole name family from the pipeline (an earlier
+`"chrom" in name` rule quietly kept 60-odd Chrome web-app icons, ChatGPT
+among them, in full light mode).
+
+The two light-mode edits made so far: `org.gnome.Totem.svg` and
+`Showtime.svg` both shipped **FaceTime's green camera** as the video player's
+artwork. Both now carry a screen-and-play-head drawing
+(`dark_handdrawn.light_video_svg`). When an app looks wrong in dark mode,
+check whether it is wrong in light mode too — and check *which* file the
+desktop actually resolves, since GNOME's video player is Showtime now, not
+Totem.
