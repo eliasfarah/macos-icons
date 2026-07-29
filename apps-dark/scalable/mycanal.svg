@@ -1,48 +1,50 @@
 <svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
   <defs>
-    <!-- Elegant Apple-style Drop Shadow -->
-    <filter id="glass-shadow" x="-20%" y="-20%" width="140%" height="140%">
-      <feDropShadow dx="0" dy="2.5" stdDeviation="2.5" flood-color="#000000" flood-opacity="0.6" />
+    <!-- Ambient shadow so the tile still detaches from a dark dock -->
+    <filter id="d-shadow" x="-25%" y="-25%" width="150%" height="150%">
+      <feDropShadow dx="0" dy="1.8" stdDeviation="1.9" flood-color="#000000" flood-opacity="0.55" />
     </filter>
-    
-    <!-- 3D Bevel/Glass Highlights -->
-    <linearGradient id="inner-bevel" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.4" />
-      <stop offset="25%" stop-color="#ffffff" stop-opacity="0.0" />
-      <stop offset="75%" stop-color="#000000" stop-opacity="0.0" />
-      <stop offset="100%" stop-color="#000000" stop-opacity="0.8" />
-    </linearGradient>
-    
-    <!-- Premium Soft Background Gradient -->
-    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#1c1c1e" />
-      <stop offset="100%" stop-color="#000000" />
+
+    <!-- Dark canvas, tinted with the icon's own hue -->
+    <linearGradient id="d-bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#26262a" />
+      <stop offset="100%" stop-color="#0c0c0e" />
     </linearGradient>
 
-    <!-- Unified Squircle Mask -->
-    <clipPath id="squircle-clip">
+    <!-- The glyph appears to light its own tile, faintly -->
+    <radialGradient id="d-glow" cx="50%" cy="42%" r="52%">
+      <stop offset="0%" stop-color="#8c8c8c" stop-opacity="0.095" />
+      <stop offset="55%" stop-color="#8c8c8c" stop-opacity="0.035" />
+      <stop offset="100%" stop-color="#8c8c8c" stop-opacity="0" />
+    </radialGradient>
+
+    <!-- Hairline rim: light catches the top edge, bottom falls away -->
+    <linearGradient id="d-rim" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.26" />
+      <stop offset="42%" stop-color="#ffffff" stop-opacity="0.07" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.03" />
+    </linearGradient>
+
+    <linearGradient id="d-floor" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#000000" stop-opacity="0" />
+      <stop offset="72%" stop-color="#000000" stop-opacity="0" />
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.42" />
+    </linearGradient>
+
+    <clipPath id="d-clip">
       <rect width="56" height="56" x="4" y="4" rx="14" ry="14" />
     </clipPath>
-  
-    <!-- Apple Dark Mode: Darken & Desaturate Icon Art -->
-    <filter id="dark-mode" x="0%" y="0%" width="100%" height="100%" color-interpolation-filters="sRGB">
-      <feColorMatrix type="saturate" values="1.0" />
-      <feComponentTransfer>
-        <feFuncR type="linear" slope="0.85" intercept="0.0"/>
-        <feFuncG type="linear" slope="0.85" intercept="0.0"/>
-        <feFuncB type="linear" slope="0.85" intercept="0.0"/>
-      </feComponentTransfer>
-    </filter>
   </defs>
-  <g filter="url(#glass-shadow)">
-    <g clip-path="url(#squircle-clip)">
-      <image filter="url(#dark-mode)" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJhIiB4MT0iNy45MzciIHgyPSI3LjkzNyIgeTE9IjE1LjA4MSIgeTI9IjEuODUyIiBncmFkaWVudFRyYW5zZm9ybT0ic2NhbGUoMy43Nzk2KSIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPjxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iIzM2MzYzNiIgLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiM2YzZjNmMiIC8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3Qgd2lkdGg9IjU2IiBoZWlnaHQ9IjU2IiB4PSI0IiB5PSI0IiBmaWxsPSJ1cmwoI2EpIiByeD0iMTMiIHJ5PSIxMyIgc3R5bGU9ImZpbGw6dXJsKCNhKSIgLz48cGF0aCBkPSJNNDcuMzU2IDM1LjQ3OXMtLjAzNy4wOC0uMTY3LjA4SDM2LjgzNGMtLjE2NyAwLS4yNDguMDgtLjI0OC4wOHMtLjEyNC4wNDQtLjEyNC4yNDh2MTEuMDM2YzAgLjE2Ny0uMDguMjA0LS4wOC4yMDRzLS4wNDMuMDg2LS4xNjcuMDg2aC04LjIzMmMtLjExNyAwLS4yMDQtLjA4Ni0uMjA0LS4wODZzLS4wNDMtLjAzNy0uMDQzLS4yNDFWMzUuODQzYzAtLjExNy0uMS0uMjAzLS4xLS4yMDNzLS4wNjEtLjA4LS4xNjctLjA4SDE2Ljg0MmMtLjIwNCAwLS4yNDEtLjA0NC0uMjQxLS4wNDRzLS4wOC0uMDgtLjA4LS4zMjh2LTguMDc2YzAtLjA5OS4wOC0uMjA0LjA4LS4yMDRzLjAzNy0uMDM3LjEyNC0uMDM3aDEwLjg1Yy4wODYgMCAuMDg2LS4wNDMuMDg2LS4wNDNzLjA3NS0uMDQzLjA3NS0uMTI0di05LjY3YzAtLjExNy4wNDMtLjIwNC4wNDMtLjIwNHMuMDg3LS4wNDMuMzI4LS4wNDNoOC4wN2MuMTYyIDAgLjIwNS4wNDMuMjA1LjA0M3MuMDguMDg3LjA4LjI0N3Y5LjcwOEg0Ny4wMWMuMjY2IDAgLjM0Ny4wNDMuMzQ3LjA0M3MuMTIzLjA0My4xMjMuMjg0djguMTYzYzAgLjA4LS4xMjMuMjA0LS4xMjMuMjA0IiBzdHlsZT0iZmlsbDojZmZmO2ZpbGwtcnVsZTpub256ZXJvO3N0cm9rZTpub25lO3N0cm9rZS13aWR0aDouMzgzOTk4IiAvPjwvc3ZnPg==" x="0" y="0" width="64" height="64" />
-    </g>
+
+  <g filter="url(#d-shadow)">
+    <rect width="56" height="56" x="4" y="4" rx="14" ry="14" fill="url(#d-bg)" />
   </g>
-  
-  <!-- Subtle dark vignette overlay -->
-  <rect width="56" height="56" x="4" y="4" rx="14" ry="14" fill="#000000" opacity="0.15" clip-path="url(#squircle-clip)" />
-  
-  <!-- Glass Bevel Overlay matching the clip boundary exactly -->
-  <rect width="56" height="56" x="4" y="4" rx="14" ry="14" fill="none" stroke="url(#inner-bevel)" stroke-width="1.5" />
+
+  <g clip-path="url(#d-clip)">
+    <rect width="56" height="56" x="4" y="4" fill="url(#d-glow)" />
+    <image href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAgAAAAIACAYAAAD0eNT6AAAMPklEQVR42u3cT4ic5R3A8d/7vDM7u2NCEjEFpRr/VFnIXorY2EMvsT00h0IEcxCEQiGhh556SU7rnHMQtAQN9VYo5FJ68GIgIoIRUiJoNmDQLD1ENJvaTdyw8/d5ejGl0B66yWx8N/l8YEnOv2FmvvO87/uLAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOC+UBkBTOe9tLi4WPV6vfzGG2+ceOqpp347Nzc36Ha7nbm5uUgpRSnFlDYo59xvtVqzly5dOnfw4MGfREScOnWqPnTo0MR0QADA966UUkVEVVVV/uKLL05s3779t3VdD+q67qSUoqoqAXB7AZDb7Xa5fv362vvvv3/mxo0bhw8fPvyPkydPto4cOTIyIbh9LSOA6XryyScNYXpSRAy73e6OZ5555uDS0tLvq6q69t5779URIQBAAEBzjMfjfx/5V1UVVeWg7Q5OAKKu6yrnnFNK3z766KOjiIj19XXHKSAAoGE/WVOqUkoGMZ1Z3vo35ZxnU0pqCqZ4vAYACAAAQAAAAAIAABAAwH/fuOYO9diUXQuxvr5uECAAAAABAAAIAIjvb3mNZ9UBAQAACAAAQAAAAAIAABAAAIAAAAAEANgECCAAAAABAGEREIAAAAAEAAAIAABAAAAAAgAAEACAPQCAAAAABAAAIAAAAAEAYRMggAAAAAQAACAAAAABAAAIALAI6J5XSvmf/wcEAAAgAAAAAQAACAAIi4AABAAACAAAQAAAAAIAABAAAIAAAAAEAAAgAAAAAQAACAAAQADAPcAqYEAAAAACAAAQAHBPKkYACAAAQAAAAAIAABAAAIAAgLAHAEAAAAACAAAQAACAAIC7+EZKyfIfQADA/SbnXNkECAgAAEAAAAACAAAQAACAAICwCRBAAAAAAgAAEAAAgACARrAIaDOGWowVBAAAIAAAAAEAAAgAAEAAQFgEBCAAAEAAAAACAAAQAEBYBAQIAABAAAAAAgAAEAAAgAAAAAQAhE2AAAIAABAAAIAAAAAEAIRNgAACAAAQAACAAAAAWkYA0/PWW2+1hfXmqKoq6rpuX7hwYWZ1dXXmwoUL7rVooH6/Xy5fvlwtLS3lXq83NhELS9igxcXF9OqrrxrE1novVVVVjUspr0fE7yJiEBEdo7l9OedIKY0iov3RRx8NPv/88x+88sorN0xmayilpKqqskk4AWADer1e7vV6BrHFHD9+/IHBYLCz0+mUnHOVksOAaWm32/Hwww//8PTp01c6nc7MYDAYmkrzjEajsra2Vp09e3ZYVdW6iQgAuC/s2bPnL+Px+GedTmdQSpk1kTvzXUC1Synx+OOPz1y5cuWD8Xic67qOUlwBiOYd/8dwOOxv3759dn5+/p2I+LWphEsAbMyxY8dOv/zyy7GwsBCTySTqujaUZr+PSkTEtWvXfv7QQw9FREwiwosWUz1OjqrykbUFTgCi3W7HxYsXBxcvXvzgpZde+oWpCAA24N133y379+/3xb81ZTcCbt73i0VLWyOIh8PhzPLycszPz/ueCZcA2ID5+fn+cDiMubm5WzdCGcoWMJlMZuq69mJt3ilA2xSafUpz66RmOBzmbrfrPg0BwG18kcz+5+NPbA1ObDb/UUCa/frcCoBWq5Uiwn0wYREQPugAEAAAgAAAAAQAACAAAAABAAAIAABAAAAAAgAAEAAAgAAAAAEAAAgAAEAAAAACAAAQAACAAAAABAAAIAAAAAEAAAgAAEAAAAACAAAQAAA0VSnFEAQAACAAAAABAAAIAABAAAAAAgAAEAAAgAAAAAQAACAAAAABAAACAAAQAACAAAAABAAAIAAAAAEAAAgAAEAAAAACAAAQAACAAAAABAAAIAAAAAEAAAgAAEAAAAACAAAEAE1TSjEEAAQAACAAAAABAAAIAABAAAAAAgAABIARAIAAAAAEAAAgAAAAAQAACAAAQAAAAAIAABAAAIAAAAAEAAAgAAAAAQAACAAAQAAAAAIAABAAAIAAAAABAADcH1pG0EylFEMAtvTH2Hd/CAA2Yjgc9ofD4czMzEwqpURVVYbScFVVRUoO1e5GHN/6o5mvT1VVeTwep5yzDy4BwEZ98803s4899ljUdT2IiEpJbw0555mUkg+9TTKZTKKu61FVVdk0GmscEQ+MRqO15eXlPxmHAGCDPv300z/nnH+1d+/eBwaDQbRaXqqm/urPOUdd17Fz585bJwCllFI5tZm+uq7HEdG+efNmDAYDpwAN/PWfUurcvHlzbdu2bX/4+OOPj5tKgz+/jKC5jh49+vrTTz/9y9Fo1M85z5pIMwNgPB5Hp9OJ+fn52Lt3748efPDByDkXJwHTt76+Hp999tnVS5cuXV9dXU2TyUQBNOzXf7fbbfX7/XcOHDhwbM+ePesiTQBwm6/P4uKi16jhHnnkkfrLL7+cREQ8++yzf3vhhRd+3O12+znnWfcExDQuq0RKKY/H4/T222/Hhx9++OITTzzx14iYjYi+CTVPr9dzAyDE7R+l+eLfgt58882frq2tfVBKmUwmk1HhjuScSyllVEopy8vLgxMnTuwPly7BCcC97tSpU/Xu3bu9RlvE7t2708LCwnA4HP6x3W7/JiIGEdExmTv+9T+KiPa5c+f6zz333K6UUv/MmTPbVlZW1r0/mmllZaUcOnRoYhICAO6XmwFTRMR4PD7RarWOCIDpBsDZs2cHKysrC+fPn7+8b9++9oEDBwYmBGETIDQkBIr31eZFVqfTGfR6PY8AggCAxvxSvXWaVlJKvqBicx4xW19fNwgQANCgN1JK7ngGBAAAIAAAAAEAAAgAiHv2hkAAAQAACAAAQAAAAAIAABAAEFvrxj9LgQABAPfbJsCUvK0AAQAACAAAQAAAAAIAwiZAAAEAAAgAAEAAAAACAAAQAACAAIC7ppTiKQBAAAAAAgAAEAAAgAAAAAQAACAAYKvwFAAgAOA+VIxgUx6vNAQQANDgn/9V5ZsKEAAAgACAsAkQQAAAAAIAABAAAIAAAAAEAAAgACDsAQAQAACAAICwBwBAAACAAAAABAAAIAAAAAEAAAgAAEAAQFgEZAqAAAAABAAAIAAgbAIEEAAAgAAAAAQAACAAAAABAAAIAABAAEDYBBhb+/FKQwABAAAIALAICEAAAAACAAAQAACAAAAAAQAACAAg7AEABAAAIAAAAAEAAAgACJsAAQQAACAAAAABAAAIAABAAAAAAgDCJkAAAQAACAAAQABAWAQEIAAAQAAYAQAIAABAAAAAAgAAEABAWAQUd+3pCkMAAQAACAAAQABAWAQEIAAAAAEAAALACABAAAAAAgAIewAAAQAACAAAQAAAAAIAwiIgAAEAAAgAAEAAAAACAAAQAACAAIDmyjl7CgAQAACAAAAABADcg2+qlFwKAAQAQExnw6IhwBS1jABiqjf+1XU9Go/HhjLFL/2cc261Wv1Op6MCQABANPUSQPu7ywDZNKbTASmltLq6umNpaakdEfH111+7vAICAJrl/Pnz/9y1a9d4x44ddV3XBnIHv/5LKTmlVH/11VfXP/nkkzNXr179tpRSnTx5cmJCIADge1dVVSwuLkZExGuvvfb3hYWFm/v27dvR7XYN5w4CYGZmZri2tjZ77ty5S0ePHn0xIuL555+vjxw5MjIhAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAID/w78A7GUYiSp0ph8AAAAASUVORK5CYII=" x="0" y="0" width="64" height="64" />
+    <rect width="56" height="56" x="4" y="4" fill="url(#d-floor)" />
+  </g>
+
+  <rect width="55" height="55" x="4.5" y="4.5" rx="13.5" ry="13.5" fill="none" stroke="url(#d-rim)" stroke-width="1" />
 </svg>

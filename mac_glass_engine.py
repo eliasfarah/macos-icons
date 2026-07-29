@@ -349,8 +349,16 @@ def process_directory(dir_path, is_dark=False):
     return processed_count, flat_count, clip_count
 
 def main():
-    is_dark = "--dark" in sys.argv
-    
+    if "--dark" in sys.argv:
+        # Dark mode moved to its own engine, which rebuilds each icon as a
+        # designed dark variant instead of filtering the light one.
+        print("Modo escuro agora é gerado por mac_dark_engine.py — delegando...")
+        os.execvp(sys.executable, [sys.executable,
+                                   str(Path(__file__).parent / "mac_dark_engine.py")]
+                  + [a for a in sys.argv[1:] if a != "--dark"])
+
+    is_dark = False
+
     misnamed_builder = Path("apps/scalable/gnome-buildersvg")
     if misnamed_builder.exists():
         misnamed_builder.rename("apps/scalable/gnome-builder.svg")
