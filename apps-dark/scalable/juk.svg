@@ -2,12 +2,12 @@
   <defs>
     <!-- Elegant Apple-style Drop Shadow -->
     <filter id="glass-shadow" x="-20%" y="-20%" width="140%" height="140%">
-      <feDropShadow dx="0" dy="2.5" stdDeviation="2.5" flood-color="#000000" flood-opacity="0.5" />
+      <feDropShadow dx="0" dy="2.5" stdDeviation="2.5" flood-color="#000000" flood-opacity="0.6" />
     </filter>
     
     <!-- 3D Bevel/Glass Highlights -->
     <linearGradient id="inner-bevel" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.3" />
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.4" />
       <stop offset="25%" stop-color="#ffffff" stop-opacity="0.0" />
       <stop offset="75%" stop-color="#000000" stop-opacity="0.0" />
       <stop offset="100%" stop-color="#000000" stop-opacity="0.8" />
@@ -16,7 +16,7 @@
     <!-- Premium Soft Background Gradient -->
     <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#222327" />
-      <stop offset="100%" stop-color="#121315" />
+      <stop offset="100%" stop-color="#0a0a0c" />
     </linearGradient>
 
     <!-- Unified Squircle Mask -->
@@ -26,9 +26,12 @@
   </defs>
   <g filter="url(#glass-shadow)">
     <g clip-path="url(#squircle-clip)">
-      <image href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHZpZXdCb3g9IjAgMCA2NCA2NCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayI+CiAgPGRlZnM+CiAgICA8IS0tIEVsZWdhbnQgQXBwbGUtc3R5bGUgRHJvcCBTaGFkb3cgLS0+CiAgICA8ZmlsdGVyIGlkPSJnbGFzcy1zaGFkb3ciIHg9Ii0yMCUiIHk9Ii0yMCUiIHdpZHRoPSIxNDAlIiBoZWlnaHQ9IjE0MCUiPgogICAgICA8ZmVEcm9wU2hhZG93IGR4PSIwIiBkeT0iMi41IiBzdGREZXZpYXRpb249IjIuNSIgZmxvb2QtY29sb3I9IiMwMDAwMDAiIGZsb29kLW9wYWNpdHk9IjAuMjUiIC8+CiAgICA8L2ZpbHRlcj4KICAgIAogICAgPCEtLSAzRCBCZXZlbC9HbGFzcyBIaWdobGlnaHRzIC0tPgogICAgPGxpbmVhckdyYWRpZW50IGlkPSJpbm5lci1iZXZlbCIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjZmZmZmZmIiBzdG9wLW9wYWNpdHk9IjAuNiIgLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIyNSUiIHN0b3AtY29sb3I9IiNmZmZmZmYiIHN0b3Atb3BhY2l0eT0iMC4wIiAvPgogICAgICA8c3RvcCBvZmZzZXQ9Ijc1JSIgc3RvcC1jb2xvcj0iIzAwMDAwMCIgc3RvcC1vcGFjaXR5PSIwLjAiIC8+CiAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzAwMDAwMCIgc3RvcC1vcGFjaXR5PSIwLjI1IiAvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICAgIAogICAgPCEtLSBQcmVtaXVtIFNvZnQgQmFja2dyb3VuZCBHcmFkaWVudCAtLT4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iYmctZ3JhZCIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiNmZmVjZDIiIC8+CiAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI2ZjYjY5ZiIgLz4KICAgIDwvbGluZWFyR3JhZGllbnQ+CgogICAgPCEtLSBVbmlmaWVkIFNxdWlyY2xlIE1hc2sgLS0+CiAgICA8Y2xpcFBhdGggaWQ9InNxdWlyY2xlLWNsaXAiPgogICAgICA8cmVjdCB3aWR0aD0iNTYiIGhlaWdodD0iNTYiIHg9IjQiIHk9IjQiIHJ4PSIxNCIgcnk9IjE0IiAvPgogICAgPC9jbGlwUGF0aD4KICA8L2RlZnM+CiAgPGcgZmlsdGVyPSJ1cmwoI2dsYXNzLXNoYWRvdykiPgogICAgPGcgY2xpcC1wYXRoPSJ1cmwoI3NxdWlyY2xlLWNsaXApIj4KICAgICAgPGltYWdlIGhyZWY9ImRhdGE6aW1hZ2Uvc3ZnK3htbDtiYXNlNjQsUEhOMlp5QjRiV3h1Y3owaWFIUjBjRG92TDNkM2R5NTNNeTV2Y21jdk1qQXdNQzl6ZG1jaUlIZHBaSFJvUFNJMk5DSWdhR1ZwWjJoMFBTSTJOQ0lnZG1sbGQwSnZlRDBpTUNBd0lERTJMamt6TXlBeE5pNDVNek1pUGp4a1pXWnpQanhzYVc1bFlYSkhjbUZrYVdWdWRDQnBaRDBpWVNJZ2VERTlJakUyT1M0MU1TSWdlREk5SWpFMk9TNDFNU0lnZVRFOUlqRXlNaTQwTmlJZ2VUSTlJakUyTGpRME55SWdaM0poWkdsbGJuUlVjbUZ1YzJadmNtMDlJblJ5WVc1emJHRjBaU2d0TVRJdU9UTTRJQzB1TVRFeEtYTmpZV3hsS0M0eE1qY3pOQ2tpSUdkeVlXUnBaVzUwVlc1cGRITTlJblZ6WlhKVGNHRmpaVTl1VlhObElqNDhjM1J2Y0NCdlptWnpaWFE5SWpBaUlITjBiM0F0WTI5c2IzSTlJaU0zTldWaE5EZ2lJQzgrUEhOMGIzQWdiMlptYzJWMFBTSXhJaUJ6ZEc5d0xXTnZiRzl5UFNJak5XVm1aR0poSWlBdlBqd3ZiR2x1WldGeVIzSmhaR2xsYm5RK1BHWnBiSFJsY2lCcFpEMGlZaUlnZDJsa2RHZzlJakV1TWpFMklpQm9aV2xuYUhROUlqRXVNakUySWlCNFBTSXRMakV3T0NJZ2VUMGlMUzR4TURnaUlHTnZiRzl5TFdsdWRHVnljRzlzWVhScGIyNHRabWxzZEdWeWN6MGljMUpIUWlJK1BHWmxSMkYxYzNOcFlXNUNiSFZ5SUhOMFpFUmxkbWxoZEdsdmJqMGlMak00TVNJZ0x6NDhMMlpwYkhSbGNqNDhMMlJsWm5NK1BISmxZM1FnZDJsa2RHZzlJakUwTGpneE55SWdhR1ZwWjJoMFBTSXhOQzQ0TVRjaUlIZzlJakV1TURVNElpQjVQU0l4TGpBMUlpQm1hV3hzUFNKMWNtd29JMkVwSWlCeWVEMGlNeTQwTkNJZ2NuazlJak11TkRRaUlDOCtQSEJoZEdnZ1pEMGlUVEV5TGpjZ05TNHlPRGh6TFM0M01EWWdNUzR3TmpJdE1TNDNOalFnTVM0d05qSmpMUzQ1T0RjdExqRTVMVEV1TXpjNExTNHdNamt0TVM0ME1URWdNSFkwTGpJM01tTXRMakEwTnk0NUxTNDNPRFVnTVM0NE1ETXRNUzQ0T0RNZ01pNHlNVGd0TVM0ek9UTXVOVEkyTFRJdU9EWTJMakEyT1MwekxqSTVNaTB4TGpBeU55MHVOREkzTFRFdU1Ea3pMak0xTXkweUxqUXhPQ0F4TGpjME55MHlMamswTlNBeExqQTRMUzQwTURjZ01pNHdOeTB1TXpBMklESXVOekl5TGpNd05sWTBMamt6Tm1NeExqUXhNUzB1T1RRZ01pNDNNak11TXpNNElETXVPRGd4TGpNMU15SWdabWxzZEdWeVBTSjFjbXdvSTJJcElpQnZjR0ZqYVhSNVBTSXVNVFVpSUM4K1BIQmhkR2dnWm1sc2JEMGlJMlptWmlJZ1pEMGlUVEV5TGpjZ05DNDVNM010TGpjd05pQXhMakEyTWkweExqYzJOQ0F4TGpBMk1tTXRMams0TnkwdU1Ua3RNUzR6TnpndExqQXpMVEV1TkRFeElEQjJOQzR5TnpKakxTNHdORGN1T1MwdU56ZzFJREV1T0RBeUxURXVPRGd6SURJdU1qRTNMVEV1TXprekxqVXlOeTB5TGpnMk5pNHdOeTB6TGpJNU1pMHhMakF5TmkwdU5ESTNMVEV1TURrekxqTTFNeTB5TGpReE9TQXhMamMwTnkweUxqazBOaUF4TGpBNExTNDBNRFlnTWk0d055MHVNekExSURJdU56SXlMak13TmxZMExqVTNPR014TGpReE1TMHVPVFFnTWk0M01qTXVNek00SURNdU9EZ3hMak0xTXlJZ0x6NDhMM04yWno0PSIgeD0iMCIgeT0iMCIgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiAvPgogICAgPC9nPgogIDwvZz4KICAKICA8IS0tIEdsYXNzIEJldmVsIE92ZXJsYXkgbWF0Y2hpbmcgdGhlIGNsaXAgYm91bmRhcnkgZXhhY3RseSAtLT4KICA8cmVjdCB3aWR0aD0iNTYiIGhlaWdodD0iNTYiIHg9IjQiIHk9IjQiIHJ4PSIxNCIgcnk9IjE0IiBmaWxsPSJub25lIiBzdHJva2U9InVybCgjaW5uZXItYmV2ZWwpIiBzdHJva2Utd2lkdGg9IjEuNSIgLz4KPC9zdmc+" x="0" y="0" width="64" height="64" />
+      <image style="filter: invert(1) hue-rotate(180deg) brightness(1.2) saturate(1.2);" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgdmlld0JveD0iMCAwIDE2LjkzMyAxNi45MzMiPjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iYSIgeDE9IjE2OS41MSIgeDI9IjE2OS41MSIgeTE9IjEyMi40NiIgeTI9IjE2LjQ0NyIgZ3JhZGllbnRUcmFuc2Zvcm09InRyYW5zbGF0ZSgtMTIuOTM4IC0uMTExKXNjYWxlKC4xMjczNCkiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiM3NWVhNDgiIC8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjNWVmZGJhIiAvPjwvbGluZWFyR3JhZGllbnQ+PGZpbHRlciBpZD0iYiIgd2lkdGg9IjEuMjE2IiBoZWlnaHQ9IjEuMjE2IiB4PSItLjEwOCIgeT0iLS4xMDgiIGNvbG9yLWludGVycG9sYXRpb24tZmlsdGVycz0ic1JHQiI+PGZlR2F1c3NpYW5CbHVyIHN0ZERldmlhdGlvbj0iLjM4MSIgLz48L2ZpbHRlcj48L2RlZnM+PHJlY3Qgd2lkdGg9IjE0LjgxNyIgaGVpZ2h0PSIxNC44MTciIHg9IjEuMDU4IiB5PSIxLjA1IiBmaWxsPSJ1cmwoI2EpIiByeD0iMy40NCIgcnk9IjMuNDQiIC8+PHBhdGggZD0iTTEyLjcgNS4yODhzLS43MDYgMS4wNjItMS43NjQgMS4wNjJjLS45ODctLjE5LTEuMzc4LS4wMjktMS40MTEgMHY0LjI3MmMtLjA0Ny45LS43ODUgMS44MDMtMS44ODMgMi4yMTgtMS4zOTMuNTI2LTIuODY2LjA2OS0zLjI5Mi0xLjAyNy0uNDI3LTEuMDkzLjM1My0yLjQxOCAxLjc0Ny0yLjk0NSAxLjA4LS40MDcgMi4wNy0uMzA2IDIuNzIyLjMwNlY0LjkzNmMxLjQxMS0uOTQgMi43MjMuMzM4IDMuODgxLjM1MyIgZmlsdGVyPSJ1cmwoI2IpIiBvcGFjaXR5PSIuMTUiIC8+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTEyLjcgNC45M3MtLjcwNiAxLjA2Mi0xLjc2NCAxLjA2MmMtLjk4Ny0uMTktMS4zNzgtLjAzLTEuNDExIDB2NC4yNzJjLS4wNDcuOS0uNzg1IDEuODAyLTEuODgzIDIuMjE3LTEuMzkzLjUyNy0yLjg2Ni4wNy0zLjI5Mi0xLjAyNi0uNDI3LTEuMDkzLjM1My0yLjQxOSAxLjc0Ny0yLjk0NiAxLjA4LS40MDYgMi4wNy0uMzA1IDIuNzIyLjMwNlY0LjU3OGMxLjQxMS0uOTQgMi43MjMuMzM4IDMuODgxLjM1MyIgLz48L3N2Zz4=" x="0" y="0" width="64" height="64" />
     </g>
   </g>
+  
+  <!-- Subtle dark vignette overlay -->
+  <rect width="56" height="56" x="4" y="4" rx="14" ry="14" fill="#000000" opacity="0.15" clip-path="url(#squircle-clip)" />
   
   <!-- Glass Bevel Overlay matching the clip boundary exactly -->
   <rect width="56" height="56" x="4" y="4" rx="14" ry="14" fill="none" stroke="url(#inner-bevel)" stroke-width="1.5" />
