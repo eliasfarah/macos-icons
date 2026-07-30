@@ -1,5 +1,12 @@
 # Project Rules for macos-icons
 
+## Repository Update Preference
+
+- After completing and validating requested work in this project, commit the
+  relevant changes and push them to `origin/main`, unless the user explicitly
+  asks not to publish them.
+- Never include unrelated pre-existing work in that commit.
+
 ## Glassmorphism Engine & Directory Scope Rules
 - **Only process `apps/scalable`**: The glassmorphism engine (`mac_glass_engine.py`) must ONLY process icons inside `apps/scalable`.
 - **DO NOT touch `places/scalable`**: Never modify or attempt to auto-glassmorph icons in `places/scalable` (folders, trash cans, places icons). Keep user's original places icons intact.
