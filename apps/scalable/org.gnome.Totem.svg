@@ -1,36 +1,96 @@
 <svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <filter id="glass-shadow" x="-20%" y="-20%" width="140%" height="140%">
-      <feDropShadow dx="0" dy="2.5" stdDeviation="2.5" flood-color="#000000" flood-opacity="0.25" />
+    <filter id="shadow" x="-25%" y="-25%" width="150%" height="155%">
+      <feDropShadow dx="0" dy="2.6" stdDeviation="2.7" flood-color="#252351" flood-opacity="0.28"/>
+      <feDropShadow dx="0" dy="0.8" stdDeviation="0.7" flood-color="#ffffff" flood-opacity="0.34"/>
     </filter>
-    <linearGradient id="card" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#fdfdff" />
-      <stop offset="100%" stop-color="#e6e8ef" />
+    <filter id="screen-shadow" x="-30%" y="-35%" width="160%" height="180%">
+      <feDropShadow dx="0" dy="2" stdDeviation="1.8" flood-color="#1b174b" flood-opacity="0.42"/>
+    </filter>
+    <filter id="play-shadow" x="-45%" y="-45%" width="190%" height="195%">
+      <feDropShadow dx="0" dy="1.5" stdDeviation="1.5" flood-color="#120d42" flood-opacity="0.45"/>
+    </filter>
+    <linearGradient id="tile" x1="8%" y1="0%" x2="90%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="52%" stop-color="#f1f3fb"/>
+      <stop offset="100%" stop-color="#d6dcea"/>
     </linearGradient>
-    <linearGradient id="inner-bevel" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.75" />
-      <stop offset="35%" stop-color="#ffffff" stop-opacity="0.12" />
-      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.05" />
+    <radialGradient id="tile-glow" cx="24%" cy="3%" r="88%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.98"/>
+      <stop offset="58%" stop-color="#ffffff" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#7d8ba8" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="frame" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#9da7c8"/>
+      <stop offset="100%" stop-color="#4a4e77"/>
     </linearGradient>
-    <linearGradient id="v-screen" x1="10%" y1="0%" x2="90%" y2="100%">
-      <stop offset="0%" stop-color="#5b62d6" />
-      <stop offset="55%" stop-color="#3b3f9c" />
-      <stop offset="100%" stop-color="#252a63" />
+    <linearGradient id="screen" x1="8%" y1="0%" x2="92%" y2="100%">
+      <stop offset="0%" stop-color="#796bff"/>
+      <stop offset="47%" stop-color="#4d45b4"/>
+      <stop offset="100%" stop-color="#211c57"/>
     </linearGradient>
-    <clipPath id="card-clip">
-      <rect width="56" height="56" x="4" y="4" rx="14" ry="14" />
+    <radialGradient id="screen-glow" cx="78%" cy="18%" r="78%">
+      <stop offset="0%" stop-color="#ff74ba" stop-opacity="0.38"/>
+      <stop offset="52%" stop-color="#7b6fff" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#2f2c7b" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="play-disc" x1="18%" y1="0%" x2="82%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.38"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.10"/>
+    </linearGradient>
+    <linearGradient id="progress" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ff65ad"/>
+      <stop offset="100%" stop-color="#ffb55f"/>
+    </linearGradient>
+    <linearGradient id="stand" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#72799a"/>
+      <stop offset="100%" stop-color="#3e425f"/>
+    </linearGradient>
+    <linearGradient id="rim" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.94"/>
+      <stop offset="48%" stop-color="#ffffff" stop-opacity="0.30"/>
+      <stop offset="100%" stop-color="#626b80" stop-opacity="0.38"/>
+    </linearGradient>
+    <clipPath id="clip">
+      <rect x="4" y="4" width="56" height="56" rx="14"/>
+    </clipPath>
+    <clipPath id="screen-clip">
+      <rect x="11.5" y="15.5" width="41" height="32" rx="6.4"/>
     </clipPath>
   </defs>
 
-  <g filter="url(#glass-shadow)">
-    <rect width="56" height="56" x="4" y="4" rx="14" ry="14" fill="url(#card)" />
+  <g filter="url(#shadow)">
+    <rect x="4" y="4" width="56" height="56" rx="14" fill="url(#tile)"/>
+  </g>
+  <g clip-path="url(#clip)">
+    <rect x="4" y="4" width="56" height="56" fill="url(#tile-glow)"/>
+    <path d="M4 4H44C38 14 27 20 4 22Z" fill="#ffffff" opacity="0.64"/>
+    <path d="M4 49C22 54 43 51 60 41V60H4Z" fill="#7a849f" opacity="0.08"/>
+
+    <g filter="url(#screen-shadow)">
+      <rect x="9.5" y="13.5" width="45" height="36" rx="8" fill="url(#frame)"/>
+      <rect x="11.5" y="15.5" width="41" height="32" rx="6.4" fill="url(#screen)"/>
+    </g>
+    <g clip-path="url(#screen-clip)">
+      <rect x="11.5" y="15.5" width="41" height="32" fill="url(#screen-glow)"/>
+      <path d="M10 16H39C35 25 26 30 10 31Z" fill="#ffffff" opacity="0.11"/>
+      <path d="M11 39C25 43 39 41 53 34V48H11Z" fill="#0c0a36" opacity="0.16"/>
+    </g>
+    <rect x="12.2" y="16.2" width="39.6" height="30.6" rx="5.7" fill="none" stroke="#ffffff" stroke-opacity="0.20" stroke-width="0.8"/>
+
+    <g filter="url(#play-shadow)">
+      <circle cx="32" cy="29.5" r="9.4" fill="url(#play-disc)" stroke="#ffffff" stroke-opacity="0.40" stroke-width="0.9"/>
+      <path d="M29.3 24.3L38.8 29.5L29.3 34.7Z" fill="#ffffff"/>
+      <path d="M30.2 25.4V33.6" stroke="#ffffff" stroke-opacity="0.46" stroke-width="0.65" stroke-linecap="round"/>
+    </g>
+
+    <rect x="17" y="42.3" width="30" height="2.2" rx="1.1" fill="#ffffff" opacity="0.22"/>
+    <rect x="17" y="42.3" width="17.2" height="2.2" rx="1.1" fill="url(#progress)"/>
+    <circle cx="34.2" cy="43.4" r="1.65" fill="#fff4f8" stroke="#e95b9d" stroke-width="0.65"/>
+    <path d="M28 50H36L38.5 53H25.5Z" fill="url(#stand)"/>
+    <rect x="22.5" y="52.3" width="19" height="2.3" rx="1.15" fill="url(#stand)"/>
+    <path d="M23.5 52.8H40.5" stroke="#ffffff" stroke-opacity="0.28" stroke-width="0.6" stroke-linecap="round"/>
   </g>
 
-  <g clip-path="url(#card-clip)">
-    <rect x="10.5" y="16" width="43" height="32" rx="6.5" ry="6.5" fill="url(#v-screen)" />
-    <path d="M 28.2 25.4 L 41.5 32 L 28.2 38.6 Z" fill="#ffffff" />
-    <rect x="24" y="51" width="16" height="2.6" rx="1.3" fill="#3b3f9c" opacity="0.35" />
-  </g>
-
-  <rect width="55" height="55" x="4.5" y="4.5" rx="13.5" ry="13.5" fill="none" stroke="url(#inner-bevel)" stroke-width="1" />
+  <rect x="4.5" y="4.5" width="55" height="55" rx="13.5" fill="none" stroke="url(#rim)" stroke-width="1"/>
 </svg>

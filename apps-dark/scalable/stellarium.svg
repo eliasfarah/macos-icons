@@ -1,34 +1,42 @@
 <svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
   <defs>
-    <!-- Ambient shadow so the tile still detaches from a dark dock -->
+    <!-- Two-scale Apple shadow: a soft lift plus a tight contact shadow -->
     <filter id="d-shadow" x="-25%" y="-25%" width="150%" height="150%">
-      <feDropShadow dx="0" dy="1.8" stdDeviation="1.9" flood-color="#000000" flood-opacity="0.55" />
+      <feDropShadow dx="0" dy="2.4" stdDeviation="2.8" flood-color="#000000" flood-opacity="0.38" />
+      <feDropShadow dx="0" dy="1.0" stdDeviation="0.8" flood-color="#000000" flood-opacity="0.62" />
     </filter>
 
     <!-- Dark canvas, tinted with the icon's own hue -->
     <linearGradient id="d-bg" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#20182a" />
-      <stop offset="100%" stop-color="#0a070d" />
+      <stop offset="0%" stop-color="#261e30" />
+      <stop offset="100%" stop-color="#0c0911" />
     </linearGradient>
 
     <!-- The glyph appears to light its own tile, faintly -->
     <radialGradient id="d-glow" cx="50%" cy="42%" r="52%">
-      <stop offset="0%" stop-color="#4f278c" stop-opacity="0.033" />
-      <stop offset="55%" stop-color="#4f278c" stop-opacity="0.012" />
+      <stop offset="0%" stop-color="#4f278c" stop-opacity="0.038" />
+      <stop offset="55%" stop-color="#4f278c" stop-opacity="0.014" />
       <stop offset="100%" stop-color="#4f278c" stop-opacity="0" />
     </radialGradient>
 
-    <!-- Hairline rim: light catches the top edge, bottom falls away -->
+    <!-- A broad, almost invisible glass reflection over the upper shoulder -->
+    <radialGradient id="d-sheen" cx="22%" cy="4%" r="82%" fx="22%" fy="4%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.105" />
+      <stop offset="48%" stop-color="#ffffff" stop-opacity="0.022" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0" />
+    </radialGradient>
+
+    <!-- Hairline rim: the top catches light while the bottom recedes -->
     <linearGradient id="d-rim" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.26" />
-      <stop offset="42%" stop-color="#ffffff" stop-opacity="0.07" />
-      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.03" />
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.34" />
+      <stop offset="34%" stop-color="#ffffff" stop-opacity="0.10" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.025" />
     </linearGradient>
 
     <linearGradient id="d-floor" x1="0%" y1="0%" x2="0%" y2="100%">
       <stop offset="0%" stop-color="#000000" stop-opacity="0" />
-      <stop offset="72%" stop-color="#000000" stop-opacity="0" />
-      <stop offset="100%" stop-color="#000000" stop-opacity="0.42" />
+      <stop offset="58%" stop-color="#000000" stop-opacity="0" />
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.28" />
     </linearGradient>
 
     <clipPath id="d-clip">
@@ -41,10 +49,14 @@
   </g>
 
   <g clip-path="url(#d-clip)">
-    <rect width="56" height="56" x="4" y="4" fill="url(#d-glow)" />
-    <image href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJhIiB4MT0iMTMuOTI2IiB4Mj0iMTcuMzM3IiB5MT0iMjguNDk3IiB5Mj0iMjEuNjAxIiBncmFkaWVudFRyYW5zZm9ybT0ibWF0cml4KDEuNzk1NiAwIDAgMS43NjA5IC00Ljk4IC0xMy4yOTkpIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjNDYyZTdhIiAvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzQ2MmU3YSIgc3RvcC1vcGFjaXR5PSIwIiAvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSI1Ni4wMDMiIGhlaWdodD0iNTYuMDAzIiB4PSIzLjk5OSIgeT0iMy45NjkiIGZpbGw9IiMzYzFkNjYiIHJ4PSIxMy4wMDMiIHJ5PSIxMy4wMDMiIC8+PGNpcmNsZSBjeD0iNDUuMzQ3IiBjeT0iMjAuMzM5IiByPSI5LjEzNCIgZmlsbD0iIzNhMzY3MCIgLz48cGF0aCBmaWxsPSIjZTZlNmU2IiBkPSJNNTIuMzUgMTQuNDc4YTkuMSA5LjEgMCAwIDEgLjQ3OCAyLjkgOS4xMzQgOS4xMzQgMCAwIDEtMTYuMTM1IDUuODYxIDkuMTMzIDkuMTMzIDAgMSAwIDE1LjY1Ny04Ljc2MSIgLz48cGF0aCBmaWxsPSJ1cmwoI2EpIiBkPSJNNCAxMy4wMXMzNC44NjQgMS44MzggNDUuMjA3IDMyLjU0OGwtNS4zNzggOS44MjctMjMuNzU4LTEuMDk2TDQgNDMuMDM2eiIgLz48cGF0aCBmaWxsPSIjYWM3NzZkIiBkPSJNNTguMTU5IDMxLjQxOWMtNS45NjItLjA1NC0xOS4zMDUgMi4wMi0zMC42NiAxOS40NjhsMTkuMzMyIDUuNDA3IDEwLjI4Ny0xLjE1M2ExMi45NiAxMi45NiAwIDAgMCAyLjg4My04LjE3M1YzMS41MTZhMjEgMjEgMCAwIDAtMS44NDItLjA5NyIgb3BhY2l0eT0iLjUiIC8+PHBhdGggZmlsbD0iI2I4YWQ5OSIgZD0iTTYwIDM1LjgyN2MtNy43ODYuOTEtMjAuNDc3IDUuMzYyLTMxLjUzNCAyMi45NjNsMjkuMDA1LTQuMTJhMTIuOTUgMTIuOTUgMCAwIDAgMi41My03Ljd6IiBvcGFjaXR5PSIuNSIgLz48cGF0aCBmaWxsPSIjNTc0YTVjIiBkPSJNNTIuODMgNDQuOTNjLTE1LjAwNS4xNzMtMjcuOTA2IDYuMTA0LTI3LjkwNiA2LjEwNGwtLjE0NSA1Ljg2N0g1NS40YTEyLjk2IDEyLjk2IDAgMCAwIDQuNjAyLTkuOTMydi0xLjY0NmE1MyA1MyAwIDAgMC03LjE3Mi0uMzkzIiBzdHlsZT0ibWl4LWJsZW5kLW1vZGU6bm9ybWFsIiAvPjxwYXRoIGQ9Ik00IDM0LjczNnYxMi4yMzJBMTIuOTczIDEyLjk3MyAwIDAgMCAxNy4wMDIgNTkuOTdINDdhMTIuOTcgMTIuOTcgMCAwIDAgMTIuMzg1LTkuMDNjLTE1LjEyNiA2LjU1Mi0yNy43NDQtMy4xNzMtMjcuNzQ0LTMuMTczQzEzLjkxNiAzNS41NDIgOC42NjUgMzUuMjY5IDQgMzQuNzM2IiAvPjxwYXRoIGZpbGw9IiNmZmYiIGQ9Ik0xMy4zNTkgNy43ODNhLjcxNy43MTcgMCAwIDAtLjcxNy43MTkuNzE3LjcxNyAwIDAgMCAuNzE3LjcxNy43MTcuNzE3IDAgMCAwIC43MTctLjcxNy43MTcuNzE3IDAgMCAwLS43MTctLjcxOW01LjExMSAzLjQyMmEuOTg2Ljk4NiAwIDAgMC0uOTg2Ljk4Ni45ODYuOTg2IDAgMCAwIC45ODYuOTg3Ljk4Ni45ODYgMCAwIDAgLjk4Ny0uOTg3Ljk4Ni45ODYgMCAwIDAtLjk4Ny0uOTg2bS02LjYzNCAzLjI3NGExLjg4MyAxLjg4MyAwIDAgMC0xLjg4MyAxLjg4MiAxLjg4MyAxLjg4MyAwIDAgMCAxLjg4MyAxLjg4MyAxLjg4MyAxLjg4MyAwIDAgMCAxLjg4Mi0xLjg4MyAxLjg4MyAxLjg4MyAwIDAgMC0xLjg4Mi0xLjg4M202LjA5IDMuOTZhLjcxNy43MTcgMCAwIDAtLjcxNy43Mi43MTcuNzE3IDAgMCAwIC43MTYuNzE2LjcxNy43MTcgMCAwIDAgLjcxNy0uNzE3LjcxNy43MTcgMCAwIDAtLjcxNy0uNzE5bS0yLjYzNyAxLjM2YTEuMjEgMS4yMSAwIDAgMC0xLjIxMSAxLjIwOSAxLjIxIDEuMjEgMCAwIDAgMS4yMSAxLjIxIDEuMjEgMS4yMSAwIDAgMCAxLjIxLTEuMjEgMS4yMSAxLjIxIDAgMCAwLTEuMjEtMS4yMW01LjY4MS4xNjRhLjcxNy43MTcgMCAwIDAtLjcxNy43MTcuNzE3LjcxNyAwIDAgMCAuNzE3LjcxNi43MTcuNzE3IDAgMCAwIC43MTctLjcxNi43MTcuNzE3IDAgMCAwLS43MTctLjcxN204LjAyIDUuOTI2YTEuMjEgMS4yMSAwIDAgMC0xLjIxMSAxLjIwOSAxLjIxIDEuMjEgMCAwIDAgMS4yMSAxLjIxIDEuMjEgMS4yMSAwIDAgMCAxLjIxLTEuMjEgMS4yMSAxLjIxIDAgMCAwLTEuMjEtMS4yMW0tOS41NDEgNC43M2EuNzE3LjcxNyAwIDAgMC0uNzE3LjcxNy43MTcuNzE3IDAgMCAwIC43MTcuNzE3LjcxNy43MTcgMCAwIDAgLjcxNy0uNzE3LjcxNy43MTcgMCAwIDAtLjcxNy0uNzE3IiBvcGFjaXR5PSIuNSIgLz48L3N2Zz4=" x="0" y="0" width="64" height="64" />
+    <!-- Surface lighting always stays behind the artwork.  Brand colours must
+         never be dimmed by a generic overlay. -->
     <rect width="56" height="56" x="4" y="4" fill="url(#d-floor)" />
+    <rect width="56" height="56" x="4" y="4" fill="url(#d-glow)" />
+    <rect width="56" height="56" x="4" y="4" fill="url(#d-sheen)" />
+    <image href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJhIiB4MT0iMTMuOTI2IiB4Mj0iMTcuMzM3IiB5MT0iMjguNDk3IiB5Mj0iMjEuNjAxIiBncmFkaWVudFRyYW5zZm9ybT0ibWF0cml4KDEuNzk1NiAwIDAgMS43NjA5IC00Ljk4IC0xMy4yOTkpIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjNDYyZTdhIiAvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzQ2MmU3YSIgc3RvcC1vcGFjaXR5PSIwIiAvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSI1Ni4wMDMiIGhlaWdodD0iNTYuMDAzIiB4PSIzLjk5OSIgeT0iMy45NjkiIGZpbGw9IiMzYzFkNjYiIHJ4PSIxMy4wMDMiIHJ5PSIxMy4wMDMiIC8+PGNpcmNsZSBjeD0iNDUuMzQ3IiBjeT0iMjAuMzM5IiByPSI5LjEzNCIgZmlsbD0iIzNhMzY3MCIgLz48cGF0aCBmaWxsPSIjZTZlNmU2IiBkPSJNNTIuMzUgMTQuNDc4YTkuMSA5LjEgMCAwIDEgLjQ3OCAyLjkgOS4xMzQgOS4xMzQgMCAwIDEtMTYuMTM1IDUuODYxIDkuMTMzIDkuMTMzIDAgMSAwIDE1LjY1Ny04Ljc2MSIgLz48cGF0aCBmaWxsPSJ1cmwoI2EpIiBkPSJNNCAxMy4wMXMzNC44NjQgMS44MzggNDUuMjA3IDMyLjU0OGwtNS4zNzggOS44MjctMjMuNzU4LTEuMDk2TDQgNDMuMDM2eiIgLz48cGF0aCBmaWxsPSIjYWM3NzZkIiBkPSJNNTguMTU5IDMxLjQxOWMtNS45NjItLjA1NC0xOS4zMDUgMi4wMi0zMC42NiAxOS40NjhsMTkuMzMyIDUuNDA3IDEwLjI4Ny0xLjE1M2ExMi45NiAxMi45NiAwIDAgMCAyLjg4My04LjE3M1YzMS41MTZhMjEgMjEgMCAwIDAtMS44NDItLjA5NyIgb3BhY2l0eT0iLjUiIC8+PHBhdGggZmlsbD0iI2I4YWQ5OSIgZD0iTTYwIDM1LjgyN2MtNy43ODYuOTEtMjAuNDc3IDUuMzYyLTMxLjUzNCAyMi45NjNsMjkuMDA1LTQuMTJhMTIuOTUgMTIuOTUgMCAwIDAgMi41My03Ljd6IiBvcGFjaXR5PSIuNSIgLz48cGF0aCBmaWxsPSIjNTc0YTVjIiBkPSJNNTIuODMgNDQuOTNjLTE1LjAwNS4xNzMtMjcuOTA2IDYuMTA0LTI3LjkwNiA2LjEwNGwtLjE0NSA1Ljg2N0g1NS40YTEyLjk2IDEyLjk2IDAgMCAwIDQuNjAyLTkuOTMydi0xLjY0NmE1MyA1MyAwIDAgMC03LjE3Mi0uMzkzIiBzdHlsZT0ibWl4LWJsZW5kLW1vZGU6bm9ybWFsIiAvPjxwYXRoIGQ9Ik00IDM0LjczNnYxMi4yMzJBMTIuOTczIDEyLjk3MyAwIDAgMCAxNy4wMDIgNTkuOTdINDdhMTIuOTcgMTIuOTcgMCAwIDAgMTIuMzg1LTkuMDNjLTE1LjEyNiA2LjU1Mi0yNy43NDQtMy4xNzMtMjcuNzQ0LTMuMTczQzEzLjkxNiAzNS41NDIgOC42NjUgMzUuMjY5IDQgMzQuNzM2IiAvPjxwYXRoIGZpbGw9IiNmZmYiIGQ9Ik0xMy4zNTkgNy43ODNhLjcxNy43MTcgMCAwIDAtLjcxNy43MTkuNzE3LjcxNyAwIDAgMCAuNzE3LjcxNy43MTcuNzE3IDAgMCAwIC43MTctLjcxNy43MTcuNzE3IDAgMCAwLS43MTctLjcxOW01LjExMSAzLjQyMmEuOTg2Ljk4NiAwIDAgMC0uOTg2Ljk4Ni45ODYuOTg2IDAgMCAwIC45ODYuOTg3Ljk4Ni45ODYgMCAwIDAgLjk4Ny0uOTg3Ljk4Ni45ODYgMCAwIDAtLjk4Ny0uOTg2bS02LjYzNCAzLjI3NGExLjg4MyAxLjg4MyAwIDAgMC0xLjg4MyAxLjg4MiAxLjg4MyAxLjg4MyAwIDAgMCAxLjg4MyAxLjg4MyAxLjg4MyAxLjg4MyAwIDAgMCAxLjg4Mi0xLjg4MyAxLjg4MyAxLjg4MyAwIDAgMC0xLjg4Mi0xLjg4M202LjA5IDMuOTZhLjcxNy43MTcgMCAwIDAtLjcxNy43Mi43MTcuNzE3IDAgMCAwIC43MTYuNzE2LjcxNy43MTcgMCAwIDAgLjcxNy0uNzE3LjcxNy43MTcgMCAwIDAtLjcxNy0uNzE5bS0yLjYzNyAxLjM2YTEuMjEgMS4yMSAwIDAgMC0xLjIxMSAxLjIwOSAxLjIxIDEuMjEgMCAwIDAgMS4yMSAxLjIxIDEuMjEgMS4yMSAwIDAgMCAxLjIxLTEuMjEgMS4yMSAxLjIxIDAgMCAwLTEuMjEtMS4yMW01LjY4MS4xNjRhLjcxNy43MTcgMCAwIDAtLjcxNy43MTcuNzE3LjcxNyAwIDAgMCAuNzE3LjcxNi43MTcuNzE3IDAgMCAwIC43MTctLjcxNi43MTcuNzE3IDAgMCAwLS43MTctLjcxN204LjAyIDUuOTI2YTEuMjEgMS4yMSAwIDAgMC0xLjIxMSAxLjIwOSAxLjIxIDEuMjEgMCAwIDAgMS4yMSAxLjIxIDEuMjEgMS4yMSAwIDAgMCAxLjIxLTEuMjEgMS4yMSAxLjIxIDAgMCAwLTEuMjEtMS4yMW0tOS41NDEgNC43M2EuNzE3LjcxNyAwIDAgMC0uNzE3LjcxNy43MTcuNzE3IDAgMCAwIC43MTcuNzE3LjcxNy43MTcgMCAwIDAgLjcxNy0uNzE3LjcxNy43MTcgMCAwIDAtLjcxNy0uNzE3IiBvcGFjaXR5PSIuNSIgLz48L3N2Zz4=" x="0" y="0" width="64" height="64" />
   </g>
 
-  <rect width="55" height="55" x="4.5" y="4.5" rx="13.5" ry="13.5" fill="none" stroke="url(#d-rim)" stroke-width="1" />
+  <rect width="55.5" height="55.5" x="4.25" y="4.25" rx="13.75" ry="13.75" fill="none" stroke="#000000" stroke-opacity="0.34" stroke-width="0.5" />
+  <rect width="54.5" height="54.5" x="4.75" y="4.75" rx="13.25" ry="13.25" fill="none" stroke="url(#d-rim)" stroke-width="0.75" />
 </svg>

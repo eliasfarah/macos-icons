@@ -1,39 +1,36 @@
-<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <!-- Ambient shadow so the tile still detaches from a dark dock -->
     <filter id="d-shadow" x="-25%" y="-25%" width="150%" height="150%">
-      <feDropShadow dx="0" dy="1.8" stdDeviation="1.9" flood-color="#000000" flood-opacity="0.55" />
+      <feDropShadow dx="0" dy="2.4" stdDeviation="2.8" flood-color="#000000" flood-opacity="0.38" />
+      <feDropShadow dx="0" dy="1.0" stdDeviation="0.8" flood-color="#000000" flood-opacity="0.62" />
     </filter>
-
-    <!-- Dark canvas, tinted with the icon's own hue -->
     <linearGradient id="d-bg" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#26262a" />
-      <stop offset="100%" stop-color="#0c0c0e" />
+      <stop offset="0%" stop-color="#28261d" />
+      <stop offset="100%" stop-color="#0d0d09" />
     </linearGradient>
-
-    <!-- The glyph appears to light its own tile, faintly -->
-    <radialGradient id="d-glow" cx="50%" cy="42%" r="52%">
-      <stop offset="0%" stop-color="#8c8c8c" stop-opacity="0.033" />
-      <stop offset="55%" stop-color="#8c8c8c" stop-opacity="0.012" />
-      <stop offset="100%" stop-color="#8c8c8c" stop-opacity="0" />
-    </radialGradient>
-
-    <!-- Hairline rim: light catches the top edge, bottom falls away -->
     <linearGradient id="d-rim" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.26" />
-      <stop offset="42%" stop-color="#ffffff" stop-opacity="0.07" />
-      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.03" />
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.34" />
+      <stop offset="34%" stop-color="#ffffff" stop-opacity="0.10" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.025" />
     </linearGradient>
-
     <linearGradient id="d-floor" x1="0%" y1="0%" x2="0%" y2="100%">
       <stop offset="0%" stop-color="#000000" stop-opacity="0" />
-      <stop offset="72%" stop-color="#000000" stop-opacity="0" />
-      <stop offset="100%" stop-color="#000000" stop-opacity="0.42" />
+      <stop offset="58%" stop-color="#000000" stop-opacity="0" />
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.28" />
     </linearGradient>
-
+    <radialGradient id="d-sheen" cx="22%" cy="4%" r="82%" fx="22%" fy="4%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.105" />
+      <stop offset="48%" stop-color="#ffffff" stop-opacity="0.022" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0" />
+    </radialGradient>
     <clipPath id="d-clip">
       <rect width="56" height="56" x="4" y="4" rx="14" ry="14" />
     </clipPath>
+    <radialGradient id="d-glow" cx="50%" cy="44%" r="56%">
+      <stop offset="0%" stop-color="#d64a3d" stop-opacity="0.12" />
+      <stop offset="55%" stop-color="#d64a3d" stop-opacity="0.0420" />
+      <stop offset="100%" stop-color="#d64a3d" stop-opacity="0" />
+    </radialGradient>
   </defs>
 
   <g filter="url(#d-shadow)">
@@ -41,10 +38,27 @@
   </g>
 
   <g clip-path="url(#d-clip)">
-    <rect width="56" height="56" x="4" y="4" fill="url(#d-glow)" />
-    <image href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbDpzcGFjZT0icHJlc2VydmUiIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJhIiB4MT0iNy45MzciIHgyPSI3LjkzNyIgeTE9IjE1LjA4MSIgeTI9IjEuODUyIiBncmFkaWVudFRyYW5zZm9ybT0ic2NhbGUoMy43Nzk2KSIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPjxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iIzM2MzYzNiIgc3R5bGU9InN0b3AtY29sb3I6IzFhMWExYTtzdG9wLW9wYWNpdHk6MSIgLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiM2YzZjNmMiIHN0eWxlPSJzdG9wLWNvbG9yOiMzMzM7c3RvcC1vcGFjaXR5OjEiIC8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3Qgd2lkdGg9IjU2LjAwMiIgaGVpZ2h0PSI1Ni4wMDIiIHg9IjQiIHk9IjMuOTY5IiBmaWxsPSJ1cmwoI2EpIiByeD0iMTMuMDAyIiByeT0iMTMuMDAyIiBzdHlsZT0iZmlsbDojMDAwO2ZpbGwtb3BhY2l0eToxIiAvPjwvc3ZnPg==" x="0" y="0" width="64" height="64" />
     <rect width="56" height="56" x="4" y="4" fill="url(#d-floor)" />
+    <rect width="56" height="56" x="4" y="4" fill="url(#d-glow)" />
+    <rect width="56" height="56" x="4" y="4" fill="url(#d-sheen)" />
+    <g>
+      <g fill="#6f7d48" opacity="0.88">
+        <rect x="10" y="25" width="14" height="3" />
+        <rect x="8" y="31" width="16" height="3" />
+        <rect x="10" y="37" width="14" height="3" />
+        <rect x="40" y="25" width="14" height="3" />
+        <rect x="40" y="31" width="16" height="3" />
+        <rect x="40" y="37" width="14" height="3" />
+      </g>
+      <path d="M 32 13 L 36 21 L 46 18 L 40 27 L 47 31 L 39 34 L 41 46
+               L 32 51 L 23 46 L 25 34 L 17 31 L 24 27 L 18 18 L 28 21 Z"
+            fill="#d64a3d" />
+      <path d="M 32 20 L 36.5 29 L 32 42 L 27.5 29 Z" fill="#822c2b" />
+      <path d="M 27 31 L 32 26 L 37 31 L 35 39 L 29 39 Z" fill="#e9d9b0" />
+      <path d="M 30 16 L 32 11 L 34 16 L 32 19 Z" fill="#f0d7a0" />
+    </g>
   </g>
 
-  <rect width="55" height="55" x="4.5" y="4.5" rx="13.5" ry="13.5" fill="none" stroke="url(#d-rim)" stroke-width="1" />
+  <rect width="55.5" height="55.5" x="4.25" y="4.25" rx="13.75" ry="13.75" fill="none" stroke="#000000" stroke-opacity="0.34" stroke-width="0.5" />
+  <rect width="54.5" height="54.5" x="4.75" y="4.75" rx="13.25" ry="13.25" fill="none" stroke="url(#d-rim)" stroke-width="0.75" />
 </svg>

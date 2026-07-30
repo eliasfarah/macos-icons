@@ -1,1 +1,124 @@
-preferences-plugin.svg
+<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="d-shadow" x="-25%" y="-25%" width="150%" height="150%">
+      <feDropShadow dx="0" dy="2.4" stdDeviation="2.8" flood-color="#000000" flood-opacity="0.38" />
+      <feDropShadow dx="0" dy="1.0" stdDeviation="0.8" flood-color="#000000" flood-opacity="0.62" />
+    </filter>
+    <linearGradient id="d-bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#172a45" />
+      <stop offset="100%" stop-color="#070c16" />
+    </linearGradient>
+    <linearGradient id="d-rim" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.34" />
+      <stop offset="34%" stop-color="#ffffff" stop-opacity="0.10" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.025" />
+    </linearGradient>
+    <linearGradient id="d-floor" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#000000" stop-opacity="0" />
+      <stop offset="58%" stop-color="#000000" stop-opacity="0" />
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.28" />
+    </linearGradient>
+    <radialGradient id="d-sheen" cx="22%" cy="4%" r="82%" fx="22%" fy="4%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.105" />
+      <stop offset="48%" stop-color="#ffffff" stop-opacity="0.022" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0" />
+    </radialGradient>
+    <clipPath id="d-clip">
+      <rect width="56" height="56" x="4" y="4" rx="14" ry="14" />
+    </clipPath>
+    <radialGradient id="d-glow" cx="50%" cy="44%" r="56%">
+      <stop offset="0%" stop-color="#229cff" stop-opacity="0.17" />
+      <stop offset="55%" stop-color="#229cff" stop-opacity="0.0595" />
+      <stop offset="100%" stop-color="#229cff" stop-opacity="0" />
+    </radialGradient>
+    <linearGradient id="em-piece" gradientUnits="userSpaceOnUse"
+                    x1="21" y1="10" x2="46" y2="51">
+      <stop offset="0%" stop-color="#86d7ff" />
+      <stop offset="40%" stop-color="#44a8ff" />
+      <stop offset="76%" stop-color="#1778ef" />
+      <stop offset="100%" stop-color="#0751bd" />
+    </linearGradient>
+    <linearGradient id="em-edge" gradientUnits="userSpaceOnUse"
+                    x1="23" y1="9" x2="44" y2="52">
+      <stop offset="0%" stop-color="#d9f6ff" />
+      <stop offset="45%" stop-color="#58bcff" />
+      <stop offset="100%" stop-color="#00317f" />
+    </linearGradient>
+    <clipPath id="em-piece-clip">
+      <path d="M 19 19 H 26 V 16
+               C 26 12.1 29.1 9 33 9
+               C 36.9 9 40 12.1 40 16 V 19 H 45
+               C 47.2 19 49 20.8 49 23 V 26 H 49.5
+               C 53.6 26 57 29.4 57 33.5
+               C 57 37.6 53.6 41 49.5 41 H 49 V 46
+               C 49 48.2 47.2 50 45 50 H 40 V 47.5
+               C 40 43.6 36.9 40.5 33 40.5
+               C 29.1 40.5 26 43.6 26 47.5 V 50 H 19
+               C 16.8 50 15 48.2 15 46 V 41 H 18.5
+               C 22.4 41 25.5 37.9 25.5 34
+               C 25.5 30.1 22.4 27 18.5 27 H 15 V 23
+               C 15 20.8 16.8 19 19 19 Z" />
+    </clipPath>
+    <filter id="em-piece-shadow" x="-30%" y="-30%" width="170%" height="180%">
+      <feDropShadow dx="0" dy="2.2" stdDeviation="2"
+                    flood-color="#000000" flood-opacity="0.54" />
+      <feDropShadow dx="0" dy="0.6" stdDeviation="0.5"
+                    flood-color="#001a47" flood-opacity="0.66" />
+    </filter>
+  </defs>
+
+  <g filter="url(#d-shadow)">
+    <rect width="56" height="56" x="4" y="4" rx="14" ry="14" fill="url(#d-bg)" />
+  </g>
+
+  <g clip-path="url(#d-clip)">
+    <rect width="56" height="56" x="4" y="4" fill="url(#d-floor)" />
+    <rect width="56" height="56" x="4" y="4" fill="url(#d-glow)" />
+    <rect width="56" height="56" x="4" y="4" fill="url(#d-sheen)" />
+    <g filter="url(#em-piece-shadow)">
+      <path d="M 19 19 H 26 V 16
+               C 26 12.1 29.1 9 33 9
+               C 36.9 9 40 12.1 40 16 V 19 H 45
+               C 47.2 19 49 20.8 49 23 V 26 H 49.5
+               C 53.6 26 57 29.4 57 33.5
+               C 57 37.6 53.6 41 49.5 41 H 49 V 46
+               C 49 48.2 47.2 50 45 50 H 40 V 47.5
+               C 40 43.6 36.9 40.5 33 40.5
+               C 29.1 40.5 26 43.6 26 47.5 V 50 H 19
+               C 16.8 50 15 48.2 15 46 V 41 H 18.5
+               C 22.4 41 25.5 37.9 25.5 34
+               C 25.5 30.1 22.4 27 18.5 27 H 15 V 23
+               C 15 20.8 16.8 19 19 19 Z" fill="#020b19" stroke="#031226" stroke-width="2.6" opacity="0.62" />
+      <path d="M 19 19 H 26 V 16
+               C 26 12.1 29.1 9 33 9
+               C 36.9 9 40 12.1 40 16 V 19 H 45
+               C 47.2 19 49 20.8 49 23 V 26 H 49.5
+               C 53.6 26 57 29.4 57 33.5
+               C 57 37.6 53.6 41 49.5 41 H 49 V 46
+               C 49 48.2 47.2 50 45 50 H 40 V 47.5
+               C 40 43.6 36.9 40.5 33 40.5
+               C 29.1 40.5 26 43.6 26 47.5 V 50 H 19
+               C 16.8 50 15 48.2 15 46 V 41 H 18.5
+               C 22.4 41 25.5 37.9 25.5 34
+               C 25.5 30.1 22.4 27 18.5 27 H 15 V 23
+               C 15 20.8 16.8 19 19 19 Z" fill="url(#em-piece)" stroke="url(#em-edge)" stroke-width="0.9"
+            stroke-linejoin="round" />
+      <g clip-path="url(#em-piece-clip)">
+        <rect x="14" y="8" width="19" height="26" fill="#477fff" opacity="0.32" />
+        <rect x="33" y="8" width="25" height="26" fill="#61d5ff" opacity="0.30" />
+        <rect x="14" y="34" width="19" height="18" fill="#136cf3" opacity="0.28" />
+        <rect x="33" y="34" width="25" height="18" fill="#0647bd" opacity="0.30" />
+        <path d="M 16 22 C 16 20.9 17.2 20 19 20 H 27 V 16
+                 C 27 12.8 29.5 10.3 32.7 10.2"
+              fill="none" stroke="#ffffff" stroke-width="1"
+              stroke-linecap="round" opacity="0.78" />
+        <path d="M 15 47 H 26.5 C 27.8 43.2 30 41.5 33 41.5
+                 C 36 41.5 38.2 43.2 39.5 47 H 49 V 51 H 15 Z"
+              fill="#002b78" opacity="0.22" />
+      </g>
+    </g>
+  </g>
+
+  <rect width="55.5" height="55.5" x="4.25" y="4.25" rx="13.75" ry="13.75" fill="none" stroke="#000000" stroke-opacity="0.34" stroke-width="0.5" />
+  <rect width="54.5" height="54.5" x="4.75" y="4.75" rx="13.25" ry="13.25" fill="none" stroke="url(#d-rim)" stroke-width="0.75" />
+</svg>

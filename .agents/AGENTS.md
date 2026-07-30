@@ -44,13 +44,19 @@ the cut leaves a ragged hole, so the dark variant is drawn by hand in
 
 Registration is by *light source filename*, but lookup is by **artwork hash**,
 so every alias that embeds the same drawing follows along: one entry for
-`softwarecenter.svg` also covers `gnome-software.svg` and
-`system-software-install.svg`, and the ChatGPT entry covers the Chrome web-app
-shortcut `chrome-cadlkienfkclaiaibeoongdcgmdikeeg-Default.svg`.
+`softwarecenter.svg` also covers `gnome-software.svg`, while
+`system-software-install.svg` deliberately has its own package-and-controls
+artwork. The ChatGPT entry covers the Chrome web-app shortcut
+`chrome-cadlkienfkclaiaibeoongdcgmdikeeg-Default.svg`.
 
-Currently hand-drawn: Calendar, text-editor notepad, Chrome, App Store,
-image viewer, GNOME Tour, settings cog, extensions puzzle, video player,
-Maps, Camera, Contacts. ChatGPT is generated from its own artwork
+Currently hand-drawn: Calendar, text-editor notepad, Chrome, software store,
+Web compass, image viewer, GNOME Tour, settings cog, applications grid, Extension Manager,
+document scanner, red help buoy, video player, music library, audio player,
+Maps, Camera, Contacts. Empty light-mode placeholders are repaired by exact
+filename for Celeste, Inscryption, Papers Please, OpenRA D2K, OneShot,
+Stardew Valley, Terraria, Undertale, SimpleX Chat, Clapgrep, Roblox and
+Ricochlime; this must remain name-based because unrelated apps share identical
+blank artwork hashes. ChatGPT is generated from its own artwork
 (`dark_mono_glyph_svg`): the knot is pure black ink on a white card, so
 reading the card's luminance as the mark's *alpha* re-inks it white with no
 halo — a plain card-cut would leave grey fringing on every strand.
@@ -62,9 +68,34 @@ Do **not** blanket-exempt a whole name family from the pipeline (an earlier
 `"chrom" in name` rule quietly kept 60-odd Chrome web-app icons, ChatGPT
 among them, in full light mode).
 
-The two light-mode edits made so far: `org.gnome.Totem.svg` and
-`Showtime.svg` both shipped **FaceTime's green camera** as the video player's
-artwork. Both now carry a screen-and-play-head drawing
+### GNOME Extensions visual direction
+
+The dark GNOME Extensions icon follows the restrained macOS system-icon
+language: one sculpted ivory puzzle piece on deep emerald glass. Preserve the
+single clear silhouette, subtle material depth, generous negative space and
+legibility at 32–64 px. Do not add tools, circuit traces or other secondary
+metaphors; they make the icon read as a repair utility instead of a premium
+system control. The primary file is `extensions.svg`; these aliases resolve to
+it and must continue to follow automatically:
+
+- `67EF_addoninstaller.0.svg`
+- `cs-extensions.svg`
+- `gnome-shell-extension-prefs.svg`
+- `org.gnome.Extensions.svg`
+- `org.gnome.Shell.Extensions.svg`
+
+### Extension Manager app visual direction
+
+`com.mattjakeman.ExtensionManager.svg` is a distinct application and must not
+resolve to the generic `preferences-plugin.svg` gear. Its identity is the
+official blue puzzle piece divided into four tonal quadrants. The light icon
+uses an ice-glass tile; the dark counterpart uses sapphire-black glass. Keep
+the quadrant structure, blue palette, sculpted edge and clean dock-size
+silhouette. Do not add a gear, wrench or circuit detail.
+
+`org.gnome.Totem.svg` and `Showtime.svg` both shipped **FaceTime's green
+camera** as the video player's artwork. Both now carry the same cinematic
+screen, glass play control and progress timeline
 (`dark_handdrawn.light_video_svg`). When an app looks wrong in dark mode,
 check whether it is wrong in light mode too — and check *which* file the
 desktop actually resolves, since GNOME's video player is Showtime now, not

@@ -1,44 +1,27 @@
 <svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <!-- Apple Drop Shadow -->
-    <filter id="glass-shadow" x="-20%" y="-20%" width="140%" height="140%">
-      <feDropShadow dx="0" dy="2.5" stdDeviation="2.5" flood-color="#000000" flood-opacity="0.22" />
+    <filter id="shadow" x="-25%" y="-25%" width="150%" height="155%">
+      <feDropShadow dx="0" dy="2.6" stdDeviation="2.7" flood-color="#26303d" flood-opacity="0.24"/>
+      <feDropShadow dx="0" dy="0.8" stdDeviation="0.7" flood-color="#ffffff" flood-opacity="0.38"/>
     </filter>
-
-    <!-- 3D Bevel/Glass Highlights -->
-    <linearGradient id="inner-bevel" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.75" />
-      <stop offset="30%" stop-color="#ffffff" stop-opacity="0.0" />
-      <stop offset="70%" stop-color="#000000" stop-opacity="0.0" />
-      <stop offset="100%" stop-color="#000000" stop-opacity="0.2" />
+    <linearGradient id="paper" x1="8%" y1="0%" x2="90%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="62%" stop-color="#fbfbfc"/>
+      <stop offset="100%" stop-color="#edf0f4"/>
     </linearGradient>
-
-    <!-- White Card Base Gradient -->
-    <linearGradient id="bg-grad-white" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#ffffff" />
-      <stop offset="100%" stop-color="#f1f5f9" />
+    <linearGradient id="rim" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.98"/>
+      <stop offset="50%" stop-color="#ffffff" stop-opacity="0.28"/>
+      <stop offset="100%" stop-color="#7f8997" stop-opacity="0.34"/>
     </linearGradient>
-
-    <!-- Squircle Clip -->
-    <clipPath id="squircle-clip">
-      <rect width="56" height="56" x="4" y="4" rx="14" ry="14" />
-    </clipPath>
+    <clipPath id="clip"><rect x="4" y="4" width="56" height="56" rx="14"/></clipPath>
   </defs>
-
-  <!-- Background Base with Shadow -->
-  <g filter="url(#glass-shadow)">
-    <g clip-path="url(#squircle-clip)">
-      <!-- White Base Card -->
-      <rect width="56" height="56" x="4" y="4" fill="url(#bg-grad-white)" />
-      
-      <!-- Red Weekday Text (e.g. Mon / Wed / SEG) -->
-      <text x="32" y="21.5" font-family="-apple-system, BlinkMacSystemFont, SF Pro Text, Inter, Roboto, sans-serif" font-weight="600" font-size="11.5" fill="#ff3b30" text-anchor="middle">Mon</text>
-      
-      <!-- Date Number (e.g. 27 / 4) -->
-      <text x="32" y="49" font-family="-apple-system, BlinkMacSystemFont, SF Pro Display, Inter, Roboto, sans-serif" font-weight="600" font-size="28" fill="#1c1c1e" text-anchor="middle">27</text>
-    </g>
+  <g filter="url(#shadow)"><rect x="4" y="4" width="56" height="56" rx="14" fill="url(#paper)"/></g>
+  <g clip-path="url(#clip)">
+    <path d="M4 4H60V25H4Z" fill="#ffffff" opacity="0.44"/>
+    <text x="32" y="21.5" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Text', Inter, Roboto, sans-serif" font-weight="650" font-size="11.5" fill="#ff3b30" text-anchor="middle">QUI</text>
+    <text x="32" y="49" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', Inter, Roboto, sans-serif" font-weight="600" font-size="28" fill="#1c1c1e" text-anchor="middle">30</text>
+    <path d="M4 52C20 56 44 54 60 45V60H4Z" fill="#768293" opacity="0.04"/>
   </g>
-
-  <!-- Glass Bevel Overlay -->
-  <rect width="56" height="56" x="4" y="4" rx="14" ry="14" fill="none" stroke="url(#inner-bevel)" stroke-width="1.5" />
+  <rect x="4.5" y="4.5" width="55" height="55" rx="13.5" fill="none" stroke="url(#rim)" stroke-width="1"/>
 </svg>

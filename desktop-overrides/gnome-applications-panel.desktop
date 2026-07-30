@@ -1,0 +1,15 @@
+[Desktop Entry]
+Name=Apps
+Name[pt_BR]=Aplicativos
+Comment=Control various app permissions and settings
+Comment[pt_BR]=Controle várias permissões e configurações de aplicativos
+Exec=gnome-control-center applications
+Icon=applications-system
+Terminal=false
+Type=Application
+NoDisplay=true
+StartupNotify=true
+Categories=GNOME;GTK;Settings;DesktopSettings;X-GNOME-Settings-Panel;X-GNOME-AccountSettings;
+OnlyShowIn=GNOME;Unity;
+Keywords=application;flatpak;permission;setting;default;preferred;media;autorun;device;system;
+Keywords[pt_BR]=aplicativo;flatpak;permissão;configuração;padrão;preferido;mídia;dispositivo;sistema;

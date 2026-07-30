@@ -1,1 +1,96 @@
-preferences-plugin.svg
+<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="em-card-shadow" x="-25%" y="-25%" width="150%" height="160%">
+      <feDropShadow dx="0" dy="2.6" stdDeviation="2.7" flood-color="#173455" flood-opacity="0.22" />
+      <feDropShadow dx="0" dy="0.7" stdDeviation="0.7" flood-color="#173455" flood-opacity="0.18" />
+    </filter>
+    <filter id="em-piece-shadow" x="-30%" y="-30%" width="170%" height="180%">
+      <feDropShadow dx="0" dy="2.1" stdDeviation="1.9" flood-color="#0a3f8f" flood-opacity="0.34" />
+      <feDropShadow dx="0" dy="0.5" stdDeviation="0.45" flood-color="#062d70" flood-opacity="0.28" />
+    </filter>
+    <linearGradient id="em-card" gradientUnits="userSpaceOnUse" x1="15" y1="7" x2="49" y2="58">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="48%" stop-color="#f3f8ff" />
+      <stop offset="100%" stop-color="#dce8f5" />
+    </linearGradient>
+    <linearGradient id="em-card-rim" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95" />
+      <stop offset="48%" stop-color="#ffffff" stop-opacity="0.18" />
+      <stop offset="100%" stop-color="#7890aa" stop-opacity="0.34" />
+    </linearGradient>
+    <radialGradient id="em-card-glow" cx="50%" cy="38%" r="64%">
+      <stop offset="0%" stop-color="#76c9ff" stop-opacity="0.22" />
+      <stop offset="100%" stop-color="#76c9ff" stop-opacity="0" />
+    </radialGradient>
+    <linearGradient id="em-piece" gradientUnits="userSpaceOnUse" x1="21" y1="10" x2="46" y2="51">
+      <stop offset="0%" stop-color="#77c7ff" />
+      <stop offset="42%" stop-color="#3d9cff" />
+      <stop offset="78%" stop-color="#1874e8" />
+      <stop offset="100%" stop-color="#0756c4" />
+    </linearGradient>
+    <linearGradient id="em-piece-edge" gradientUnits="userSpaceOnUse" x1="23" y1="9" x2="44" y2="52">
+      <stop offset="0%" stop-color="#d6f3ff" />
+      <stop offset="45%" stop-color="#55b9ff" />
+      <stop offset="100%" stop-color="#003b98" />
+    </linearGradient>
+    <clipPath id="em-card-clip">
+      <rect x="4" y="4" width="56" height="56" rx="14" ry="14" />
+    </clipPath>
+    <clipPath id="em-piece-clip">
+      <path d="M 19 19 H 26 V 16
+               C 26 12.1 29.1 9 33 9
+               C 36.9 9 40 12.1 40 16 V 19 H 45
+               C 47.2 19 49 20.8 49 23 V 26 H 49.5
+               C 53.6 26 57 29.4 57 33.5
+               C 57 37.6 53.6 41 49.5 41 H 49 V 46
+               C 49 48.2 47.2 50 45 50 H 40 V 47.5
+               C 40 43.6 36.9 40.5 33 40.5
+               C 29.1 40.5 26 43.6 26 47.5 V 50 H 19
+               C 16.8 50 15 48.2 15 46 V 41 H 18.5
+               C 22.4 41 25.5 37.9 25.5 34
+               C 25.5 30.1 22.4 27 18.5 27 H 15 V 23
+               C 15 20.8 16.8 19 19 19 Z" />
+    </clipPath>
+  </defs>
+
+  <g filter="url(#em-card-shadow)">
+    <rect x="4" y="4" width="56" height="56" rx="14" ry="14" fill="url(#em-card)" />
+  </g>
+
+  <g clip-path="url(#em-card-clip)">
+    <rect x="4" y="4" width="56" height="56" fill="url(#em-card-glow)" />
+    <g filter="url(#em-piece-shadow)">
+      <path d="M 19 19 H 26 V 16
+               C 26 12.1 29.1 9 33 9
+               C 36.9 9 40 12.1 40 16 V 19 H 45
+               C 47.2 19 49 20.8 49 23 V 26 H 49.5
+               C 53.6 26 57 29.4 57 33.5
+               C 57 37.6 53.6 41 49.5 41 H 49 V 46
+               C 49 48.2 47.2 50 45 50 H 40 V 47.5
+               C 40 43.6 36.9 40.5 33 40.5
+               C 29.1 40.5 26 43.6 26 47.5 V 50 H 19
+               C 16.8 50 15 48.2 15 46 V 41 H 18.5
+               C 22.4 41 25.5 37.9 25.5 34
+               C 25.5 30.1 22.4 27 18.5 27 H 15 V 23
+               C 15 20.8 16.8 19 19 19 Z"
+            fill="url(#em-piece)" stroke="url(#em-piece-edge)" stroke-width="0.9"
+            stroke-linejoin="round" />
+      <g clip-path="url(#em-piece-clip)">
+        <rect x="14" y="8" width="19" height="26" fill="#4f8fff" opacity="0.30" />
+        <rect x="33" y="8" width="25" height="26" fill="#65d4ff" opacity="0.28" />
+        <rect x="14" y="34" width="19" height="18" fill="#1777f4" opacity="0.24" />
+        <rect x="33" y="34" width="25" height="18" fill="#0757d2" opacity="0.25" />
+        <path d="M 16 22 C 16 20.9 17.2 20 19 20 H 27 V 16
+                 C 27 12.8 29.5 10.3 32.7 10.2"
+              fill="none" stroke="#ffffff" stroke-width="1"
+              stroke-linecap="round" opacity="0.72" />
+        <path d="M 15 47 H 26.5 C 27.8 43.2 30 41.5 33 41.5
+                 C 36 41.5 38.2 43.2 39.5 47 H 49 V 51 H 15 Z"
+              fill="#003b9c" opacity="0.15" />
+      </g>
+    </g>
+  </g>
+
+  <rect x="4.5" y="4.5" width="55" height="55" rx="13.5" ry="13.5"
+        fill="none" stroke="url(#em-card-rim)" stroke-width="1" />
+</svg>

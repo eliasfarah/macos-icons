@@ -17,7 +17,7 @@ hairline top rim and an outer shadow.
 # shared tile
 # --------------------------------------------------------------------------
 
-def tile(body, top="#2a2a2e", bottom="#0e0e10", defs="", glow=None, filter_shadow=True):
+def tile(body, top="#2e2e33", bottom="#101013", defs="", glow=None, filter_shadow=True):
     """Wrap `body` (clipped to the tile) in the standard dark card.
 
     glow: (colour, opacity) for a soft radial bloom behind the artwork — the
@@ -37,17 +37,28 @@ def tile(body, top="#2a2a2e", bottom="#0e0e10", defs="", glow=None, filter_shado
     return f"""<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <filter id="d-shadow" x="-25%" y="-25%" width="150%" height="150%">
-      <feDropShadow dx="0" dy="1.8" stdDeviation="1.9" flood-color="#000000" flood-opacity="0.55" />
+      <feDropShadow dx="0" dy="2.4" stdDeviation="2.8" flood-color="#000000" flood-opacity="0.38" />
+      <feDropShadow dx="0" dy="1.0" stdDeviation="0.8" flood-color="#000000" flood-opacity="0.62" />
     </filter>
     <linearGradient id="d-bg" x1="0%" y1="0%" x2="0%" y2="100%">
       <stop offset="0%" stop-color="{top}" />
       <stop offset="100%" stop-color="{bottom}" />
     </linearGradient>
     <linearGradient id="d-rim" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.26" />
-      <stop offset="42%" stop-color="#ffffff" stop-opacity="0.07" />
-      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.03" />
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.34" />
+      <stop offset="34%" stop-color="#ffffff" stop-opacity="0.10" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.025" />
     </linearGradient>
+    <linearGradient id="d-floor" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#000000" stop-opacity="0" />
+      <stop offset="58%" stop-color="#000000" stop-opacity="0" />
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.28" />
+    </linearGradient>
+    <radialGradient id="d-sheen" cx="22%" cy="4%" r="82%" fx="22%" fy="4%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.105" />
+      <stop offset="48%" stop-color="#ffffff" stop-opacity="0.022" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0" />
+    </radialGradient>
     <clipPath id="d-clip">
       <rect width="56" height="56" x="4" y="4" rx="14" ry="14" />
     </clipPath>{glow_defs}{defs}
@@ -58,11 +69,14 @@ def tile(body, top="#2a2a2e", bottom="#0e0e10", defs="", glow=None, filter_shado
   </g>
 
   <g clip-path="url(#d-clip)">
+    <rect width="56" height="56" x="4" y="4" fill="url(#d-floor)" />
     {glow_body}
+    <rect width="56" height="56" x="4" y="4" fill="url(#d-sheen)" />
 {body}
   </g>
 
-  <rect width="55" height="55" x="4.5" y="4.5" rx="13.5" ry="13.5" fill="none" stroke="url(#d-rim)" stroke-width="1" />
+  <rect width="55.5" height="55.5" x="4.25" y="4.25" rx="13.75" ry="13.75" fill="none" stroke="#000000" stroke-opacity="0.34" stroke-width="0.5" />
+  <rect width="54.5" height="54.5" x="4.75" y="4.75" rx="13.25" ry="13.25" fill="none" stroke="url(#d-rim)" stroke-width="0.75" />
 </svg>"""
 
 
@@ -103,28 +117,165 @@ def dark_chrome_svg():
                 defs=defs, glow=("#4285f4", 0.10))
 
 
+def dark_web_svg():
+    """GNOME Web: luminous Safari-style compass made for the dark tile."""
+    defs = """
+    <filter id="web-shadow" x="-35%" y="-35%" width="170%" height="180%">
+      <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#000814" flood-opacity="0.72" />
+    </filter>
+    <linearGradient id="web-rim" x1="16%" y1="4%" x2="86%" y2="96%">
+      <stop offset="0%" stop-color="#d9f7ff" />
+      <stop offset="28%" stop-color="#72d8ff" />
+      <stop offset="70%" stop-color="#238ed9" />
+      <stop offset="100%" stop-color="#0a4d8c" />
+    </linearGradient>
+    <radialGradient id="web-dial" cx="34%" cy="25%" r="76%">
+      <stop offset="0%" stop-color="#51d3ff" />
+      <stop offset="48%" stop-color="#1aa7ec" />
+      <stop offset="100%" stop-color="#0873c7" />
+    </radialGradient>
+    <linearGradient id="web-red" x1="20%" y1="100%" x2="80%" y2="0%">
+      <stop offset="0%" stop-color="#e2293d" />
+      <stop offset="100%" stop-color="#ff6658" />
+    </linearGradient>
+    <linearGradient id="web-pearl" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#c9eaff" />
+      <stop offset="62%" stop-color="#ffffff" />
+      <stop offset="100%" stop-color="#e9f8ff" />
+    </linearGradient>
+    <g id="web-tick">
+      <path d="M32 12.8V16.2" stroke="#f4fbff" stroke-width="1.35" stroke-linecap="round" />
+    </g>"""
+    ticks = "\n".join(
+        f'      <use href="#web-tick" transform="rotate({angle} 32 32)" />'
+        for angle in range(0, 360, 15)
+    )
+    body = f"""    <g filter="url(#web-shadow)">
+      <circle cx="32" cy="32" r="23.1" fill="#071a2d" opacity="0.88" />
+      <circle cx="32" cy="32" r="22.1" fill="url(#web-rim)" />
+      <circle cx="32" cy="32" r="19.7" fill="url(#web-dial)" />
+      <path d="M17.2 24.5A18.8 18.8 0 0 1 45.8 18.3"
+            fill="none" stroke="#ffffff" stroke-width="1.5" opacity="0.35" />
+      <g opacity="0.96">
+{ticks}
+      </g>
+      <path d="M29.6 29.6L49.3 16.2L35 35Z" fill="url(#web-red)"
+            stroke="#b4142a" stroke-width="0.35" stroke-linejoin="round" />
+      <path d="M34.4 34.4L14.7 47.8L29 29Z" fill="url(#web-pearl)"
+            stroke="#b9dbea" stroke-width="0.35" stroke-linejoin="round" />
+      <circle cx="32" cy="32" r="2.7" fill="#edf9ff" opacity="0.95" />
+      <circle cx="32" cy="32" r="1.45" fill="#163a58" />
+    </g>"""
+    return tile(body, top="#183149", bottom="#07111d",
+                defs=defs, glow=("#31bfff", 0.16))
+
+
 # --------------------------------------------------------------------------
 # app store / software centre
 # --------------------------------------------------------------------------
 
 def dark_appstore_svg():
-    """App Store: the blue card becomes a blue-black tile, the A stays white."""
-    # userSpaceOnUse: the crossbar is a horizontal line, so an
-    # objectBoundingBox gradient would collapse and never paint it.
+    """Software store: a sculpted gold A replaces the generic white glyph."""
     defs = """
-    <linearGradient id="a-glyph" gradientUnits="userSpaceOnUse" x1="32" y1="18" x2="32" y2="46">
-      <stop offset="0%" stop-color="#ffffff" />
-      <stop offset="100%" stop-color="#cfd6e4" />
+    <filter id="store-glyph-shadow" x="-35%" y="-35%" width="170%" height="180%">
+      <feDropShadow dx="0" dy="2" stdDeviation="1.7" flood-color="#000000" flood-opacity="0.62" />
+      <feDropShadow dx="0" dy="0.5" stdDeviation="0.5" flood-color="#fff4bb" flood-opacity="0.28" />
+    </filter>
+    <linearGradient id="store-gold" gradientUnits="userSpaceOnUse" x1="32" y1="12" x2="32" y2="51">
+      <stop offset="0%" stop-color="#fff8cf" />
+      <stop offset="24%" stop-color="#ffe78c" />
+      <stop offset="58%" stop-color="#f3b93d" />
+      <stop offset="100%" stop-color="#b9670d" />
+    </linearGradient>
+    <linearGradient id="store-gold-edge" gradientUnits="userSpaceOnUse" x1="32" y1="13" x2="32" y2="51">
+      <stop offset="0%" stop-color="#d99a25" />
+      <stop offset="100%" stop-color="#6e3103" />
     </linearGradient>"""
-    # The App Store "A", traced off the light icon: heavy round bars, legs
-    # that cross high and narrow, and a crossbar far wider than the stance.
-    body = """    <g stroke="url(#a-glyph)" stroke-width="6.2" stroke-linecap="round" fill="none">
-      <path d="M 16.5 47 L 34.5 15" />
-      <path d="M 46.5 47 L 28.5 15" />
-      <path d="M 14.5 38.4 L 48.5 38.4" />
+    body = """    <g filter="url(#store-glyph-shadow)" fill="none"
+           stroke-linecap="round" stroke-linejoin="round">
+      <g stroke="url(#store-gold-edge)" stroke-width="8.2" opacity="0.58">
+        <path d="M16.5 47L34.5 15" />
+        <path d="M47.5 47L29.5 15" />
+        <path d="M14.5 38.5H49.5" />
+      </g>
+      <g stroke="url(#store-gold)" stroke-width="6.25">
+        <path d="M16.5 47L34.5 15" />
+        <path d="M47.5 47L29.5 15" />
+        <path d="M14.5 38.5H49.5" />
+      </g>
+    </g>
+    <path d="M32.8 16.6L17.5 43.8" fill="none" stroke="#fff9d9"
+          stroke-width="1.05" stroke-linecap="round" opacity="0.52" />
+    <path d="M15.5 37.6H48.4" fill="none" stroke="#fff6c0"
+          stroke-width="0.85" stroke-linecap="round" opacity="0.44" />
+    <circle cx="49.8" cy="16.2" r="1.4" fill="#fff7be" opacity="0.88" />
+    <path d="M49.8 12.8V19.6M46.4 16.2H53.2" stroke="#fff7be"
+          stroke-width="0.7" stroke-linecap="round" opacity="0.62" />"""
+    return tile(body, top="#17294d", bottom="#070a12",
+                defs=defs, glow=("#2f7fff", 0.18))
+
+
+# --------------------------------------------------------------------------
+# add / remove software
+# --------------------------------------------------------------------------
+
+def dark_package_manager_svg():
+    """A vivid software package with explicit add and remove controls."""
+    defs = """
+    <filter id="pkg-cube-shadow" x="-35%" y="-35%" width="170%" height="180%">
+      <feDropShadow dx="0" dy="2.1" stdDeviation="2" flood-color="#000000" flood-opacity="0.56" />
+    </filter>
+    <filter id="pkg-badge-shadow" x="-45%" y="-45%" width="190%" height="195%">
+      <feDropShadow dx="0" dy="1.5" stdDeviation="1.4" flood-color="#000000" flood-opacity="0.64" />
+    </filter>
+    <linearGradient id="pkg-top" x1="12%" y1="0%" x2="86%" y2="100%">
+      <stop offset="0%" stop-color="#ca94ff" />
+      <stop offset="100%" stop-color="#7059ee" />
+    </linearGradient>
+    <linearGradient id="pkg-left" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#68cdff" />
+      <stop offset="100%" stop-color="#2775eb" />
+    </linearGradient>
+    <linearGradient id="pkg-right" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#9072ff" />
+      <stop offset="100%" stop-color="#cf53dc" />
+    </linearGradient>
+    <linearGradient id="pkg-plus" x1="20%" y1="0%" x2="80%" y2="100%">
+      <stop offset="0%" stop-color="#96f48a" />
+      <stop offset="100%" stop-color="#24bd63" />
+    </linearGradient>
+    <linearGradient id="pkg-minus" x1="20%" y1="0%" x2="80%" y2="100%">
+      <stop offset="0%" stop-color="#ffa08d" />
+      <stop offset="100%" stop-color="#f05268" />
+    </linearGradient>"""
+    body = """    <g filter="url(#pkg-cube-shadow)" stroke="#ffffff"
+           stroke-opacity="0.30" stroke-width="0.8" stroke-linejoin="round">
+      <path d="M32 12L50 22L32 32L14 22Z" fill="url(#pkg-top)" />
+      <path d="M14 22L32 32V52L14 42Z" fill="url(#pkg-left)" />
+      <path d="M50 22L32 32V52L50 42Z" fill="url(#pkg-right)" />
+      <path d="M25.5 15.6L43.5 25.6L38 28.7L20 18.7Z"
+            fill="#ffffff" fill-opacity="0.30" stroke="none" />
+      <path d="M27.4 34.3V43.9L21.6 40.7V31.1Z"
+            fill="#ffffff" fill-opacity="0.84" stroke="none" />
+      <path d="M35.7 34L45 28.8V32.6L35.7 37.8Z"
+            fill="#ffffff" fill-opacity="0.24" stroke="none" />
+    </g>
+    <g filter="url(#pkg-badge-shadow)">
+      <circle cx="48" cy="17.5" r="8.6" fill="url(#pkg-plus)" />
+      <circle cx="48" cy="17.5" r="7.85" fill="none" stroke="#ffffff"
+              stroke-opacity="0.62" stroke-width="0.8" />
+      <path d="M48 13.4V21.6M43.9 17.5H52.1" stroke="#ffffff"
+            stroke-width="2.5" stroke-linecap="round" />
+    </g>
+    <g filter="url(#pkg-badge-shadow)">
+      <circle cx="16.5" cy="47" r="7.7" fill="url(#pkg-minus)" />
+      <circle cx="16.5" cy="47" r="6.95" fill="none" stroke="#ffffff"
+              stroke-opacity="0.60" stroke-width="0.8" />
+      <path d="M12.7 47H20.3" stroke="#ffffff"
+            stroke-width="2.5" stroke-linecap="round" />
     </g>"""
-    return tile(body, top="#1c2534", bottom="#080a10",
-                defs=defs, glow=("#0a84ff", 0.16))
+    return tile(body, top="#302447", bottom="#0b0910",
+                defs=defs, glow=("#8a63ff", 0.20))
 
 
 # --------------------------------------------------------------------------
@@ -173,6 +324,134 @@ def dark_image_viewer_svg():
     </g>"""
     return tile(body, top="#242a31", bottom="#0a0c0f",
                 defs=defs, glow=("#4f97c9", 0.11))
+
+
+# --------------------------------------------------------------------------
+# loupe image viewer
+# --------------------------------------------------------------------------
+
+def dark_loupe_svg():
+    """Loupe's eight-colour flower, preserved on a sapphire-black card."""
+    defs = """
+    <filter id="flower-shadow" x="-35%" y="-35%" width="170%" height="175%">
+      <feDropShadow dx="0" dy="1.5" stdDeviation="1.5" flood-color="#000000" flood-opacity="0.48" />
+    </filter>
+    <linearGradient id="petal-orange" x1="18%" y1="0%" x2="78%" y2="100%">
+      <stop offset="0%" stop-color="#ffb17a" />
+      <stop offset="100%" stop-color="#ff6326" />
+    </linearGradient>
+    <linearGradient id="petal-yellow" x1="18%" y1="0%" x2="78%" y2="100%">
+      <stop offset="0%" stop-color="#fff66e" />
+      <stop offset="100%" stop-color="#f3c600" />
+    </linearGradient>
+    <linearGradient id="petal-green" x1="18%" y1="0%" x2="78%" y2="100%">
+      <stop offset="0%" stop-color="#91f862" />
+      <stop offset="100%" stop-color="#24c93a" />
+    </linearGradient>
+    <linearGradient id="petal-cyan" x1="18%" y1="0%" x2="78%" y2="100%">
+      <stop offset="0%" stop-color="#51f0c8" />
+      <stop offset="100%" stop-color="#00b7d8" />
+    </linearGradient>
+    <linearGradient id="petal-blue" x1="18%" y1="0%" x2="78%" y2="100%">
+      <stop offset="0%" stop-color="#6fcbff" />
+      <stop offset="100%" stop-color="#367ff1" />
+    </linearGradient>
+    <linearGradient id="petal-violet" x1="18%" y1="0%" x2="78%" y2="100%">
+      <stop offset="0%" stop-color="#a17cff" />
+      <stop offset="100%" stop-color="#6842e7" />
+    </linearGradient>
+    <linearGradient id="petal-magenta" x1="18%" y1="0%" x2="78%" y2="100%">
+      <stop offset="0%" stop-color="#f176ff" />
+      <stop offset="100%" stop-color="#c326da" />
+    </linearGradient>
+    <linearGradient id="petal-red" x1="18%" y1="0%" x2="78%" y2="100%">
+      <stop offset="0%" stop-color="#ff7183" />
+      <stop offset="100%" stop-color="#ee2949" />
+    </linearGradient>
+    <radialGradient id="loupe-heart" cx="35%" cy="28%" r="75%">
+      <stop offset="0%" stop-color="#31558f" />
+      <stop offset="100%" stop-color="#101a31" />
+    </radialGradient>"""
+    petal = ("M32 33C25.7 29 23.4 20.6 26.4 14.4"
+             "C28.6 9.8 34.4 8.4 38.4 11.4C43 15 41.2 24.1 32 33Z")
+    colours = (
+        "petal-orange", "petal-yellow", "petal-green", "petal-cyan",
+        "petal-blue", "petal-violet", "petal-magenta", "petal-red",
+    )
+    petals = "\n".join(
+        f'      <path d="{petal}" fill="url(#{colour})"'
+        + (f' transform="rotate({i * 45} 32 32)"' if i else "")
+        + " />"
+        for i, colour in enumerate(colours)
+    )
+    body = f"""    <g filter="url(#flower-shadow)">
+{petals}
+      <circle cx="32" cy="32" r="4.2" fill="url(#loupe-heart)" fill-opacity="0.88" />
+      <ellipse cx="30.7" cy="30.7" rx="1.45" ry="1" fill="#ffffff" opacity="0.45"
+               transform="rotate(-28 30.7 30.7)" />
+    </g>"""
+    return tile(body, top="#26304a", bottom="#090b12",
+                defs=defs, glow=("#667cff", 0.16))
+
+
+# --------------------------------------------------------------------------
+# display manager settings / login screen
+# --------------------------------------------------------------------------
+
+def dark_login_svg():
+    """A premium login panel with a compact settings badge for GDM tools."""
+    defs = """
+    <filter id="login-panel-shadow" x="-30%" y="-30%" width="160%" height="170%">
+      <feDropShadow dx="0" dy="1.5" stdDeviation="1.7" flood-color="#000000" flood-opacity="0.48" />
+    </filter>
+    <filter id="login-badge-shadow" x="-45%" y="-45%" width="190%" height="195%">
+      <feDropShadow dx="0" dy="1.4" stdDeviation="1.4" flood-color="#000000" flood-opacity="0.66" />
+    </filter>
+    <linearGradient id="login-frame" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#8ca8c8" />
+      <stop offset="100%" stop-color="#40536d" />
+    </linearGradient>
+    <linearGradient id="login-screen" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#173f70" />
+      <stop offset="100%" stop-color="#09192e" />
+    </linearGradient>
+    <linearGradient id="login-avatar" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="100%" stop-color="#cdd8e7" />
+    </linearGradient>
+    <linearGradient id="login-badge" x1="18%" y1="0%" x2="78%" y2="100%">
+      <stop offset="0%" stop-color="#f6f9fd" />
+      <stop offset="52%" stop-color="#bdc9d8" />
+      <stop offset="100%" stop-color="#657287" />
+    </linearGradient>"""
+    body = """    <g filter="url(#login-panel-shadow)">
+      <rect x="10.5" y="12.5" width="43" height="39" rx="9" fill="url(#login-frame)" />
+      <rect x="12.5" y="14.5" width="39" height="35" rx="7.2" fill="url(#login-screen)" />
+    </g>
+    <rect x="13.2" y="15.2" width="37.6" height="33.6" rx="6.5" fill="none"
+          stroke="#8ccaff" stroke-opacity="0.28" stroke-width="0.8" />
+    <circle cx="29.5" cy="26.5" r="6.1" fill="url(#login-avatar)" />
+    <path d="M18.2 39.1C19.4 33.6 23.6 30.6 29.5 30.6C35.4 30.6 39.6 33.6 40.8 39.1
+             C41.1 40.4 40.1 41.5 38.8 41.5H20.2C18.9 41.5 17.9 40.4 18.2 39.1Z"
+          fill="url(#login-avatar)" />
+    <rect x="19.5" y="43.8" width="20" height="3.2" rx="1.6" fill="#000000" opacity="0.42" />
+    <circle cx="24.8" cy="45.4" r="0.9" fill="#d7e8fa" />
+    <circle cx="29.5" cy="45.4" r="0.9" fill="#d7e8fa" />
+    <circle cx="34.2" cy="45.4" r="0.9" fill="#d7e8fa" />
+    <g filter="url(#login-badge-shadow)">
+      <circle cx="47.5" cy="46.5" r="10" fill="url(#login-badge)" />
+      <circle cx="47.5" cy="46.5" r="9.25" fill="none" stroke="#ffffff"
+              stroke-opacity="0.46" stroke-width="0.8" />
+    </g>
+    <g fill="none" stroke="#173860" stroke-width="2.25" stroke-linecap="round">
+      <circle cx="47.5" cy="46.5" r="4.4" />
+      <path d="M47.5 37.8V40M47.5 53V55.2M38.8 46.5H41M54 46.5H56.2
+               M41.35 40.35L42.9 41.9M52.1 51.1L53.65 52.65
+               M41.35 52.65L42.9 51.1M52.1 41.9L53.65 40.35" />
+    </g>
+    <circle cx="47.5" cy="46.5" r="1.75" fill="#173860" />"""
+    return tile(body, top="#1b3e70", bottom="#080d19",
+                defs=defs, glow=("#55b8ff", 0.14))
 
 
 # --------------------------------------------------------------------------
@@ -293,78 +572,411 @@ def dark_contacts_svg():
 
 
 def dark_extensions_svg():
-    """Extension puzzle piece — Apple green at full strength on near-black."""
+    """A single sculpted puzzle piece on deep emerald glass.
+
+    Extension Manager is a system utility, not a repair workshop.  The icon
+    therefore uses one calm, instantly recognisable symbol with the restrained
+    material depth of a macOS system icon.  No secondary tool or micro-detail
+    competes with the silhouette at dock sizes.
+    """
     defs = """
-    <linearGradient id="x-piece" x1="20%" y1="0%" x2="80%" y2="100%">
-      <stop offset="0%" stop-color="#4cf07a" />
-      <stop offset="100%" stop-color="#1faf4e" />
-    </linearGradient>"""
-    # Square body, a tab bulging out of the right edge and a socket cut into
-    # the bottom one — the two halves of a joint, which is what an extension is.
-    piece = ("M 19.5 17 L 24 17 A 5.5 5.5 0 0 1 35 17 L 40.5 17 A 3.5 3.5 0 0 1 44 20.5 L 44 26 "
-             "A 6 6 0 0 1 44 38 L 44 41.5 A 3.5 3.5 0 0 1 40.5 45 L 38 45 "
-             "A 6 6 0 0 0 26 45 L 19.5 45 A 3.5 3.5 0 0 1 16 41.5 L 16 20.5 "
-             "A 3.5 3.5 0 0 1 19.5 17 Z")
-    body = f"""    <g transform="translate(-1.5, 1)">
-      <path d="{piece}" fill="url(#x-piece)" />
-      <path d="M 24 17 A 5.5 5.5 0 0 1 35 17 L 40.5 17 A 3.5 3.5 0 0 1 44 20.5 L 44 22
-               A 3.5 3.5 0 0 0 40.5 18.5 L 34.6 18.5 A 5.5 5.5 0 0 0 24.4 18.5
-               L 19.5 18.5 A 3.5 3.5 0 0 0 16 22 L 16 20.5 A 3.5 3.5 0 0 1 19.5 17 Z"
-            fill="#ffffff" opacity="0.42" />
+    <linearGradient id="x-piece" gradientUnits="userSpaceOnUse"
+                    x1="25" y1="11" x2="40" y2="51">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="42%" stop-color="#f2faf5" />
+      <stop offset="78%" stop-color="#d8e9df" />
+      <stop offset="100%" stop-color="#b8cfc1" />
+    </linearGradient>
+    <linearGradient id="x-edge" gradientUnits="userSpaceOnUse"
+                    x1="22" y1="12" x2="42" y2="51">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="52%" stop-color="#dcece3" />
+      <stop offset="100%" stop-color="#789586" />
+    </linearGradient>
+    <linearGradient id="x-sheen" gradientUnits="userSpaceOnUse"
+                    x1="24" y1="13" x2="37" y2="39">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.72" />
+      <stop offset="55%" stop-color="#ffffff" stop-opacity="0.10" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0" />
+    </linearGradient>
+    <clipPath id="x-piece-clip">
+      <path d="M 19 17 H 26 V 15.5
+               C 26 11.9 28.9 9 32.5 9
+               C 36.1 9 39 11.9 39 15.5 V 17 H 45
+               C 46.7 17 48 18.3 48 20 V 26 H 49.5
+               C 53.1 26 56 28.9 56 32.5
+               C 56 36.1 53.1 39 49.5 39 H 48 V 45
+               C 48 46.7 46.7 48 45 48 H 39 V 46.5
+               C 39 42.9 36.1 40 32.5 40
+               C 28.9 40 26 42.9 26 46.5 V 48 H 19
+               C 17.3 48 16 46.7 16 45 V 39 H 17.5
+               C 21.1 39 24 36.1 24 32.5
+               C 24 28.9 21.1 26 17.5 26 H 16 V 20
+               C 16 18.3 17.3 17 19 17 Z" />
+    </clipPath>
+    <filter id="x-piece-shadow" x="-30%" y="-30%" width="170%" height="180%">
+      <feDropShadow dx="0" dy="2.2" stdDeviation="2.1"
+                    flood-color="#000000" flood-opacity="0.52" />
+      <feDropShadow dx="0" dy="0.6" stdDeviation="0.45"
+                    flood-color="#000000" flood-opacity="0.46" />
+    </filter>"""
+    piece = """M 19 17 H 26 V 15.5
+               C 26 11.9 28.9 9 32.5 9
+               C 36.1 9 39 11.9 39 15.5 V 17 H 45
+               C 46.7 17 48 18.3 48 20 V 26 H 49.5
+               C 53.1 26 56 28.9 56 32.5
+               C 56 36.1 53.1 39 49.5 39 H 48 V 45
+               C 48 46.7 46.7 48 45 48 H 39 V 46.5
+               C 39 42.9 36.1 40 32.5 40
+               C 28.9 40 26 42.9 26 46.5 V 48 H 19
+               C 17.3 48 16 46.7 16 45 V 39 H 17.5
+               C 21.1 39 24 36.1 24 32.5
+               C 24 28.9 21.1 26 17.5 26 H 16 V 20
+               C 16 18.3 17.3 17 19 17 Z"""
+    body = f"""    <g filter="url(#x-piece-shadow)">
+      <path d="{piece}" fill="#04100a" stroke="#06140d" stroke-width="2.8" opacity="0.66" />
+      <path d="{piece}" fill="url(#x-piece)" stroke="url(#x-edge)" stroke-width="0.9"
+            stroke-linejoin="round" />
+      <g clip-path="url(#x-piece-clip)">
+        <ellipse cx="26" cy="16" rx="24" ry="17" fill="url(#x-sheen)" />
+        <path d="M 16.8 44.4 H 26.8 C 28.2 41.8 30.2 40.6 32.5 40.6
+                 C 35.1 40.6 37.1 42 38.3 44.2 H 47.3 V 48.8 H 16.8 Z"
+              fill="#688576" opacity="0.12" />
+      </g>
+      <path d="M 19.5 18 H 27 V 15.5 C 27 12.6 29.3 10.2 32.3 10.1"
+            fill="none" stroke="#ffffff" stroke-width="0.85"
+            stroke-linecap="round" stroke-linejoin="round" opacity="0.86" />
     </g>"""
-    return tile(body, top="#16281c", bottom="#070c08",
-                defs=defs, glow=("#30d158", 0.18))
+    return tile(body, top="#18352b", bottom="#07110d",
+                defs=defs, glow=("#40d98a", 0.13))
+
+
+def dark_extension_manager_svg():
+    """Extension Manager — the official blue quadrant puzzle, refined.
+
+    The four blue fields preserve the app's recognisable identity and suggest
+    a managed collection.  A sapphire glass tile and restrained optical depth
+    distinguish it from the single ivory puzzle used by GNOME Extensions.
+    """
+    piece = """M 19 19 H 26 V 16
+               C 26 12.1 29.1 9 33 9
+               C 36.9 9 40 12.1 40 16 V 19 H 45
+               C 47.2 19 49 20.8 49 23 V 26 H 49.5
+               C 53.6 26 57 29.4 57 33.5
+               C 57 37.6 53.6 41 49.5 41 H 49 V 46
+               C 49 48.2 47.2 50 45 50 H 40 V 47.5
+               C 40 43.6 36.9 40.5 33 40.5
+               C 29.1 40.5 26 43.6 26 47.5 V 50 H 19
+               C 16.8 50 15 48.2 15 46 V 41 H 18.5
+               C 22.4 41 25.5 37.9 25.5 34
+               C 25.5 30.1 22.4 27 18.5 27 H 15 V 23
+               C 15 20.8 16.8 19 19 19 Z"""
+    defs = f"""
+    <linearGradient id="em-piece" gradientUnits="userSpaceOnUse"
+                    x1="21" y1="10" x2="46" y2="51">
+      <stop offset="0%" stop-color="#86d7ff" />
+      <stop offset="40%" stop-color="#44a8ff" />
+      <stop offset="76%" stop-color="#1778ef" />
+      <stop offset="100%" stop-color="#0751bd" />
+    </linearGradient>
+    <linearGradient id="em-edge" gradientUnits="userSpaceOnUse"
+                    x1="23" y1="9" x2="44" y2="52">
+      <stop offset="0%" stop-color="#d9f6ff" />
+      <stop offset="45%" stop-color="#58bcff" />
+      <stop offset="100%" stop-color="#00317f" />
+    </linearGradient>
+    <clipPath id="em-piece-clip">
+      <path d="{piece}" />
+    </clipPath>
+    <filter id="em-piece-shadow" x="-30%" y="-30%" width="170%" height="180%">
+      <feDropShadow dx="0" dy="2.2" stdDeviation="2"
+                    flood-color="#000000" flood-opacity="0.54" />
+      <feDropShadow dx="0" dy="0.6" stdDeviation="0.5"
+                    flood-color="#001a47" flood-opacity="0.66" />
+    </filter>"""
+    body = f"""    <g filter="url(#em-piece-shadow)">
+      <path d="{piece}" fill="#020b19" stroke="#031226" stroke-width="2.6" opacity="0.62" />
+      <path d="{piece}" fill="url(#em-piece)" stroke="url(#em-edge)" stroke-width="0.9"
+            stroke-linejoin="round" />
+      <g clip-path="url(#em-piece-clip)">
+        <rect x="14" y="8" width="19" height="26" fill="#477fff" opacity="0.32" />
+        <rect x="33" y="8" width="25" height="26" fill="#61d5ff" opacity="0.30" />
+        <rect x="14" y="34" width="19" height="18" fill="#136cf3" opacity="0.28" />
+        <rect x="33" y="34" width="25" height="18" fill="#0647bd" opacity="0.30" />
+        <path d="M 16 22 C 16 20.9 17.2 20 19 20 H 27 V 16
+                 C 27 12.8 29.5 10.3 32.7 10.2"
+              fill="none" stroke="#ffffff" stroke-width="1"
+              stroke-linecap="round" opacity="0.78" />
+        <path d="M 15 47 H 26.5 C 27.8 43.2 30 41.5 33 41.5
+                 C 36 41.5 38.2 43.2 39.5 47 H 49 V 51 H 15 Z"
+              fill="#002b78" opacity="0.22" />
+      </g>
+    </g>"""
+    return tile(body, top="#172a45", bottom="#070c16",
+                defs=defs, glow=("#229cff", 0.17))
+
+
+# --------------------------------------------------------------------------
+# document scanner
+# --------------------------------------------------------------------------
+
+def dark_scanner_svg():
+    """A physical scanner, visible document and cyan scanning beam."""
+    defs = """
+    <filter id="scan-paper-shadow" x="-35%" y="-35%" width="170%" height="180%">
+      <feDropShadow dx="0" dy="1.8" stdDeviation="1.7" flood-color="#000000" flood-opacity="0.46" />
+    </filter>
+    <filter id="scan-device-shadow" x="-30%" y="-35%" width="160%" height="180%">
+      <feDropShadow dx="0" dy="2" stdDeviation="1.8" flood-color="#000000" flood-opacity="0.62" />
+    </filter>
+    <filter id="scan-beam-glow" x="-20%" y="-250%" width="140%" height="600%">
+      <feGaussianBlur stdDeviation="1.4" result="blur" />
+      <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
+    </filter>
+    <linearGradient id="scan-paper" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="100%" stop-color="#dce5ec" />
+    </linearGradient>
+    <linearGradient id="scan-fold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#d7e2ea" />
+      <stop offset="100%" stop-color="#9fb3c1" />
+    </linearGradient>
+    <linearGradient id="scan-deck" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#90a7b8" />
+      <stop offset="100%" stop-color="#465d6e" />
+    </linearGradient>
+    <linearGradient id="scan-body" x1="8%" y1="0%" x2="90%" y2="100%">
+      <stop offset="0%" stop-color="#365b74" />
+      <stop offset="52%" stop-color="#203d52" />
+      <stop offset="100%" stop-color="#0d1c28" />
+    </linearGradient>
+    <linearGradient id="scan-front" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1a3548" />
+      <stop offset="100%" stop-color="#08141d" />
+    </linearGradient>"""
+    body = """    <g filter="url(#scan-paper-shadow)">
+      <path d="M18 9.5H39.5L46 16V42H18Z" fill="url(#scan-paper)" />
+      <path d="M39.5 9.5V16H46Z" fill="url(#scan-fold)" />
+      <path d="M22.5 17H35.5" stroke="#4a8bc1" stroke-width="2.1" stroke-linecap="round" />
+      <path d="M22.5 22H40.5M22.5 25.5H38" stroke="#8fa2b0" stroke-width="1.15" stroke-linecap="round" />
+      <rect x="22.5" y="29" width="9.5" height="7.5" rx="1.2" fill="#64b9df" />
+      <path d="M23.5 35.3L26.3 32.8L28 34.2L29.6 32.5L31.2 35.3Z" fill="#205f8b" />
+      <circle cx="29.4" cy="30.9" r="0.9" fill="#fff0a0" />
+      <path d="M35 29.7H41M35 33H40M35 36.3H39" stroke="#99aab6"
+            stroke-width="1.05" stroke-linecap="round" />
+    </g>
+    <g filter="url(#scan-device-shadow)">
+      <path d="M13 31.5H51L56 39.5H8Z" fill="url(#scan-deck)" stroke="#ffffff"
+            stroke-opacity="0.27" stroke-width="0.8" stroke-linejoin="round" />
+      <rect x="8" y="37.5" width="48" height="17" rx="5.5" fill="url(#scan-body)" />
+      <rect x="11.5" y="40.5" width="41" height="10.5" rx="3.4" fill="url(#scan-front)" />
+      <rect x="14" y="38" width="36" height="3" rx="1.5" fill="#050b10" />
+      <path d="M12.5 39H51.5" stroke="#8ad9f3" stroke-opacity="0.26" stroke-width="0.8" />
+      <circle cx="49" cy="47" r="1.8" fill="#68ef88" />
+      <circle cx="49" cy="47" r="0.75" fill="#e9ffe9" />
+      <path d="M15 50H37" stroke="#47677d" stroke-width="1" stroke-linecap="round" />
+    </g>
+    <g filter="url(#scan-beam-glow)">
+      <path d="M12 34.5H52" stroke="#42e7ff" stroke-width="2.1" stroke-linecap="round" />
+      <path d="M14 33.9H50" stroke="#e5fdff" stroke-width="0.65" stroke-linecap="round" />
+    </g>"""
+    return tile(body, top="#1d3543", bottom="#070b0f",
+                defs=defs, glow=("#35d8ff", 0.15))
+
+
+# --------------------------------------------------------------------------
+# help
+# --------------------------------------------------------------------------
+
+def dark_help_svg():
+    """A large realistic red life buoy with diagonal bands and braided rope."""
+    defs = """
+    <filter id="help-buoy-shadow" x="-45%" y="-45%" width="190%" height="195%">
+      <feDropShadow dx="0" dy="2.5" stdDeviation="2.2" flood-color="#000000" flood-opacity="0.72" />
+    </filter>
+    <radialGradient id="help-hole" cx="38%" cy="28%" r="78%">
+      <stop offset="0%" stop-color="#246d82" />
+      <stop offset="100%" stop-color="#061823" />
+    </radialGradient>
+    <radialGradient id="help-red" cx="32%" cy="20%" r="82%">
+      <stop offset="0%" stop-color="#ff9b83" />
+      <stop offset="34%" stop-color="#f54d46" />
+      <stop offset="70%" stop-color="#d51e32" />
+      <stop offset="100%" stop-color="#8f091f" />
+    </radialGradient>
+    <linearGradient id="help-band" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fffefb" />
+      <stop offset="58%" stop-color="#e9e4dc" />
+      <stop offset="100%" stop-color="#a9a197" />
+    </linearGradient>
+    <linearGradient id="help-rope" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffedbc" />
+      <stop offset="48%" stop-color="#c9a866" />
+      <stop offset="100%" stop-color="#795322" />
+    </linearGradient>
+    <mask id="help-ring">
+      <rect width="64" height="64" fill="#000000" />
+      <circle cx="32" cy="31.5" r="17.4" fill="#ffffff" />
+      <circle cx="32" cy="31.5" r="8.7" fill="#000000" />
+    </mask>"""
+    body = """    <g filter="url(#help-buoy-shadow)">
+      <ellipse cx="32" cy="50.5" rx="16" ry="3.2" fill="#000000" opacity="0.36" />
+      <circle cx="32" cy="31.5" r="20.7" fill="none" stroke="#65451d"
+              stroke-width="2.4" opacity="0.68" />
+      <circle cx="32" cy="31.5" r="20.7" fill="none" stroke="url(#help-rope)"
+              stroke-width="1.55" stroke-dasharray="1.25 1.05" />
+      <circle cx="32" cy="31.5" r="18.3" fill="#590719" opacity="0.62" />
+      <g mask="url(#help-ring)">
+        <circle cx="32" cy="31.5" r="17.4" fill="url(#help-red)" />
+        <g stroke="url(#help-band)" stroke-width="8.2" stroke-linecap="butt">
+          <path d="M39 24.5L48.5 15" /><path d="M39 38.5L48.5 48" />
+          <path d="M25 38.5L15.5 48" /><path d="M25 24.5L15.5 15" />
+        </g>
+        <ellipse cx="27" cy="22.5" rx="12" ry="8" fill="#ffffff" opacity="0.13"
+                 transform="rotate(-26 27 22.5)" />
+        <path d="M15.5 39C24 46 39 47 49 36" fill="none" stroke="#650719"
+              stroke-opacity="0.34" stroke-width="3" />
+      </g>
+      <circle cx="32" cy="31.5" r="8.55" fill="url(#help-hole)" />
+      <circle cx="32" cy="31.5" r="8.75" fill="none" stroke="#520617"
+              stroke-opacity="0.76" stroke-width="1" />
+      <path d="M32 10.8V15M52.7 31.5H48.5M32 52.2V48M11.3 31.5H15.5"
+            stroke="#8f6934" stroke-width="2.6" stroke-linecap="round" />
+      <path d="M18.8 20A16.8 16.8 0 0 1 34 14.3" fill="none" stroke="#ffffff"
+            stroke-opacity="0.22" stroke-width="1.2" stroke-linecap="round" />
+    </g>"""
+    return tile(body, top="#16394d", bottom="#050b10",
+                defs=defs, glow=("#2ccce5", 0.13))
 
 
 # --------------------------------------------------------------------------
 # video player
 # --------------------------------------------------------------------------
 
-def _video_body(screen_top, screen_bottom, sheen):
-    return f"""    <g>
-      <rect x="10.5" y="16" width="43" height="32" rx="6.5" ry="6.5" fill="url(#v-screen)" />
-      <rect x="10.5" y="16" width="43" height="32" rx="6.5" ry="6.5" fill="none"
-            stroke="#ffffff" stroke-opacity="{sheen}" stroke-width="1" />
-      <path d="M 28.2 25.4 L 41.5 32 L 28.2 38.6 Z" fill="#ffffff" />
-      <rect x="24" y="51" width="16" height="2.6" rx="1.3" fill="#ffffff" opacity="0.30" />
-    </g>"""
+def _video_body():
+    return """    <g filter="url(#v-screen-shadow)">
+      <rect x="9.5" y="13.5" width="45" height="36" rx="8" fill="url(#v-frame)" />
+      <rect x="11.5" y="15.5" width="41" height="32" rx="6.4" fill="url(#v-screen)" />
+    </g>
+    <g clip-path="url(#v-screen-clip)">
+      <rect x="11.5" y="15.5" width="41" height="32" fill="url(#v-screen-glow)" />
+      <path d="M10 16H39C35 25 26 30 10 31Z" fill="#ffffff" opacity="0.11" />
+      <path d="M11 39C25 43 39 41 53 34V48H11Z" fill="#0c0a36" opacity="0.20" />
+    </g>
+    <rect x="12.2" y="16.2" width="39.6" height="30.6" rx="5.7" fill="none"
+          stroke="#ffffff" stroke-opacity="0.18" stroke-width="0.8" />
+    <g filter="url(#v-play-shadow)">
+      <circle cx="32" cy="29.5" r="9.4" fill="url(#v-play-disc)"
+              stroke="#ffffff" stroke-opacity="0.36" stroke-width="0.9" />
+      <path d="M29.3 24.3L38.8 29.5L29.3 34.7Z" fill="#ffffff" />
+      <path d="M30.2 25.4V33.6" stroke="#ffffff" stroke-opacity="0.46"
+            stroke-width="0.65" stroke-linecap="round" />
+    </g>
+    <rect x="17" y="42.3" width="30" height="2.2" rx="1.1" fill="#ffffff" opacity="0.20" />
+    <rect x="17" y="42.3" width="17.2" height="2.2" rx="1.1" fill="url(#v-progress)" />
+    <circle cx="34.2" cy="43.4" r="1.65" fill="#fff4f8" stroke="#e95b9d" stroke-width="0.65" />
+    <path d="M28 50H36L38.5 53H25.5Z" fill="url(#v-stand)" />
+    <rect x="22.5" y="52.3" width="19" height="2.3" rx="1.15" fill="url(#v-stand)" />
+    <path d="M23.5 52.8H40.5" stroke="#ffffff" stroke-opacity="0.20"
+          stroke-width="0.6" stroke-linecap="round" />"""
 
 
 def dark_video_svg():
-    """A video player is a screen with a play head — not a FaceTime camera."""
+    """A cinematic glass display with active play and progress controls."""
     defs = """
-    <linearGradient id="v-screen" x1="10%" y1="0%" x2="90%" y2="100%">
-      <stop offset="0%" stop-color="#3a3f7a" />
-      <stop offset="55%" stop-color="#232647" />
-      <stop offset="100%" stop-color="#14152a" />
-    </linearGradient>"""
-    return tile(_video_body(None, None, 0.16), top="#22232e", bottom="#0a0a0f",
-                defs=defs, glow=("#6b74ff", 0.14))
+    <filter id="v-screen-shadow" x="-30%" y="-35%" width="160%" height="180%">
+      <feDropShadow dx="0" dy="2" stdDeviation="1.8" flood-color="#000000" flood-opacity="0.62" />
+    </filter>
+    <filter id="v-play-shadow" x="-45%" y="-45%" width="190%" height="195%">
+      <feDropShadow dx="0" dy="1.5" stdDeviation="1.5" flood-color="#0d092f" flood-opacity="0.65" />
+    </filter>
+    <linearGradient id="v-frame" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#6c7392" />
+      <stop offset="100%" stop-color="#30334d" />
+    </linearGradient>
+    <linearGradient id="v-screen" x1="8%" y1="0%" x2="92%" y2="100%">
+      <stop offset="0%" stop-color="#796bff" />
+      <stop offset="47%" stop-color="#4d45b4" />
+      <stop offset="100%" stop-color="#211c57" />
+    </linearGradient>
+    <radialGradient id="v-screen-glow" cx="78%" cy="18%" r="78%">
+      <stop offset="0%" stop-color="#ff74ba" stop-opacity="0.38" />
+      <stop offset="52%" stop-color="#7b6fff" stop-opacity="0.08" />
+      <stop offset="100%" stop-color="#2f2c7b" stop-opacity="0" />
+    </radialGradient>
+    <linearGradient id="v-play-disc" x1="18%" y1="0%" x2="82%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.38" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.10" />
+    </linearGradient>
+    <linearGradient id="v-progress" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ff65ad" />
+      <stop offset="100%" stop-color="#ffb55f" />
+    </linearGradient>
+    <linearGradient id="v-stand" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#616782" />
+      <stop offset="100%" stop-color="#2d3045" />
+    </linearGradient>
+    <clipPath id="v-screen-clip">
+      <rect x="11.5" y="15.5" width="41" height="32" rx="6.4" />
+    </clipPath>"""
+    return tile(_video_body(), top="#29263e", bottom="#08080d",
+                defs=defs, glow=("#7166ff", 0.17))
 
 
 def light_video_svg():
     """Light-mode counterpart, same drawing on the light glass card."""
-    return """<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+    body = _video_body().replace('stroke-opacity="0.18"', 'stroke-opacity="0.20"')
+    return f"""<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <filter id="glass-shadow" x="-20%" y="-20%" width="140%" height="140%">
       <feDropShadow dx="0" dy="2.5" stdDeviation="2.5" flood-color="#000000" flood-opacity="0.25" />
     </filter>
+    <filter id="v-screen-shadow" x="-30%" y="-35%" width="160%" height="180%">
+      <feDropShadow dx="0" dy="2" stdDeviation="1.8" flood-color="#1b174b" flood-opacity="0.42" />
+    </filter>
+    <filter id="v-play-shadow" x="-45%" y="-45%" width="190%" height="195%">
+      <feDropShadow dx="0" dy="1.5" stdDeviation="1.5" flood-color="#120d42" flood-opacity="0.45" />
+    </filter>
     <linearGradient id="card" x1="0%" y1="0%" x2="0%" y2="100%">
       <stop offset="0%" stop-color="#fdfdff" />
-      <stop offset="100%" stop-color="#e6e8ef" />
+      <stop offset="100%" stop-color="#d6dcea" />
     </linearGradient>
     <linearGradient id="inner-bevel" x1="0%" y1="0%" x2="0%" y2="100%">
       <stop offset="0%" stop-color="#ffffff" stop-opacity="0.75" />
       <stop offset="35%" stop-color="#ffffff" stop-opacity="0.12" />
       <stop offset="100%" stop-color="#ffffff" stop-opacity="0.05" />
     </linearGradient>
-    <linearGradient id="v-screen" x1="10%" y1="0%" x2="90%" y2="100%">
-      <stop offset="0%" stop-color="#5b62d6" />
-      <stop offset="55%" stop-color="#3b3f9c" />
-      <stop offset="100%" stop-color="#252a63" />
+    <linearGradient id="v-frame" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#9da7c8" />
+      <stop offset="100%" stop-color="#4a4e77" />
+    </linearGradient>
+    <linearGradient id="v-screen" x1="8%" y1="0%" x2="92%" y2="100%">
+      <stop offset="0%" stop-color="#796bff" />
+      <stop offset="47%" stop-color="#4d45b4" />
+      <stop offset="100%" stop-color="#211c57" />
+    </linearGradient>
+    <radialGradient id="v-screen-glow" cx="78%" cy="18%" r="78%">
+      <stop offset="0%" stop-color="#ff74ba" stop-opacity="0.38" />
+      <stop offset="52%" stop-color="#7b6fff" stop-opacity="0.08" />
+      <stop offset="100%" stop-color="#2f2c7b" stop-opacity="0" />
+    </radialGradient>
+    <linearGradient id="v-play-disc" x1="18%" y1="0%" x2="82%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.38" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.10" />
+    </linearGradient>
+    <linearGradient id="v-progress" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ff65ad" />
+      <stop offset="100%" stop-color="#ffb55f" />
+    </linearGradient>
+    <linearGradient id="v-stand" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#72799a" />
+      <stop offset="100%" stop-color="#3e425f" />
     </linearGradient>
     <clipPath id="card-clip">
       <rect width="56" height="56" x="4" y="4" rx="14" ry="14" />
+    </clipPath>
+    <clipPath id="v-screen-clip">
+      <rect x="11.5" y="15.5" width="41" height="32" rx="6.4" />
     </clipPath>
   </defs>
 
@@ -373,13 +985,192 @@ def light_video_svg():
   </g>
 
   <g clip-path="url(#card-clip)">
-    <rect x="10.5" y="16" width="43" height="32" rx="6.5" ry="6.5" fill="url(#v-screen)" />
-    <path d="M 28.2 25.4 L 41.5 32 L 28.2 38.6 Z" fill="#ffffff" />
-    <rect x="24" y="51" width="16" height="2.6" rx="1.3" fill="#3b3f9c" opacity="0.35" />
+{body}
   </g>
 
   <rect width="55" height="55" x="4.5" y="4.5" rx="13.5" ry="13.5" fill="none" stroke="url(#inner-bevel)" stroke-width="1" />
 </svg>"""
+
+
+# --------------------------------------------------------------------------
+# music library
+# --------------------------------------------------------------------------
+
+def dark_music_library_svg():
+    """GNOME Music as an album collection with sleeve and vinyl record."""
+    defs = """
+    <filter id="music-album-shadow" x="-35%" y="-35%" width="170%" height="180%">
+      <feDropShadow dx="0" dy="2" stdDeviation="1.8" flood-color="#000000" flood-opacity="0.58" />
+    </filter>
+    <filter id="music-record-shadow" x="-35%" y="-35%" width="170%" height="180%">
+      <feDropShadow dx="0" dy="2" stdDeviation="1.7" flood-color="#000000" flood-opacity="0.72" />
+    </filter>
+    <linearGradient id="music-sleeve" x1="12%" y1="0%" x2="88%" y2="100%">
+      <stop offset="0%" stop-color="#ff77b7" />
+      <stop offset="48%" stop-color="#d84fc0" />
+      <stop offset="100%" stop-color="#6c49cc" />
+    </linearGradient>
+    <radialGradient id="music-sun" cx="40%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#fff3a8" />
+      <stop offset="100%" stop-color="#ff9a5a" />
+    </radialGradient>
+    <radialGradient id="music-vinyl" cx="34%" cy="27%" r="76%">
+      <stop offset="0%" stop-color="#414060" />
+      <stop offset="42%" stop-color="#1c1a31" />
+      <stop offset="100%" stop-color="#050409" />
+    </radialGradient>
+    <radialGradient id="music-label" cx="35%" cy="28%" r="72%">
+      <stop offset="0%" stop-color="#65e6ff" />
+      <stop offset="52%" stop-color="#6f72ff" />
+      <stop offset="100%" stop-color="#df4dbe" />
+    </radialGradient>
+    <clipPath id="music-cover-clip">
+      <rect x="12" y="12" width="35" height="39" rx="6" />
+    </clipPath>"""
+    body = """    <g filter="url(#music-album-shadow)">
+      <rect x="9.5" y="15" width="35" height="39" rx="6" fill="#603e68"
+            opacity="0.78" transform="rotate(-5 27 34.5)" />
+      <rect x="12" y="12" width="35" height="39" rx="6" fill="url(#music-sleeve)" />
+      <g clip-path="url(#music-cover-clip)">
+        <circle cx="29.5" cy="27" r="9.5" fill="url(#music-sun)" />
+        <path d="M9 37C18 29 25 31 33 37C41 43 47 38 52 33V53H9Z"
+              fill="#5d3daf" opacity="0.78" />
+        <path d="M10 42C20 36 30 41 38 43C45 45 49 42 52 40V53H10Z"
+              fill="#332975" opacity="0.66" />
+        <path d="M15 17H29" stroke="#fff7df" stroke-width="2.1"
+              stroke-linecap="round" opacity="0.86" />
+        <path d="M15 21H24" stroke="#fff7df" stroke-width="1.1"
+              stroke-linecap="round" opacity="0.54" />
+      </g>
+      <rect x="12.6" y="12.6" width="33.8" height="37.8" rx="5.4" fill="none"
+            stroke="#ffffff" stroke-opacity="0.32" stroke-width="0.8" />
+    </g>
+    <g filter="url(#music-record-shadow)">
+      <circle cx="42.5" cy="39" r="14.2" fill="url(#music-vinyl)" />
+      <circle cx="42.5" cy="39" r="11.7" fill="none" stroke="#8c879e"
+              stroke-opacity="0.28" stroke-width="0.65" />
+      <circle cx="42.5" cy="39" r="9.5" fill="none" stroke="#8c879e"
+              stroke-opacity="0.22" stroke-width="0.55" />
+      <circle cx="42.5" cy="39" r="7.3" fill="none" stroke="#8c879e"
+              stroke-opacity="0.20" stroke-width="0.5" />
+      <circle cx="42.5" cy="39" r="5.2" fill="url(#music-label)" />
+      <circle cx="42.5" cy="39" r="1.15" fill="#f8f4ff" />
+      <path d="M34.5 30.2A12 12 0 0 1 44 27" fill="none" stroke="#ffffff"
+            stroke-width="1" stroke-linecap="round" opacity="0.20" />
+    </g>"""
+    return tile(body, top="#3b2038", bottom="#0c080c",
+                defs=defs, glow=("#e852b6", 0.16))
+
+
+# --------------------------------------------------------------------------
+# audio player
+# --------------------------------------------------------------------------
+
+def dark_audio_player_svg():
+    """Decibels as active headphones wrapped around a colourful waveform."""
+    defs = """
+    <filter id="audio-player-shadow" x="-38%" y="-38%" width="176%" height="185%">
+      <feDropShadow dx="0" dy="2" stdDeviation="1.8" flood-color="#000000" flood-opacity="0.66" />
+    </filter>
+    <radialGradient id="audio-disc" cx="35%" cy="28%" r="74%">
+      <stop offset="0%" stop-color="#29466f" />
+      <stop offset="58%" stop-color="#132541" />
+      <stop offset="100%" stop-color="#070e1e" />
+    </radialGradient>
+    <linearGradient id="audio-metal" gradientUnits="userSpaceOnUse" x1="32" y1="17" x2="32" y2="49">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="46%" stop-color="#d7e5f0" />
+      <stop offset="100%" stop-color="#71899f" />
+    </linearGradient>
+    <linearGradient id="audio-ear" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#eaf5fc" />
+      <stop offset="42%" stop-color="#8db4d1" />
+      <stop offset="100%" stop-color="#365a82" />
+    </linearGradient>
+    <linearGradient id="audio-wave" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#44e6ff" />
+      <stop offset="52%" stop-color="#7d78ff" />
+      <stop offset="100%" stop-color="#ff69b7" />
+    </linearGradient>"""
+    body = """    <g filter="url(#audio-player-shadow)">
+      <circle cx="32" cy="34" r="13.2" fill="url(#audio-disc)" stroke="#ffffff"
+              stroke-opacity="0.22" stroke-width="0.9" />
+      <circle cx="32" cy="34" r="10.9" fill="none" stroke="#75a2c8"
+              stroke-opacity="0.18" stroke-width="0.6" />
+      <path d="M16.2 35V31.5C16.2 21.5 22.7 16.5 32 16.5C41.3 16.5 47.8 21.5 47.8 31.5V35"
+            fill="none" stroke="url(#audio-metal)" stroke-width="5" stroke-linecap="round" />
+      <rect x="11.8" y="32.5" width="9.3" height="15.5" rx="4.3" fill="url(#audio-ear)" />
+      <rect x="42.9" y="32.5" width="9.3" height="15.5" rx="4.3" fill="url(#audio-ear)" />
+      <path d="M15.2 35.8V44.6M48.8 35.8V44.6" stroke="#ffffff"
+            stroke-width="1" stroke-linecap="round" opacity="0.34" />
+      <g fill="url(#audio-wave)">
+        <rect x="24.3" y="31" width="2.5" height="6" rx="1.25" />
+        <rect x="28.2" y="27.5" width="2.5" height="13" rx="1.25" />
+        <rect x="32.1" y="29.5" width="2.5" height="9" rx="1.25" />
+        <rect x="36" y="25.5" width="2.5" height="17" rx="1.25" />
+        <rect x="39.9" y="31.5" width="2.5" height="5" rx="1.25" />
+      </g>
+      <path d="M23.5 45H40.5" stroke="#7ca5c5" stroke-opacity="0.35"
+            stroke-width="1.2" stroke-linecap="round" />
+      <circle cx="34.5" cy="45" r="1.35" fill="#ff75b8" />
+    </g>"""
+    return tile(body, top="#19365b", bottom="#060a12",
+                defs=defs, glow=("#4d8cff", 0.17))
+
+
+# --------------------------------------------------------------------------
+# applications grid
+# --------------------------------------------------------------------------
+
+def dark_app_grid_svg():
+    """Search plus six colourful app tiles, following the supplied reference."""
+    defs = """
+    <filter id="apps-control-shadow" x="-35%" y="-35%" width="170%" height="180%">
+      <feDropShadow dx="0" dy="1.4" stdDeviation="1.3" flood-color="#000000" flood-opacity="0.52" />
+    </filter>
+    <linearGradient id="apps-search" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#555b63" />
+      <stop offset="52%" stop-color="#3d4249" />
+      <stop offset="100%" stop-color="#443a41" />
+    </linearGradient>
+    <linearGradient id="apps-blue" x1="10%" y1="0%" x2="90%" y2="100%">
+      <stop offset="0%" stop-color="#22c7ff" /><stop offset="100%" stop-color="#078ae7" />
+    </linearGradient>
+    <linearGradient id="apps-green" x1="10%" y1="0%" x2="90%" y2="100%">
+      <stop offset="0%" stop-color="#4cec68" /><stop offset="100%" stop-color="#19bd3d" />
+    </linearGradient>
+    <linearGradient id="apps-pink" x1="10%" y1="0%" x2="90%" y2="100%">
+      <stop offset="0%" stop-color="#ff5d87" /><stop offset="100%" stop-color="#f22b5e" />
+    </linearGradient>
+    <linearGradient id="apps-orange" x1="10%" y1="0%" x2="90%" y2="100%">
+      <stop offset="0%" stop-color="#ffb33d" /><stop offset="100%" stop-color="#ff8611" />
+    </linearGradient>
+    <linearGradient id="apps-purple" x1="10%" y1="0%" x2="90%" y2="100%">
+      <stop offset="0%" stop-color="#c169f0" /><stop offset="100%" stop-color="#9143ce" />
+    </linearGradient>
+    <linearGradient id="apps-gray" x1="10%" y1="0%" x2="90%" y2="100%">
+      <stop offset="0%" stop-color="#b7b7b9" /><stop offset="100%" stop-color="#77797e" />
+    </linearGradient>"""
+    body = """    <g filter="url(#apps-control-shadow)">
+      <rect x="11.5" y="12.5" width="41" height="11.5" rx="5.75" fill="url(#apps-search)" />
+      <rect x="12.2" y="13.2" width="39.6" height="10.1" rx="5.05" fill="none"
+            stroke="#ffffff" stroke-opacity="0.18" stroke-width="0.7" />
+      <circle cx="18.2" cy="18" r="2.8" fill="none" stroke="#f5f7fa" stroke-width="1.4" />
+      <path d="M20.3 20.1L22.8 22.6" stroke="#f5f7fa" stroke-width="1.4" stroke-linecap="round" />
+    </g>
+    <g filter="url(#apps-control-shadow)">
+      <rect x="12.5" y="28" width="11" height="11" rx="3.1" fill="url(#apps-blue)" />
+      <rect x="26.5" y="28" width="11" height="11" rx="3.1" fill="url(#apps-green)" />
+      <rect x="40.5" y="28" width="11" height="11" rx="3.1" fill="url(#apps-pink)" />
+      <rect x="12.5" y="42" width="11" height="11" rx="3.1" fill="url(#apps-orange)" />
+      <rect x="26.5" y="42" width="11" height="11" rx="3.1" fill="url(#apps-purple)" />
+      <rect x="40.5" y="42" width="11" height="11" rx="3.1" fill="url(#apps-gray)" />
+      <path d="M14.5 29.3H21.5M28.5 29.3H35.5M42.5 29.3H49.5
+               M14.5 43.3H21.5M28.5 43.3H35.5M42.5 43.3H49.5"
+            stroke="#ffffff" stroke-width="0.75" stroke-linecap="round" opacity="0.40" />
+    </g>"""
+    return tile(body, top="#2c313a", bottom="#090b0e",
+                defs=defs, glow=("#8297b4", 0.12))
 
 
 # --------------------------------------------------------------------------
@@ -467,19 +1258,290 @@ def dark_camera_svg():
 
 
 # --------------------------------------------------------------------------
+# name-specific repairs for empty source artwork
+# --------------------------------------------------------------------------
+
+def dark_celeste_svg():
+    """Celeste: a cold mountain, warm summit and the game's red berry."""
+    defs = """
+    <linearGradient id="ce-mountain" x1="20%" y1="0%" x2="80%" y2="100%">
+      <stop offset="0%" stop-color="#9ed8ff" />
+      <stop offset="55%" stop-color="#596bd4" />
+      <stop offset="100%" stop-color="#30245f" />
+    </linearGradient>
+    <linearGradient id="ce-berry" x1="20%" y1="0%" x2="80%" y2="100%">
+      <stop offset="0%" stop-color="#ff6b7d" />
+      <stop offset="100%" stop-color="#d71952" />
+    </linearGradient>"""
+    body = """    <g>
+      <path d="M 9 51 L 26.5 21 L 32 28 L 38 16 L 55 51 Z" fill="url(#ce-mountain)" />
+      <path d="M 26.5 21 L 32 28 L 38 16 L 43 25 L 38 23.2 L 34 33 L 29.5 28 Z"
+            fill="#f4f7ff" opacity="0.92" />
+      <path d="M 9 51 L 22 39 L 29 44 L 36 35 L 55 51 Z" fill="#19162f" opacity="0.74" />
+      <g transform="translate(43, 15)">
+        <path d="M 0 2 C -5 -1 -9 2 -8 7 C -7 12 -2 15 0 17 C 2 15 7 12 8 7 C 9 2 5 -1 0 2 Z"
+              fill="url(#ce-berry)" />
+        <path d="M -4 1 L 0 -3 L 4 1 L 1.5 2.5 L 0 0.8 L -1.5 2.5 Z" fill="#73df73" />
+        <circle cx="-3" cy="6" r="0.8" fill="#ffd37d" />
+        <circle cx="2.7" cy="7.5" r="0.8" fill="#ffd37d" />
+      </g>
+    </g>"""
+    return tile(body, top="#202a46", bottom="#0a0c19",
+                defs=defs, glow=("#739dff", 0.17))
+
+
+def dark_inscryption_svg():
+    """Inscryption: an ember-lit card and the watching cabin eye."""
+    defs = """
+    <linearGradient id="in-card" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6e3218" />
+      <stop offset="100%" stop-color="#2a120b" />
+    </linearGradient>
+    <linearGradient id="in-ember" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffb13b" />
+      <stop offset="100%" stop-color="#e64b16" />
+    </linearGradient>"""
+    body = """    <g>
+      <rect x="16" y="11" width="32" height="42" rx="4" fill="url(#in-card)"
+            stroke="#d46a26" stroke-width="1.2" />
+      <path d="M 20 17 L 24 13 M 44 13 L 48 17 M 20 47 L 24 51 M 44 51 L 48 47"
+            stroke="#ff9f2f" stroke-opacity="0.52" stroke-width="1.2" />
+      <path d="M 21 31 C 27 23 37 23 43 31 C 37 39 27 39 21 31 Z" fill="#130a08"
+            stroke="url(#in-ember)" stroke-width="1.5" />
+      <circle cx="32" cy="31" r="5.2" fill="url(#in-ember)" />
+      <circle cx="32" cy="31" r="2.2" fill="#170b08" />
+      <path d="M 26 43 L 30 39 L 32 43 L 34 39 L 38 43" fill="none"
+            stroke="#e87027" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+    </g>"""
+    return tile(body, top="#2b1812", bottom="#0b0706",
+                defs=defs, glow=("#ff6b1a", 0.18))
+
+
+def dark_papers_please_svg():
+    """Papers, Please: the severe Arstotzkan eagle in red and olive."""
+    body = """    <g>
+      <g fill="#6f7d48" opacity="0.88">
+        <rect x="10" y="25" width="14" height="3" />
+        <rect x="8" y="31" width="16" height="3" />
+        <rect x="10" y="37" width="14" height="3" />
+        <rect x="40" y="25" width="14" height="3" />
+        <rect x="40" y="31" width="16" height="3" />
+        <rect x="40" y="37" width="14" height="3" />
+      </g>
+      <path d="M 32 13 L 36 21 L 46 18 L 40 27 L 47 31 L 39 34 L 41 46
+               L 32 51 L 23 46 L 25 34 L 17 31 L 24 27 L 18 18 L 28 21 Z"
+            fill="#d64a3d" />
+      <path d="M 32 20 L 36.5 29 L 32 42 L 27.5 29 Z" fill="#822c2b" />
+      <path d="M 27 31 L 32 26 L 37 31 L 35 39 L 29 39 Z" fill="#e9d9b0" />
+      <path d="M 30 16 L 32 11 L 34 16 L 32 19 Z" fill="#f0d7a0" />
+    </g>"""
+    return tile(body, top="#28261d", bottom="#0d0d09",
+                glow=("#d64a3d", 0.12))
+
+
+def dark_openra_d2k_svg():
+    """OpenRA Dune 2000: desert planet, twin moons and compact D2K mark."""
+    defs = """
+    <radialGradient id="d2k-planet" cx="38%" cy="30%" r="72%">
+      <stop offset="0%" stop-color="#ffd27a" />
+      <stop offset="55%" stop-color="#c77a27" />
+      <stop offset="100%" stop-color="#633012" />
+    </radialGradient>"""
+    body = """    <g>
+      <circle cx="32" cy="31" r="20" fill="url(#d2k-planet)" />
+      <path d="M 13 35 C 23 28 33 39 51 28 C 43 45 27 52 17 42 Z"
+            fill="#3a1c16" opacity="0.88" />
+      <circle cx="44" cy="16" r="3.2" fill="#d6d4c6" />
+      <circle cx="49" cy="22" r="1.7" fill="#9ba7ad" />
+      <text x="32" y="38" font-family="DIN Condensed, Impact, sans-serif" font-size="15"
+            font-weight="800" letter-spacing="-1" fill="#fff3c5" text-anchor="middle">D2K</text>
+    </g>"""
+    return tile(body, top="#302119", bottom="#100a07",
+                defs=defs, glow=("#d48a31", 0.15))
+
+
+def dark_oneshot_svg():
+    """OneShot: its sun-like bulb with a heart filament and violet base."""
+    defs = """
+    <radialGradient id="os-bulb" cx="38%" cy="28%" r="70%">
+      <stop offset="0%" stop-color="#fffbd1" />
+      <stop offset="45%" stop-color="#ffd84e" />
+      <stop offset="100%" stop-color="#e99212" />
+    </radialGradient>
+    <linearGradient id="os-base" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8f65d6" />
+      <stop offset="100%" stop-color="#453071" />
+    </linearGradient>"""
+    body = """    <g>
+      <circle cx="32" cy="28" r="17" fill="url(#os-bulb)" />
+      <path d="M 25 29 C 25 24 31 23 32 27 C 33 23 39 24 39 29
+               C 39 33 35 35 32 38 C 29 35 25 33 25 29 Z"
+            fill="none" stroke="#fffdf2" stroke-width="2.1" />
+      <path d="M 23 42 L 41 42 L 38 52 L 26 52 Z" fill="url(#os-base)" />
+      <path d="M 25 45 L 39 45 M 26 49 L 38 49" stroke="#d9c7ff" stroke-width="1.2" opacity="0.72" />
+      <path d="M 22 20 A 17 17 0 0 1 35 11" fill="none" stroke="#ffffff"
+            stroke-width="2" stroke-linecap="round" opacity="0.65" />
+    </g>"""
+    return tile(body, top="#29213a", bottom="#0e0a16",
+                defs=defs, glow=("#ffd84e", 0.22))
+
+
+def dark_stardew_svg():
+    """Stardew Valley: a tiny pixel chicken under a midnight farm sky."""
+    body = """    <g shape-rendering="crispEdges">
+      <rect x="18" y="18" width="4" height="4" fill="#fff4cf" />
+      <rect x="22" y="14" width="12" height="4" fill="#fff4cf" />
+      <rect x="18" y="22" width="24" height="16" fill="#fff4cf" />
+      <rect x="22" y="38" width="16" height="8" fill="#fff4cf" />
+      <rect x="34" y="18" width="8" height="4" fill="#d9533f" />
+      <rect x="38" y="22" width="8" height="4" fill="#f4b73f" />
+      <rect x="22" y="26" width="4" height="4" fill="#4b2b28" />
+      <rect x="18" y="34" width="4" height="4" fill="#d8bb83" />
+      <rect x="24" y="46" width="4" height="4" fill="#f4b73f" />
+      <rect x="34" y="46" width="4" height="4" fill="#f4b73f" />
+      <rect x="12" y="14" width="2" height="2" fill="#fff4cf" />
+      <rect x="49" y="20" width="2" height="2" fill="#fff4cf" />
+      <rect x="46" y="11" width="3" height="3" fill="#f4d45c" />
+    </g>"""
+    return tile(body, top="#173354", bottom="#080f1c",
+                glow=("#f4d45c", 0.11))
+
+
+def dark_terraria_svg():
+    """Terraria: the grass block and tree reduced to crisp pixel essentials."""
+    body = """    <g shape-rendering="crispEdges">
+      <rect x="13" y="39" width="38" height="13" fill="#7a3f21" />
+      <rect x="13" y="36" width="38" height="6" fill="#6fc34a" />
+      <rect x="15" y="42" width="5" height="4" fill="#a96735" />
+      <rect x="28" y="45" width="5" height="4" fill="#a96735" />
+      <rect x="41" y="41" width="5" height="4" fill="#a96735" />
+      <rect x="29" y="23" width="6" height="17" fill="#8a4c2d" />
+      <rect x="23" y="17" width="18" height="12" fill="#47ad49" />
+      <rect x="19" y="21" width="8" height="8" fill="#47ad49" />
+      <rect x="37" y="20" width="8" height="9" fill="#47ad49" />
+      <rect x="27" y="13" width="10" height="8" fill="#66ce58" />
+      <rect x="10" y="13" width="2" height="2" fill="#d9f6ff" />
+      <rect x="49" y="10" width="2" height="2" fill="#d9f6ff" />
+    </g>"""
+    return tile(body, top="#173144", bottom="#091017",
+                glow=("#62d25b", 0.12))
+
+
+def dark_undertale_svg():
+    """Undertale: the red SOUL, intentionally tiny and pixel-sharp."""
+    body = """    <g shape-rendering="crispEdges">
+      <rect x="24" y="24" width="6" height="6" fill="#ff2d37" />
+      <rect x="34" y="24" width="6" height="6" fill="#ff2d37" />
+      <rect x="21" y="28" width="22" height="8" fill="#ff2d37" />
+      <rect x="24" y="36" width="16" height="5" fill="#ff2d37" />
+      <rect x="28" y="41" width="8" height="5" fill="#ff2d37" />
+      <rect x="31" y="46" width="2" height="2" fill="#ff2d37" />
+      <rect x="14" y="17" width="2" height="2" fill="#f2f2f2" />
+      <rect x="48" y="38" width="2" height="2" fill="#f2f2f2" />
+      <rect x="44" y="15" width="3" height="3" fill="#f2f2f2" />
+    </g>"""
+    return tile(body, top="#242126", bottom="#09090a",
+                glow=("#ff2d37", 0.19))
+
+
+def dark_simplex_svg():
+    """SimpleX Chat: three linked X marks, kept crisp at launcher size."""
+    body = """    <g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="4.2">
+      <path d="M 18 21 L 30 33 L 18 45 M 30 21 L 18 33 L 30 45" stroke="#4db8ff" />
+      <path d="M 29 21 L 41 33 L 29 45 M 41 21 L 29 33 L 41 45" stroke="#1688d4" />
+      <path d="M 40 21 L 51 33 L 40 45 M 51 21 L 40 33 L 51 45" stroke="#8be0ff" />
+    </g>"""
+    return tile(body, top="#182b3c", bottom="#081019",
+                glow=("#46bfff", 0.16))
+
+
+def dark_clapgrep_svg():
+    """Clapgrep: document search, expressed without tiny unreadable detail."""
+    defs = """
+    <linearGradient id="cg-doc" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#edeff5" />
+      <stop offset="100%" stop-color="#aeb8c8" />
+    </linearGradient>
+    <linearGradient id="cg-glass" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#66e0ff" />
+      <stop offset="100%" stop-color="#198ad3" />
+    </linearGradient>"""
+    body = """    <g>
+      <path d="M 16 13 H 39 L 47 21 V 47 H 16 Z" fill="url(#cg-doc)" />
+      <path d="M 39 13 V 21 H 47" fill="#7f8a9b" />
+      <path d="M 21 27 H 38 M 21 33 H 34 M 21 39 H 31" stroke="#526071"
+            stroke-width="2" stroke-linecap="round" />
+      <circle cx="39" cy="39" r="9" fill="#15202b" stroke="url(#cg-glass)" stroke-width="3" />
+      <path d="M 45.5 45.5 L 51 51" stroke="#66e0ff" stroke-width="3.5" stroke-linecap="round" />
+    </g>"""
+    return tile(body, top="#1b2d38", bottom="#091016",
+                defs=defs, glow=("#46cfff", 0.14))
+
+
+def dark_roblox_svg():
+    """Roblox: the current tilted square mark in cool machined metal."""
+    defs = """
+    <linearGradient id="rb-metal" x1="12%" y1="0%" x2="88%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="45%" stop-color="#d9dee8" />
+      <stop offset="100%" stop-color="#8d98a8" />
+    </linearGradient>"""
+    body = """    <g transform="rotate(14 32 32)">
+      <path d="M 15 15 H 49 V 49 H 15 Z M 27 27 V 37 H 37 V 27 Z"
+            fill="url(#rb-metal)" fill-rule="evenodd" />
+      <path d="M 16 16 H 48" stroke="#ffffff" stroke-width="1.2" opacity="0.55" />
+    </g>"""
+    return tile(body, top="#252a31", bottom="#0b0d10",
+                defs=defs, glow=("#c7d8ef", 0.10))
+
+
+def dark_ricochlime_svg():
+    """Ricochlime: a lively slime plus the ricocheting projectile path."""
+    defs = """
+    <linearGradient id="rc-slime" x1="20%" y1="0%" x2="80%" y2="100%">
+      <stop offset="0%" stop-color="#8cf45b" />
+      <stop offset="100%" stop-color="#35b83e" />
+    </linearGradient>"""
+    body = """    <g>
+      <path d="M 15 45 C 15 34 20 26 27 24 C 28 17 36 17 38 24
+               C 46 27 50 35 49 45 Z" fill="url(#rc-slime)" />
+      <circle cx="27" cy="34" r="2.2" fill="#12351c" />
+      <circle cx="39" cy="34" r="2.2" fill="#12351c" />
+      <path d="M 27 41 C 30 43 35 43 39 40" fill="none" stroke="#12351c"
+            stroke-width="1.8" stroke-linecap="round" />
+      <path d="M 12 18 L 22 13 L 29 19 L 41 12 L 51 18" fill="none"
+            stroke="#dfffae" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+      <circle cx="12" cy="18" r="3" fill="#fff36b" />
+      <circle cx="51" cy="18" r="2" fill="#fff36b" opacity="0.72" />
+    </g>"""
+    return tile(body, top="#17331f", bottom="#08120b",
+                defs=defs, glow=("#71e650", 0.17))
+
+
+# --------------------------------------------------------------------------
 # registry: light source file -> builder for its dark counterpart
 # --------------------------------------------------------------------------
 
 HANDDRAWN = {
     "google-chrome.svg": dark_chrome_svg,
+    "web-browser.svg": dark_web_svg,
     "softwarecenter.svg": dark_appstore_svg,
+    "system-software-install.svg": dark_package_manager_svg,
     "eog.svg": dark_image_viewer_svg,
+    "org.gnome.Loupe.svg": dark_loupe_svg,
+    "login.svg": dark_login_svg,
     "desktop-environment-gnome.svg": dark_tour_svg,
-    "applications-system.svg": dark_gear_svg,
+    "applications-system.svg": dark_app_grid_svg,
+    "settings.svg": dark_gear_svg,
+    "scanner.svg": dark_scanner_svg,
+    "help.svg": dark_help_svg,
     "extensions.svg": dark_extensions_svg,
+    "com.mattjakeman.ExtensionManager.svg": dark_extension_manager_svg,
     "org.gnome.Totem.svg": dark_video_svg,
     # GNOME's newer player; shipped the FaceTime camera as its artwork.
     "Showtime.svg": dark_video_svg,
+    "gnome-music.svg": dark_music_library_svg,
+    "org.gnome.Decibels.svg": dark_audio_player_svg,
     "addressbook.svg": dark_contacts_svg,
     "gnome-maps.svg": dark_maps_svg,
     "accessories-camera.svg": dark_camera_svg,
@@ -488,3 +1550,35 @@ HANDDRAWN = {
 # Artwork that must survive into dark mode untouched — Apple ships one Finder
 # icon, not two, and the face *is* the card, so there is nothing to cut away.
 VERBATIM = ("finder.svg",)
+
+
+# These source files contain only an empty card.  Artwork-hash registration
+# cannot repair them because several unrelated apps share the exact same blank
+# placeholder, so these exceptions are deliberately keyed by resolved name.
+NAME_HANDDRAWN = {
+    "celeste.svg": dark_celeste_svg,
+    "com.hunterwittenborn.Celeste.svg": dark_celeste_svg,
+    "lutris_celeste.svg": dark_celeste_svg,
+    "steam_icon_504230.svg": dark_celeste_svg,
+    "inscryption.svg": dark_inscryption_svg,
+    "papers-please.svg": dark_papers_please_svg,
+    "net.openra.OpenRA-d2k.svg": dark_openra_d2k_svg,
+    "net.openra.OpenRA.openra-d2k.svg": dark_openra_d2k_svg,
+    "openra-d2k.svg": dark_openra_d2k_svg,
+    "oneshot.svg": dark_oneshot_svg,
+    "lutris_stardew-valley.svg": dark_stardew_svg,
+    "stardew-valley.svg": dark_stardew_svg,
+    "steam_icon_413150.svg": dark_stardew_svg,
+    "lutris_terraria.svg": dark_terraria_svg,
+    "steam_icon_105600.svg": dark_terraria_svg,
+    "terraria.svg": dark_terraria_svg,
+    "lutris_undertale.svg": dark_undertale_svg,
+    "steam_icon_391540.svg": dark_undertale_svg,
+    "undertale.svg": dark_undertale_svg,
+    "chat.simplex.simplex.svg": dark_simplex_svg,
+    "simplex-chat.svg": dark_simplex_svg,
+    "clapgrep.svg": dark_clapgrep_svg,
+    "de.leopoldluley.Clapgrep.svg": dark_clapgrep_svg,
+    "roblox.svg": dark_roblox_svg,
+    "ricochlime.svg": dark_ricochlime_svg,
+}

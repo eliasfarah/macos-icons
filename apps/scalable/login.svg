@@ -1,35 +1,83 @@
-<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <!-- Elegant Apple-style Drop Shadow -->
-    <filter id="glass-shadow" x="-20%" y="-20%" width="140%" height="140%">
-      <feDropShadow dx="0" dy="2.5" stdDeviation="2.5" flood-color="#000000" flood-opacity="0.25" />
+    <filter id="shadow" x="-25%" y="-25%" width="150%" height="155%">
+      <feDropShadow dx="0" dy="2.6" stdDeviation="2.6" flood-color="#102c59" flood-opacity="0.30"/>
+      <feDropShadow dx="0" dy="0.8" stdDeviation="0.7" flood-color="#ffffff" flood-opacity="0.28"/>
     </filter>
-    
-    <!-- 3D Bevel/Glass Highlights -->
-    <linearGradient id="inner-bevel" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.6" />
-      <stop offset="25%" stop-color="#ffffff" stop-opacity="0.0" />
-      <stop offset="75%" stop-color="#000000" stop-opacity="0.0" />
-      <stop offset="100%" stop-color="#000000" stop-opacity="0.25" />
+    <filter id="panel-shadow" x="-30%" y="-30%" width="160%" height="170%">
+      <feDropShadow dx="0" dy="1.5" stdDeviation="1.7" flood-color="#07316f" flood-opacity="0.28"/>
+    </filter>
+    <filter id="badge-shadow" x="-45%" y="-45%" width="190%" height="195%">
+      <feDropShadow dx="0" dy="1.4" stdDeviation="1.4" flood-color="#06245a" flood-opacity="0.42"/>
+    </filter>
+    <linearGradient id="tile" x1="10%" y1="0%" x2="88%" y2="100%">
+      <stop offset="0%" stop-color="#8cdbff"/>
+      <stop offset="47%" stop-color="#4a9df4"/>
+      <stop offset="100%" stop-color="#2361d8"/>
     </linearGradient>
-    
-    <!-- Premium Soft Background Gradient -->
-    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#a1c4fd" />
-      <stop offset="100%" stop-color="#c2e9fb" />
+    <radialGradient id="tile-glow" cx="24%" cy="5%" r="88%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.58"/>
+      <stop offset="52%" stop-color="#ffffff" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="frame" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.96"/>
+      <stop offset="100%" stop-color="#d9eaff" stop-opacity="0.88"/>
     </linearGradient>
-
-    <!-- Unified Squircle Mask -->
-    <clipPath id="squircle-clip">
-      <rect width="56" height="56" x="4" y="4" rx="14" ry="14" />
+    <linearGradient id="screen" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#256fc5"/>
+      <stop offset="100%" stop-color="#123d89"/>
+    </linearGradient>
+    <linearGradient id="avatar" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#d8e7f8"/>
+    </linearGradient>
+    <linearGradient id="badge" x1="18%" y1="0%" x2="78%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="52%" stop-color="#e7f1fd"/>
+      <stop offset="100%" stop-color="#b9cce4"/>
+    </linearGradient>
+    <linearGradient id="rim" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.88"/>
+      <stop offset="48%" stop-color="#ffffff" stop-opacity="0.24"/>
+      <stop offset="100%" stop-color="#0b3173" stop-opacity="0.34"/>
+    </linearGradient>
+    <clipPath id="clip">
+      <rect x="4" y="4" width="56" height="56" rx="14"/>
     </clipPath>
   </defs>
-  <g filter="url(#glass-shadow)">
-    <g clip-path="url(#squircle-clip)">
-      <image href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiPjxkZWZzPjxsaW5lYXJHcmFkaWVudCB4bGluazpocmVmPSIjYSIgaWQ9ImIiIHgxPSI3LjkzNyIgeDI9IjcuOTM3IiB5MT0iNi44NzkiIHkyPSIxLjA1OCIgZ3JhZGllbnRUcmFuc2Zvcm09InNjYWxlKDMuNzc5NikiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIiAvPjxsaW5lYXJHcmFkaWVudCBpZD0iYSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjZmZmIiAvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iI2NjZjBmZiIgLz48L2xpbmVhckdyYWRpZW50PjxsaW5lYXJHcmFkaWVudCBpZD0iYyIgeDE9IjcuOTM3IiB4Mj0iNy45MzciIHkxPSIxNS4wODEiIHkyPSIxLjg1MiIgZ3JhZGllbnRUcmFuc2Zvcm09InNjYWxlKDMuNzc5NikiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMyODU4ZTQiIC8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjNWFiOWY0IiAvPjwvbGluZWFyR3JhZGllbnQ+PGxpbmVhckdyYWRpZW50IHhsaW5rOmhyZWY9IiNhIiBpZD0iZCIgeDE9IjQ1IiB4Mj0iNTcuMDA4IiB5MT0iMTkiIHkyPSI2Ljk5MiIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiIC8+PC9kZWZzPjxwYXRoIGZpbGw9InVybCgjYikiIGQ9Ik0zNSAzLjk2OWM2IDAgMjUuMDAyIDE5LjAzIDI1LjAwMiAyNS4wM1YxNi45NzJBMTIuOTczIDEyLjk3MyAwIDAgMCA0NyAzLjk2OXoiIC8+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTE3LjAwMiA3YTkuOTUgOS45NSAwIDAgMC05Ljk3IDkuOTd2MzBhOS45NSA5Ljk1IDAgMCAwIDkuOTcgOS45N0g0N2E5Ljk1IDkuOTUgMCAwIDAgOS45Ny05Ljk3di0zMEE5Ljk1IDkuOTUgMCAwIDAgNDcgN3ptMCAxSDQ3YzQuOTcgMCA4Ljk3IDQgOC45NyA4Ljk3djMwYzAgNC45Ny00IDguOTctOC45NyA4Ljk3SDE3LjAwMmMtNC45NyAwLTguOTctNC04Ljk3LTguOTd2LTMwYzAtNC45NyA0LTguOTcxIDguOTctOC45NzF6IiAvPjxnIGZpbGw9IiNmZmYiPjxwYXRoIGQ9Ik00OC45OTkgOC4wMDFINTB2MjNoLTF6IiAvPjxwYXRoIGQ9Ik01NS45OTkgMTR2MWgtMjN2LTF6IiAvPjwvZz48cGF0aCBmaWxsPSJ1cmwoI2MpIiBkPSJNMTcuMDAyIDMuOTY5Yy0xLjM1IDAtMi42NTIuMjAzLTMuODc1LjU4MmExMyAxMyAwIDAgMC02LjE2NiA0LjE0IDEyLjkzIDEyLjkzIDAgMCAwLTIuODk0IDYuOTQ2di4wMDJRNCAxNi4yOTUgNCAxNi45N3YyOS45OThhMTIuOTYgMTIuOTYgMCAwIDAgMy44IDkuMjAzIDEzIDEzIDAgMCAwIDUuMzI3IDMuMjE3IDEzIDEzIDAgMCAwIDIuNTQxLjUxNWguMDAycS42NTcuMDY3IDEuMzMyLjA2N0g0N2MxLjM1IDAgMi42NTItLjIwMyAzLjg3NS0uNTgyYTEzIDEzIDAgMCAwIDguNTQ1LTguNTQ1Yy4zNzktMS4yMjMuNTgyLTIuNTI0LjU4Mi0zLjg3NXYtMTcuOTdDNjAuMDAyIDIzIDQxIDMuOTcgMzUgMy45N3oiIC8+PHBhdGggZmlsbD0idXJsKCNkKSIgZD0iTTM1IDRjNCAxIDUgNyA2IDExIC45NyAzLjg4IDMuMTggNi41NDUgOSA4IDQgMSA4IC42NCAxMCA2IDAtLjAyNC0uMDA0LS4wNDgtLjAwNC0uMDcyLS4xMS02Ljk5Ni0xNi42MDUtMjMuNzM4LTI0LjIwOS0yNC44OTNDMzUuNTIyIDQuMDE1IDM1LjI2IDQgMzUgNCIgLz48Y2lyY2xlIGN4PSIzMi4wMiIgY3k9IjMyLjA0NCIgcj0iMzAuMDAxIiBmaWxsPSJub25lIiAvPjxwYXRoIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iLjk4NyIgZD0iTTE0LjAwMiAxMS45OThoMzUuOTkzYTYuMDAzIDYuMDAzIDAgMCAxIDYuMDAzIDYuMDAzdjI3Ljk5NWE1Ljk5MyA1Ljk5MyAwIDAgMS02LjAwMyA2LjAwMkgxNC4wMDJhNS45OTUgNS45OTUgMCAwIDEtNi4wMDMtNi4wMDJWMThhNi4wMDcgNi4wMDcgMCAwIDEgNi4wMDMtNi4wMDMiIG9wYWNpdHk9Ii4xNSIgLz48cGF0aCBkPSJNMjUuOTk5IDM1LjAwM2EzLjAwMSAzLjAwMSAwIDEgMS02LjAwMyAwIDMuMDAxIDMuMDAxIDAgMCAxIDYuMDAzIDBtNy45OTggMGEzLjAwMSAzLjAwMSAwIDEgMS02LjAwMyAwIDMuMDAxIDMuMDAxIDAgMCAxIDYuMDAzIDBtOC4wMDYgMGEzLjAwMSAzLjAwMSAwIDEgMS02LjAwMyAwIDMuMDAxIDMuMDAxIDAgMCAxIDYuMDAzIDAiIG9wYWNpdHk9Ii4xIiAvPjxnIHN0cm9rZS13aWR0aD0iMy43OCI+PHBhdGggZmlsbD0iI2Y5ZjlmOSIgZD0iTTE4IDI4LjAwMmgyOC4wMDNjMS4xMDQgMCAxLjk5Ni44OTIgMS45OTYgMS45OTZWMzZhMi4wMDMgMi4wMDMgMCAwIDEtMS45OTYgMS45OTZIMThBMi4wMDMgMi4wMDMgMCAwIDEgMTUuOTk3IDM2di02LjAwMkEyIDIgMCAwIDEgMTggMjguMDAyIiAvPjxwYXRoIGZpbGw9IiMyZDJkMmQiIGQ9Ik0yMy45OTUgMzNhMy4wMDEgMy4wMDEgMCAxIDEtNi4wMDMgMCAzLjAwMSAzLjAwMSAwIDAgMSA2LjAwMyAwTTMyIDMzYTMuMDAxIDMuMDAxIDAgMSAxLTYuMDAzIDBBMy4wMDEgMy4wMDEgMCAwIDEgMzIgMzNtNy45OTggMGEzLjAwMSAzLjAwMSAwIDEgMS02LjAwMyAwQTMuMDAxIDMuMDAxIDAgMCAxIDQwIDMzIiAvPjxwYXRoIGZpbGw9IiNmOWY5ZjkiIGQ9Ik0xNi40OCAyMmgxNS4wNDRhLjQ4LjQ4IDAgMCAxIC40ODQuNDc2djEuMDM1YS40ODQuNDg0IDAgMCAxLS40ODQuNDg0SDE2LjQ4YS40ODQuNDg0IDAgMCAxLS40ODQtLjQ4NHYtMS4wMzVhLjQ4LjQ4IDAgMCAxIC40ODQtLjQ3NyIgLz48L2c+PC9zdmc+" x="0" y="0" width="64" height="64" />
-    </g>
+
+  <g filter="url(#shadow)">
+    <rect x="4" y="4" width="56" height="56" rx="14" fill="url(#tile)"/>
   </g>
-  
-  <!-- Glass Bevel Overlay matching the clip boundary exactly -->
-  <rect width="56" height="56" x="4" y="4" rx="14" ry="14" fill="none" stroke="url(#inner-bevel)" stroke-width="1.5" />
+  <g clip-path="url(#clip)">
+    <rect x="4" y="4" width="56" height="56" fill="url(#tile-glow)"/>
+    <path d="M4 4H42C37 17 28 24 4 26Z" fill="#ffffff" opacity="0.10"/>
+    <path d="M4 46C21 53 41 50 60 40V60H4Z" fill="#0b3f9b" opacity="0.16"/>
+
+    <g filter="url(#panel-shadow)">
+      <rect x="10.5" y="12.5" width="43" height="39" rx="9" fill="url(#frame)"/>
+      <rect x="12.5" y="14.5" width="39" height="35" rx="7.2" fill="url(#screen)"/>
+    </g>
+    <rect x="13.2" y="15.2" width="37.6" height="33.6" rx="6.5" fill="none" stroke="#ffffff" stroke-opacity="0.23" stroke-width="0.8"/>
+
+    <circle cx="29.5" cy="26.5" r="6.1" fill="url(#avatar)"/>
+    <path d="M18.2 39.1C19.4 33.6 23.6 30.6 29.5 30.6C35.4 30.6 39.6 33.6 40.8 39.1C41.1 40.4 40.1 41.5 38.8 41.5H20.2C18.9 41.5 17.9 40.4 18.2 39.1Z" fill="url(#avatar)"/>
+    <rect x="19.5" y="43.8" width="20" height="3.2" rx="1.6" fill="#071f4e" opacity="0.32"/>
+    <circle cx="24.8" cy="45.4" r="0.9" fill="#ffffff"/>
+    <circle cx="29.5" cy="45.4" r="0.9" fill="#ffffff"/>
+    <circle cx="34.2" cy="45.4" r="0.9" fill="#ffffff"/>
+
+    <g filter="url(#badge-shadow)">
+      <circle cx="47.5" cy="46.5" r="10" fill="url(#badge)"/>
+      <circle cx="47.5" cy="46.5" r="9.25" fill="none" stroke="#ffffff" stroke-opacity="0.82" stroke-width="0.8"/>
+    </g>
+    <g fill="none" stroke="#245ca8" stroke-width="2.25" stroke-linecap="round">
+      <circle cx="47.5" cy="46.5" r="4.4"/>
+      <path d="M47.5 37.8V40M47.5 53V55.2M38.8 46.5H41M54 46.5H56.2M41.35 40.35L42.9 41.9M52.1 51.1L53.65 52.65M41.35 52.65L42.9 51.1M52.1 41.9L53.65 40.35"/>
+    </g>
+    <circle cx="47.5" cy="46.5" r="1.75" fill="#245ca8"/>
+  </g>
+
+  <rect x="4.5" y="4.5" width="55" height="55" rx="13.5" fill="none" stroke="url(#rim)" stroke-width="1"/>
 </svg>

@@ -19,7 +19,8 @@ Este tema é baseado e inspirado nos seguintes projetos originais de código abe
   * **ChatGPT**: Logotipo oficial em preto sobre cartão **Branco Glassmórfico** 3D.
   * **Google Gemini**: Estrela/Sparkle oficial em gradiente azul/roxo sobre vidro escuro.
   * **Apple Finder**: Design oficial 100% autêntico.
-  * **Calendário Dinâmico**: Mostra o mês e dia correntes (`update_calendar_date.py`).
+  * **Calendário Dinâmico**: Mostra o dia da semana e a data correntes nos
+    modos claro e escuro (`update_calendar_date.py`).
 
 ---
 
@@ -47,6 +48,11 @@ seguindo as regras que a Apple usa nas variantes escuras do macOS/iOS:
   reprodutor de vídeo, Mapas, Câmera, além do calendário e do bloco de notas.
   O registro é por nome do arquivo claro, mas a busca é pelo *hash da arte* —
   assim todo apelido que embute o mesmo desenho é atendido junto.
+* **Placeholders vazios são reparados por nome.** Alguns arquivos claros
+  trazem apenas um cartão sem marca e, pior, aplicativos diferentes compartilham
+  exatamente o mesmo placeholder. O modo escuro fornece desenhos próprios para
+  Celeste, Inscryption, Papers Please, OpenRA D2K, OneShot, Stardew Valley,
+  Terraria, Undertale, SimpleX Chat, Clapgrep, Roblox e Ricochlime.
 * **Finder passa intacto**: a Apple entrega um único ícone do Finder.
 
 ```bash
@@ -57,6 +63,30 @@ python3 mac_dark_engine.py --only firefox,gimp --out /tmp/preview   # prévia
 
 Para instalar as duas versões lado a lado, o diretório `macos-icons-dark/`
 expõe `apps-dark` como um tema separado (`macos-icons-dark`).
+
+### Calendário dinâmico
+
+Para atualizar imediatamente e ativar a atualização diária às 00:01:
+
+```bash
+./update_calendar_date.py --install-timer
+```
+
+O timer é instalado somente para o usuário atual, é persistente (também
+atualiza depois de uma máquina desligada no horário programado) e preserva os
+aliases dos ícones. Para uma atualização manual, basta executar
+`./update_calendar_date.py`.
+
+### Voltar ao design anterior
+
+O design anterior está preservado no commit `35d02af`. Para comparar antes de
+trocar os arquivos instalados, sempre gere uma prévia com `--out /tmp/preview`.
+Se preferir integralmente a versão anterior:
+
+```bash
+git restore --source=35d02af -- mac_dark_engine.py dark_handdrawn.py apps-dark/scalable
+touch macos-icons-dark/.icon-theme.cache
+```
 
 ---
 
@@ -71,6 +101,15 @@ touch ~/.local/share/icons/macos-icons/.icon-theme.cache
 ```
 
 Depois, selecione o tema **macos-icons** no seu gerenciador de aparência (GNOME Tweaks, KDE System Settings, XFCE Appearance, etc.).
+
+No GNOME, o painel **Aplicativos** pede por padrão um ícone simbólico preto.
+Para fazê-lo usar a arte colorida do tema:
+
+```bash
+install -Dm644 desktop-overrides/gnome-applications-panel.desktop \
+  ~/.local/share/applications/gnome-applications-panel.desktop
+update-desktop-database ~/.local/share/applications
+```
 
 ---
 

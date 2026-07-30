@@ -521,14 +521,18 @@ def reframe(rgba):
 def tile_colors(tint):
     """Near-black tile carrying a whisper of the icon's own hue."""
     if tint is None:
-        return "#26262a", "#0c0c0e"
+        return "#2e2e33", "#101013"
     h, s, v = rgb_to_hsv(np.asarray(tint, dtype=np.float32))
     if s < 0.10 or v < 0.06:
-        return "#26262a", "#0c0c0e"
-    s_top = float(min(s * 0.75, 0.42))
-    s_bot = float(min(s * 0.85, 0.50))
-    top = hsv_to_rgb(np.array([h, s_top, 0.165], dtype=np.float32))
-    bot = hsv_to_rgb(np.array([h, s_bot, 0.052], dtype=np.float32))
+        return "#2e2e33", "#101013"
+    # Dark Mode still needs a visible material surface.  Going all the way to
+    # black makes otherwise excellent artwork look pasted into a hole in the
+    # Dock; a slightly lifted shoulder preserves the icon silhouette while the
+    # lower edge remains decisively dark.
+    s_top = float(min(s * 0.68, 0.38))
+    s_bot = float(min(s * 0.80, 0.46))
+    top = hsv_to_rgb(np.array([h, s_top, 0.19], dtype=np.float32))
+    bot = hsv_to_rgb(np.array([h, s_bot, 0.065], dtype=np.float32))
     return hexcolor(top), hexcolor(bot)
 
 
@@ -541,9 +545,10 @@ def glow_color(dom):
 
 SVG_TMPL = """<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
   <defs>
-    <!-- Ambient shadow so the tile still detaches from a dark dock -->
+    <!-- Two-scale Apple shadow: a soft lift plus a tight contact shadow -->
     <filter id="d-shadow" x="-25%" y="-25%" width="150%" height="150%">
-      <feDropShadow dx="0" dy="1.8" stdDeviation="1.9" flood-color="#000000" flood-opacity="0.55" />
+      <feDropShadow dx="0" dy="2.4" stdDeviation="2.8" flood-color="#000000" flood-opacity="0.38" />
+      <feDropShadow dx="0" dy="1.0" stdDeviation="0.8" flood-color="#000000" flood-opacity="0.62" />
     </filter>
 
     <!-- Dark canvas, tinted with the icon's own hue -->
@@ -559,17 +564,24 @@ SVG_TMPL = """<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.
       <stop offset="100%" stop-color="{glow}" stop-opacity="0" />
     </radialGradient>
 
-    <!-- Hairline rim: light catches the top edge, bottom falls away -->
+    <!-- A broad, almost invisible glass reflection over the upper shoulder -->
+    <radialGradient id="d-sheen" cx="22%" cy="4%" r="82%" fx="22%" fy="4%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.105" />
+      <stop offset="48%" stop-color="#ffffff" stop-opacity="0.022" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0" />
+    </radialGradient>
+
+    <!-- Hairline rim: the top catches light while the bottom recedes -->
     <linearGradient id="d-rim" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.26" />
-      <stop offset="42%" stop-color="#ffffff" stop-opacity="0.07" />
-      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.03" />
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.34" />
+      <stop offset="34%" stop-color="#ffffff" stop-opacity="0.10" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.025" />
     </linearGradient>
 
     <linearGradient id="d-floor" x1="0%" y1="0%" x2="0%" y2="100%">
       <stop offset="0%" stop-color="#000000" stop-opacity="0" />
-      <stop offset="72%" stop-color="#000000" stop-opacity="0" />
-      <stop offset="100%" stop-color="#000000" stop-opacity="0.42" />
+      <stop offset="58%" stop-color="#000000" stop-opacity="0" />
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.28" />
     </linearGradient>
 
     <clipPath id="d-clip">
@@ -582,12 +594,16 @@ SVG_TMPL = """<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.
   </g>
 
   <g clip-path="url(#d-clip)">
-    <rect width="56" height="56" x="4" y="4" fill="url(#d-glow)" />
-    <image href="{href}" x="{ix}" y="{iy}" width="{iw}" height="{ih}" />
+    <!-- Surface lighting always stays behind the artwork.  Brand colours must
+         never be dimmed by a generic overlay. -->
     <rect width="56" height="56" x="4" y="4" fill="url(#d-floor)" />
+    <rect width="56" height="56" x="4" y="4" fill="url(#d-glow)" />
+    <rect width="56" height="56" x="4" y="4" fill="url(#d-sheen)" />
+    <image href="{href}" x="{ix}" y="{iy}" width="{iw}" height="{ih}" />
   </g>
 
-  <rect width="55" height="55" x="4.5" y="4.5" rx="13.5" ry="13.5" fill="none" stroke="url(#d-rim)" stroke-width="1" />
+  <rect width="55.5" height="55.5" x="4.25" y="4.25" rx="13.75" ry="13.75" fill="none" stroke="#000000" stroke-opacity="0.34" stroke-width="0.5" />
+  <rect width="54.5" height="54.5" x="4.75" y="4.75" rx="13.25" ry="13.25" fill="none" stroke="url(#d-rim)" stroke-width="0.75" />
 </svg>"""
 
 
@@ -597,8 +613,8 @@ def compose(href, tint, dom, glow_strength=1.0, box=(0, 0, 64, 64)):
         top=top,
         bot=bot,
         glow=glow_color(dom),
-        glow_op="%.3f" % (0.095 * glow_strength),
-        glow_mid="%.3f" % (0.035 * glow_strength),
+        glow_op="%.3f" % (0.11 * glow_strength),
+        glow_mid="%.3f" % (0.040 * glow_strength),
         href=href,
         ix=box[0], iy=box[1], iw=box[2], ih=box[3],
     )
@@ -724,68 +740,22 @@ def build_dark(art, is_png, fallback=None, verbose=False):
 
 def dark_calendar_svg(weekday, day):
     """Native dark Calendar — dark tile, Apple system red, white numeral."""
-    return f"""<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <filter id="d-shadow" x="-25%" y="-25%" width="150%" height="150%">
-      <feDropShadow dx="0" dy="1.8" stdDeviation="1.9" flood-color="#000000" flood-opacity="0.55" />
-    </filter>
-    <linearGradient id="d-bg" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#2a2a2e" />
-      <stop offset="100%" stop-color="#0e0e10" />
-    </linearGradient>
-    <linearGradient id="d-rim" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.26" />
-      <stop offset="42%" stop-color="#ffffff" stop-opacity="0.07" />
-      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.03" />
-    </linearGradient>
-    <clipPath id="d-clip">
-      <rect width="56" height="56" x="4" y="4" rx="14" ry="14" />
-    </clipPath>
-  </defs>
-
-  <g filter="url(#d-shadow)">
-    <rect width="56" height="56" x="4" y="4" rx="14" ry="14" fill="url(#d-bg)" />
-  </g>
-
-  <g clip-path="url(#d-clip)">
+    body = f"""    <g>
     <text x="32" y="21.5" font-family="-apple-system, BlinkMacSystemFont, SF Pro Text, Inter, Roboto, sans-serif" font-weight="600" font-size="11.5" fill="#ff453a" text-anchor="middle">{weekday}</text>
     <text x="32" y="49" font-family="-apple-system, BlinkMacSystemFont, SF Pro Display, Inter, Roboto, sans-serif" font-weight="600" font-size="28" fill="#f2f2f7" text-anchor="middle">{day}</text>
-  </g>
-
-  <rect width="55" height="55" x="4.5" y="4.5" rx="13.5" ry="13.5" fill="none" stroke="url(#d-rim)" stroke-width="1" />
-</svg>"""
+    </g>"""
+    return HD.tile(body, top="#303034", bottom="#111114",
+                   glow=("#ff453a", 0.055))
 
 
 def dark_text_editor_svg():
     """Native dark notepad — charcoal paper, amber header, pencil at full colour."""
-    return """<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <filter id="d-shadow" x="-25%" y="-25%" width="150%" height="150%">
-      <feDropShadow dx="0" dy="1.8" stdDeviation="1.9" flood-color="#000000" flood-opacity="0.55" />
-    </filter>
-    <linearGradient id="d-paper" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#2b2721" />
-      <stop offset="100%" stop-color="#17150f" />
-    </linearGradient>
+    defs = """
     <linearGradient id="d-header" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#eab308" />
       <stop offset="100%" stop-color="#b8860b" />
-    </linearGradient>
-    <linearGradient id="d-rim" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.26" />
-      <stop offset="42%" stop-color="#ffffff" stop-opacity="0.07" />
-      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.03" />
-    </linearGradient>
-    <clipPath id="d-clip">
-      <rect width="56" height="56" x="4" y="4" rx="14" ry="14" />
-    </clipPath>
-  </defs>
-
-  <g filter="url(#d-shadow)">
-    <rect width="56" height="56" x="4" y="4" rx="14" ry="14" fill="url(#d-paper)" />
-  </g>
-
-  <g clip-path="url(#d-clip)">
+    </linearGradient>"""
+    body = """    <g>
     <rect width="56" height="12" x="4" y="4" fill="url(#d-header)" />
 
     <line x1="12" y1="22" x2="52" y2="22" stroke="#eab308" stroke-width="1" opacity="0.34" />
@@ -801,10 +771,9 @@ def dark_text_editor_svg():
       <rect x="0" y="-3" width="6" height="3" fill="#cbd5e1" />
       <rect x="0" y="-7" width="6" height="4" rx="1" fill="#f43f5e" />
     </g>
-  </g>
-
-  <rect width="55" height="55" x="4.5" y="4.5" rx="13.5" ry="13.5" fill="none" stroke="url(#d-rim)" stroke-width="1" />
-</svg>"""
+    </g>"""
+    return HD.tile(body, top="#302b23", bottom="#12100c",
+                   defs=defs, glow=("#eab308", 0.07))
 
 
 def dark_mono_glyph_svg(art, is_png, top, bottom, glow):
@@ -949,6 +918,13 @@ def process(names=None, out_dir=None, verbose=False):
                 target.write_text(cal_svg, encoding="utf-8")
                 stats["calendar"] = stats.get("calendar", 0) + 1
                 continue
+
+            named_builder = HD.NAME_HANDDRAWN.get(name)
+            if named_builder:
+                target.write_text(named_builder(), encoding="utf-8")
+                stats["name-repair"] = stats.get("name-repair", 0) + 1
+                continue
+
             art, is_png = source_art(p)
             key = hashlib.md5(art).hexdigest()
 
