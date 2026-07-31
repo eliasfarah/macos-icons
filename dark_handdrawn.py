@@ -33,6 +33,7 @@ def tile(body, top="#2e2e33", bottom="#101013", defs="", glow=None, filter_shado
       <stop offset="100%" stop-color="{colour}" stop-opacity="0" />
     </radialGradient>"""
         glow_body = '<rect width="56" height="56" x="4" y="4" fill="url(#d-glow)" />'
+    glow_line = f"    {glow_body}" if glow_body else ""
 
     return f"""<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
   <defs>
@@ -70,7 +71,7 @@ def tile(body, top="#2e2e33", bottom="#101013", defs="", glow=None, filter_shado
 
   <g clip-path="url(#d-clip)">
     <rect width="56" height="56" x="4" y="4" fill="url(#d-floor)" />
-    {glow_body}
+{glow_line}
     <rect width="56" height="56" x="4" y="4" fill="url(#d-sheen)" />
 {body}
   </g>
@@ -78,6 +79,192 @@ def tile(body, top="#2e2e33", bottom="#101013", defs="", glow=None, filter_shado
   <rect width="55.5" height="55.5" x="4.25" y="4.25" rx="13.75" ry="13.75" fill="none" stroke="#000000" stroke-opacity="0.34" stroke-width="0.5" />
   <rect width="54.5" height="54.5" x="4.75" y="4.75" rx="13.25" ry="13.25" fill="none" stroke="url(#d-rim)" stroke-width="0.75" />
 </svg>"""
+
+
+# --------------------------------------------------------------------------
+# finder / remote connections
+# --------------------------------------------------------------------------
+
+def dark_finder_svg():
+    """Finder: compact blue face floating over a graphite Liquid Glass tile."""
+    defs = """
+    <filter id="finder-face-shadow" x="-35%" y="-25%" width="180%" height="175%">
+      <feDropShadow dx="0" dy="1.45" stdDeviation="1.35" flood-color="#05060a" flood-opacity="0.72" />
+      <feDropShadow dx="0" dy="0" stdDeviation="0.42" flood-color="#248eff" flood-opacity="0.30" />
+    </filter>
+    <filter id="finder-eye-shadow" x="-90%" y="-40%" width="280%" height="190%">
+      <feDropShadow dx="0" dy="0.55" stdDeviation="0.42" flood-color="#000000" flood-opacity="0.68" />
+    </filter>
+    <filter id="finder-smile-shadow" x="-20%" y="-65%" width="140%" height="230%">
+      <feDropShadow dx="0" dy="0.65" stdDeviation="0.48" flood-color="#000000" flood-opacity="0.82" />
+    </filter>
+    <linearGradient id="finder-card" gradientUnits="userSpaceOnUse" x1="32" y1="4" x2="32" y2="60">
+      <stop offset="0%" stop-color="#2c2c2e" />
+      <stop offset="56%" stop-color="#242426" />
+      <stop offset="100%" stop-color="#19191b" />
+    </linearGradient>
+    <radialGradient id="finder-card-sheen" cx="24%" cy="5%" r="86%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.075" />
+      <stop offset="58%" stop-color="#ffffff" stop-opacity="0.012" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0" />
+    </radialGradient>
+    <linearGradient id="finder-face" gradientUnits="userSpaceOnUse" x1="38" y1="11" x2="38" y2="56">
+      <stop offset="0%" stop-color="#24b9f1" />
+      <stop offset="31%" stop-color="#3199ef" />
+      <stop offset="65%" stop-color="#315fce" />
+      <stop offset="100%" stop-color="#293f9f" />
+    </linearGradient>
+    <linearGradient id="finder-face-edge" gradientUnits="userSpaceOnUse" x1="36" y1="11" x2="42" y2="56">
+      <stop offset="0%" stop-color="#7ce3ff" stop-opacity="0.72" />
+      <stop offset="42%" stop-color="#2877df" stop-opacity="0.52" />
+      <stop offset="100%" stop-color="#19296d" stop-opacity="0.88" />
+    </linearGradient>
+    <linearGradient id="finder-face-gloss" gradientUnits="userSpaceOnUse" x1="38" y1="12" x2="38" y2="34">
+      <stop offset="0%" stop-color="#d9f9ff" stop-opacity="0.065" />
+      <stop offset="48%" stop-color="#9feaff" stop-opacity="0.015" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0" />
+    </linearGradient>
+    <linearGradient id="finder-left-eye" gradientUnits="userSpaceOnUse" x1="17" y1="22" x2="19" y2="29">
+      <stop offset="0%" stop-color="#37b8ff" />
+      <stop offset="100%" stop-color="#2b68e0" />
+    </linearGradient>
+    <linearGradient id="finder-right-eye" gradientUnits="userSpaceOnUse" x1="40" y1="22" x2="42" y2="29">
+      <stop offset="0%" stop-color="#17334e" />
+      <stop offset="100%" stop-color="#08111e" />
+    </linearGradient>
+    <linearGradient id="finder-smile" gradientUnits="userSpaceOnUse" x1="14.4" y1="45" x2="44.7" y2="45">
+      <stop offset="0%" stop-color="#329cff" />
+      <stop offset="42%" stop-color="#376ce5" />
+      <stop offset="55%" stop-color="#283f79" />
+      <stop offset="68%" stop-color="#17243a" />
+      <stop offset="100%" stop-color="#0b111a" />
+    </linearGradient>"""
+    body = """    <rect x="4" y="4" width="56" height="56" fill="url(#finder-card)" />
+    <rect x="4" y="4" width="56" height="56" fill="url(#finder-card-sheen)" />
+    <g filter="url(#finder-face-shadow)">
+      <path d="M34.45 11.4 H45.55
+               C49.82 11.4 52.35 14.26 52.35 18.72
+               V47.05 C52.35 52.28 49.25 55.45 44.82 55.45
+               H36.08 C32.82 55.45 30.62 53.38 30.62 50.18
+               V36.6 H26.35
+               C24.68 36.6 23.86 35.52 24.34 33.62
+               L29.66 14.58 C30.2 12.47 31.7 11.4 34.45 11.4 Z"
+            fill="url(#finder-face)" stroke="url(#finder-face-edge)"
+            stroke-width="0.72" stroke-linejoin="round" />
+      <path d="M34.35 12.18 H45.25 C49.2 12.18 51.58 14.72 51.72 18.25
+               C44.55 15.9 37.05 16.2 28.92 19.48 L30.28 14.72
+               C30.7 13.08 32.05 12.18 34.35 12.18 Z"
+            fill="url(#finder-face-gloss)" />
+      <path d="M30.92 36.88 V50.05 C30.92 52.92 32.82 54.73 36.02 54.73"
+            fill="none" stroke="#16276c" stroke-width="0.62"
+            stroke-linecap="round" opacity="0.47" />
+      <path d="M34.38 11.92 H45.22 C49.25 11.92 51.75 14.48 52.02 18.15"
+            fill="none" stroke="#c6f5ff" stroke-width="0.58"
+            stroke-linecap="round" opacity="0.31" />
+    </g>
+    <g filter="url(#finder-eye-shadow)">
+      <rect x="17.68" y="22.72" width="1.92" height="5.25" rx="0.96"
+            fill="url(#finder-left-eye)" />
+      <path d="M18.16 23.2 V27.12" stroke="#8dd9ff" stroke-width="0.32"
+            stroke-linecap="round" opacity="0.48" />
+      <rect x="40.22" y="22.7" width="1.92" height="5.28" rx="0.96"
+            fill="url(#finder-right-eye)" />
+      <path d="M40.65 23.3 V27.14" stroke="#33516c" stroke-width="0.3"
+            stroke-linecap="round" opacity="0.58" />
+    </g>
+    <path d="M14.4 41.92
+             C21.75 47.95 27.45 49.48 32.62 49.08
+             C37.52 48.72 41.53 45.58 44.7 41.82"
+          fill="none" stroke="#060a10" stroke-width="2.08"
+          stroke-linecap="round" opacity="0.82"
+          filter="url(#finder-smile-shadow)" />
+    <path d="M14.4 41.92
+             C21.75 47.95 27.45 49.48 32.62 49.08
+             C37.52 48.72 41.53 45.58 44.7 41.82"
+          fill="none" stroke="url(#finder-smile)" stroke-width="1.58"
+          stroke-linecap="round" />
+    <path d="M15.02 42.04 C19.95 46.03 24.2 47.72 28.18 48.35"
+          fill="none" stroke="#83bcff" stroke-width="0.34"
+          stroke-linecap="round" opacity="0.36" />"""
+    return tile(body, top="#2b2b2d", bottom="#171719", defs=defs)
+
+
+def dark_connections_svg():
+    """Connections: a precise glass globe, live route and sculpted cursor."""
+    defs = """
+    <filter id="conn-orb-shadow" x="-35%" y="-35%" width="170%" height="185%">
+      <feDropShadow dx="0" dy="2.1" stdDeviation="2.0" flood-color="#00040b" flood-opacity="0.74" />
+      <feDropShadow dx="0" dy="0" stdDeviation="0.65" flood-color="#52d9ff" flood-opacity="0.20" />
+    </filter>
+    <filter id="conn-cursor-shadow" x="-40%" y="-35%" width="190%" height="200%">
+      <feDropShadow dx="0.8" dy="2.1" stdDeviation="1.65" flood-color="#000000" flood-opacity="0.78" />
+    </filter>
+    <filter id="conn-node-glow" x="-120%" y="-120%" width="340%" height="340%">
+      <feGaussianBlur stdDeviation="1.25" result="blur" />
+      <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
+    </filter>
+    <radialGradient id="conn-orb" cx="31%" cy="22%" r="82%">
+      <stop offset="0%" stop-color="#25c8f3" />
+      <stop offset="39%" stop-color="#0b8fd3" />
+      <stop offset="73%" stop-color="#0758ae" />
+      <stop offset="100%" stop-color="#062e71" />
+    </radialGradient>
+    <linearGradient id="conn-orb-rim" x1="18%" y1="5%" x2="82%" y2="100%">
+      <stop offset="0%" stop-color="#d5faff" />
+      <stop offset="42%" stop-color="#5bdcff" />
+      <stop offset="100%" stop-color="#0c4f9d" />
+    </linearGradient>
+    <linearGradient id="conn-cursor" gradientUnits="userSpaceOnUse" x1="34" y1="15" x2="48" y2="42">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="55%" stop-color="#e9f6ff" />
+      <stop offset="100%" stop-color="#9fc7df" />
+    </linearGradient>
+    <linearGradient id="conn-cursor-edge" gradientUnits="userSpaceOnUse" x1="35" y1="15" x2="48" y2="43">
+      <stop offset="0%" stop-color="#e8fbff" />
+      <stop offset="100%" stop-color="#47738f" />
+    </linearGradient>
+    <clipPath id="conn-orb-clip"><circle cx="29.5" cy="33" r="21.15" /></clipPath>"""
+    body = """    <g filter="url(#conn-orb-shadow)">
+      <circle cx="29.5" cy="33" r="22" fill="#020b17" opacity="0.78" />
+      <circle cx="29.5" cy="33" r="21.45" fill="url(#conn-orb-rim)" />
+      <circle cx="29.5" cy="33" r="20.65" fill="url(#conn-orb)" />
+    </g>
+    <g clip-path="url(#conn-orb-clip)" fill="none" stroke="#a9efff"
+       stroke-width="0.72" opacity="0.24">
+      <ellipse cx="29.5" cy="33" rx="9.2" ry="20.8" />
+      <ellipse cx="29.5" cy="33" rx="16.4" ry="20.8" />
+      <path d="M8.8 33 H50.2" />
+      <path d="M10.7 24.3 C20.8 27.7 38.2 27.7 48.3 24.3" />
+      <path d="M10.7 41.7 C20.8 38.3 38.2 38.3 48.3 41.7" />
+    </g>
+    <path d="M11.3 21.4 C18.6 14.1 33.9 10.3 44.7 18.3"
+          fill="none" stroke="#ffffff" stroke-width="1.2"
+          stroke-linecap="round" opacity="0.20" />
+    <path d="M13.6 41.7 C18.5 47.8 26.2 50.15 33.3 48.9
+             C39.55 47.8 44.65 44.2 47.75 38.7"
+          fill="none" stroke="#7ee9ff" stroke-width="1.42"
+          stroke-linecap="round" stroke-dasharray="1.1 3.15" opacity="0.88" />
+    <g fill="#d9fbff" stroke="#5adfff" stroke-width="0.55"
+       filter="url(#conn-node-glow)">
+      <circle cx="13.7" cy="41.7" r="1.7" />
+      <circle cx="31.8" cy="49.1" r="1.35" />
+      <circle cx="47.7" cy="38.7" r="1.7" />
+    </g>
+    <g filter="url(#conn-cursor-shadow)">
+      <path d="M33.6 14.35 L52.05 28.85 L43.15 30.55
+               L49.25 40.55 L44.2 43.6 L38.1 33.45 L32.15 40.2 Z"
+            fill="#07121d" stroke="#02070d" stroke-width="2.45"
+            stroke-linejoin="round" />
+      <path d="M33.6 14.35 L52.05 28.85 L43.15 30.55
+               L49.25 40.55 L44.2 43.6 L38.1 33.45 L32.15 40.2 Z"
+            fill="url(#conn-cursor)" stroke="url(#conn-cursor-edge)"
+            stroke-width="0.65" stroke-linejoin="round" />
+      <path d="M35.15 17.35 L48.95 28.15 L41.15 29.65"
+            fill="none" stroke="#ffffff" stroke-width="0.72"
+            stroke-linecap="round" opacity="0.72" />
+    </g>"""
+    return tile(body, top="#102a42", bottom="#050b13",
+                defs=defs, glow=("#19bfff", 0.15))
 
 
 # --------------------------------------------------------------------------
@@ -1523,6 +1710,8 @@ def dark_ricochlime_svg():
 # --------------------------------------------------------------------------
 
 HANDDRAWN = {
+    "finder.svg": dark_finder_svg,
+    "gnome-connections.svg": dark_connections_svg,
     "google-chrome.svg": dark_chrome_svg,
     "web-browser.svg": dark_web_svg,
     "softwarecenter.svg": dark_appstore_svg,
@@ -1547,9 +1736,8 @@ HANDDRAWN = {
     "accessories-camera.svg": dark_camera_svg,
 }
 
-# Artwork that must survive into dark mode untouched — Apple ships one Finder
-# icon, not two, and the face *is* the card, so there is nothing to cut away.
-VERBATIM = ("finder.svg",)
+# Artwork that must survive into dark mode untouched.
+VERBATIM = ()
 
 
 # These source files contain only an empty card.  Artwork-hash registration

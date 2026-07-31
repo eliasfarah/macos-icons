@@ -891,8 +891,7 @@ def process(names=None, out_dir=None, verbose=False):
         if svg:
             handdrawn[art_key(p)] = svg
 
-    # Artwork that must reach dark mode untouched: Apple ships one Finder
-    # icon, and its face *is* the card, so there is nothing to cut away.
+    # Artwork explicitly registered as verbatim reaches dark mode untouched.
     verbatim = set()
     for src in HD.VERBATIM:
         p = LIGHT_DIR / src
@@ -928,7 +927,7 @@ def process(names=None, out_dir=None, verbose=False):
             art, is_png = source_art(p)
             key = hashlib.md5(art).hexdigest()
 
-            if key in verbatim or is_finder(name) or is_gemini(name):
+            if key in verbatim or is_gemini(name):
                 # Kept as-is: exact official artwork, or already dark by spec.
                 # A couple of these are PNGs carrying an .svg name, so wrap
                 # rather than copy — otherwise the file will not render at all.

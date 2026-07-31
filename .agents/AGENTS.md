@@ -69,7 +69,15 @@ reading the card's luminance as the mark's *alpha* re-inks it white with no
 halo — a plain card-cut would leave grey fringing on every strand.
 
 `HD.VERBATIM` lists artwork that must reach dark mode untouched. Finder is
-there because Apple ships one Finder icon, not two.
+not verbatim: its light artwork remains the exact original, while
+`dark_handdrawn.dark_finder_svg` uses the compact sculpted blue face on a
+graphite Liquid Glass tile, with asymmetric eyes and a blue-to-black smile.
+
+GNOME Connections is also a coordinated light/dark pair. The light source is
+the ice-glass globe, live route and sculpted cursor in
+`apps/scalable/gnome-connections.svg`; its dark counterpart is registered in
+`HD.HANDDRAWN` so aliases such as `org.gnome.Connections.svg` follow it by
+artwork hash.
 
 Do **not** blanket-exempt a whole name family from the pipeline (an earlier
 `"chrom" in name` rule quietly kept 60-odd Chrome web-app icons, ChatGPT

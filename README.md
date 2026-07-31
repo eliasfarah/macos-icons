@@ -43,7 +43,7 @@ seguindo as regras que a Apple usa nas variantes escuras do macOS/iOS:
   bb-launcher) são detectados e passam intactos.
 * **Quando o cartão *é* a arte, desenhamos à mão** (`dark_handdrawn.py`).
   Recortar o cartão do rosto do Finder ou do "A" da App Store deixa um buraco
-  irregular, então essas variantes são desenhadas: Chrome, App Store,
+  irregular, então essas variantes são redesenhadas: Finder, Conexões, Chrome, App Store,
   visualizador de imagens, Tour, engrenagem de ajustes, peça de extensões,
   reprodutor de vídeo, Mapas, Câmera, além do calendário e do bloco de notas.
   O registro é por nome do arquivo claro, mas a busca é pelo *hash da arte* —
@@ -53,7 +53,10 @@ seguindo as regras que a Apple usa nas variantes escuras do macOS/iOS:
   exatamente o mesmo placeholder. O modo escuro fornece desenhos próprios para
   Celeste, Inscryption, Papers Please, OpenRA D2K, OneShot, Stardew Valley,
   Terraria, Undertale, SimpleX Chat, Clapgrep, Roblox e Ricochlime.
-* **Finder passa intacto**: a Apple entrega um único ícone do Finder.
+* **Finder tem variante escura própria**: rosto azul escultural deslocado
+  sobre cartão grafite Liquid Glass, com olhos assimétricos e sorriso bicolor.
+* **Conexões é um par claro/escuro próprio**: globo técnico, rota ativa e
+  cursor escultural, com contraste e materiais calibrados para cada aparência.
 
 ```bash
 # requer: python3 (numpy, pillow) e rsvg-convert
