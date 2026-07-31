@@ -1,47 +1,65 @@
-<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <!-- Two-scale Apple shadow: a soft lift plus a tight contact shadow -->
     <filter id="d-shadow" x="-25%" y="-25%" width="150%" height="150%">
       <feDropShadow dx="0" dy="2.4" stdDeviation="2.8" flood-color="#000000" flood-opacity="0.38" />
       <feDropShadow dx="0" dy="1.0" stdDeviation="0.8" flood-color="#000000" flood-opacity="0.62" />
     </filter>
-
-    <!-- Dark canvas, tinted with the icon's own hue -->
     <linearGradient id="d-bg" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#242930" />
-      <stop offset="100%" stop-color="#0c0e11" />
+      <stop offset="0%" stop-color="#2b2e33" />
+      <stop offset="100%" stop-color="#101215" />
     </linearGradient>
-
-    <!-- The glyph appears to light its own tile, faintly -->
-    <radialGradient id="d-glow" cx="50%" cy="42%" r="52%">
-      <stop offset="0%" stop-color="#546b8c" stop-opacity="0.038" />
-      <stop offset="55%" stop-color="#546b8c" stop-opacity="0.014" />
-      <stop offset="100%" stop-color="#546b8c" stop-opacity="0" />
-    </radialGradient>
-
-    <!-- A broad, almost invisible glass reflection over the upper shoulder -->
-    <radialGradient id="d-sheen" cx="22%" cy="4%" r="82%" fx="22%" fy="4%">
-      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.105" />
-      <stop offset="48%" stop-color="#ffffff" stop-opacity="0.022" />
-      <stop offset="100%" stop-color="#ffffff" stop-opacity="0" />
-    </radialGradient>
-
-    <!-- Hairline rim: the top catches light while the bottom recedes -->
     <linearGradient id="d-rim" x1="0%" y1="0%" x2="0%" y2="100%">
       <stop offset="0%" stop-color="#ffffff" stop-opacity="0.34" />
       <stop offset="34%" stop-color="#ffffff" stop-opacity="0.10" />
       <stop offset="100%" stop-color="#ffffff" stop-opacity="0.025" />
     </linearGradient>
-
     <linearGradient id="d-floor" x1="0%" y1="0%" x2="0%" y2="100%">
       <stop offset="0%" stop-color="#000000" stop-opacity="0" />
       <stop offset="58%" stop-color="#000000" stop-opacity="0" />
       <stop offset="100%" stop-color="#000000" stop-opacity="0.28" />
     </linearGradient>
-
+    <radialGradient id="d-sheen" cx="22%" cy="4%" r="82%" fx="22%" fy="4%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.105" />
+      <stop offset="48%" stop-color="#ffffff" stop-opacity="0.022" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0" />
+    </radialGradient>
     <clipPath id="d-clip">
       <rect width="56" height="56" x="4" y="4" rx="14" ry="14" />
     </clipPath>
+    <radialGradient id="d-glow" cx="50%" cy="44%" r="56%">
+      <stop offset="0%" stop-color="#c3cad4" stop-opacity="0.09" />
+      <stop offset="55%" stop-color="#c3cad4" stop-opacity="0.0315" />
+      <stop offset="100%" stop-color="#c3cad4" stop-opacity="0" />
+    </radialGradient>
+    <linearGradient id="g-metal" x1="15%" y1="0%" x2="85%" y2="100%">
+      <stop offset="0%" stop-color="#f5f7fa" />
+      <stop offset="48%" stop-color="#d4dae2" />
+      <stop offset="100%" stop-color="#9ca5b1" />
+    </linearGradient>
+    <linearGradient id="g-inner" x1="15%" y1="0%" x2="85%" y2="100%">
+      <stop offset="0%" stop-color="#dfe4ea" />
+      <stop offset="55%" stop-color="#aab2bd" />
+      <stop offset="100%" stop-color="#767d87" />
+    </linearGradient>
+    <linearGradient id="g-disc" x1="20%" y1="0%" x2="80%" y2="100%">
+      <stop offset="0%" stop-color="#aeb6c1" />
+      <stop offset="100%" stop-color="#68717d" />
+    </linearGradient>
+    <filter id="g-depth" x="-18%" y="-18%" width="136%" height="140%">
+      <feDropShadow dx="0.22" dy="0.62" stdDeviation="0.42" flood-color="#020307" flood-opacity="0.78" />
+      <feDropShadow dx="-0.10" dy="-0.16" stdDeviation="0.12" flood-color="#ffffff" flood-opacity="0.38" />
+    </filter>
+    <rect id="g-outer-tooth" x="30.9" y="8.15" width="2.2" height="8.1" rx="1.1" />
+    <rect id="g-inner-tooth" x="31.1" y="17.45" width="1.8" height="5.4" rx="0.9" />
+    <path id="g-hole" d="M 35.18 28.82 L 44.02 19.98 A 17 17 0 0 1 44.02 44.02 L 35.18 35.18 A 4.5 4.5 0 0 0 35.18 28.82 Z" />
+    <mask id="g-cutouts" maskUnits="userSpaceOnUse" x="0" y="0" width="64" height="64">
+      <rect width="64" height="64" fill="#ffffff" />
+      <g fill="#000000">
+        <use href="#g-hole" transform="rotate(60 32 32)" />
+        <use href="#g-hole" transform="rotate(180 32 32)" />
+        <use href="#g-hole" transform="rotate(300 32 32)" />
+      </g>
+    </mask>
   </defs>
 
   <g filter="url(#d-shadow)">
@@ -49,12 +67,94 @@
   </g>
 
   <g clip-path="url(#d-clip)">
-    <!-- Surface lighting always stays behind the artwork.  Brand colours must
-         never be dimmed by a generic overlay. -->
     <rect width="56" height="56" x="4" y="4" fill="url(#d-floor)" />
     <rect width="56" height="56" x="4" y="4" fill="url(#d-glow)" />
     <rect width="56" height="56" x="4" y="4" fill="url(#d-sheen)" />
-    <image href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHZpZXdCb3g9IjAgMCA2NCA2NCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8ZGVmcz4KICAgIDxmaWx0ZXIgaWQ9ImdsYXNzLXNoYWRvdyIgeD0iLTIwJSIgeT0iLTIwJSIgd2lkdGg9IjE0MCUiIGhlaWdodD0iMTQwJSI+CiAgICAgIDxmZURyb3BTaGFkb3cgZHg9IjAiIGR5PSIyLjUiIHN0ZERldmlhdGlvbj0iMi41IiBmbG9vZC1jb2xvcj0iIzAwMDAwMCIgZmxvb2Qtb3BhY2l0eT0iMC4zIiAvPgogICAgPC9maWx0ZXI+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImlubmVyLWJldmVsIiB4MT0iMCUiIHkxPSIwJSIgeDI9IjAlIiB5Mj0iMTAwJSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiNmZmZmZmYiIHN0b3Atb3BhY2l0eT0iMC42IiAvPgogICAgICA8c3RvcCBvZmZzZXQ9IjI1JSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIgc3RvcC1vcGFjaXR5PSIwLjAiIC8+CiAgICAgIDxzdG9wIG9mZnNldD0iNzUlIiBzdG9wLWNvbG9yPSIjMDAwMDAwIiBzdG9wLW9wYWNpdHk9IjAuMCIgLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjMDAwMDAwIiBzdG9wLW9wYWNpdHk9IjAuMjUiIC8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogICAgPGxpbmVhckdyYWRpZW50IGlkPSJzZXR0aW5ncy1iZyIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiM2NDc0OGIiIC8+CiAgICAgIDxzdG9wIG9mZnNldD0iNTAlIiBzdG9wLWNvbG9yPSIjMzM0MTU1IiAvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMxZTI5M2IiIC8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogICAgPGxpbmVhckdyYWRpZW50IGlkPSJnZWFyLWdyYWQiIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjZmZmZmZmIiAvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNjYmQ1ZTEiIC8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogICAgPGNsaXBQYXRoIGlkPSJzcXVpcmNsZS1jbGlwIj4KICAgICAgPHJlY3Qgd2lkdGg9IjU2IiBoZWlnaHQ9IjU2IiB4PSI0IiB5PSI0IiByeD0iMTQiIHJ5PSIxNCIgLz4KICAgIDwvY2xpcFBhdGg+CiAgPC9kZWZzPgoKICA8ZyBmaWx0ZXI9InVybCgjZ2xhc3Mtc2hhZG93KSI+CiAgICA8ZyBjbGlwLXBhdGg9InVybCgjc3F1aXJjbGUtY2xpcCkiPgogICAgICA8cmVjdCB3aWR0aD0iNTYiIGhlaWdodD0iNTYiIHg9IjQiIHk9IjQiIGZpbGw9InVybCgjc2V0dGluZ3MtYmcpIiAvPgogICAgICAKICAgICAgPCEtLSBDZW50cmFsIEdlYXIgd2hlZWwgLS0+CiAgICAgIDxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMyLCAzMikiPgogICAgICAgIDwhLS0gOCBHZWFyIFRlZXRoIC0tPgogICAgICAgIDxyZWN0IHg9Ii0zLjUiIHk9Ii0xOSIgd2lkdGg9IjciIGhlaWdodD0iMzgiIHJ4PSIyIiBmaWxsPSJ1cmwoI2dlYXItZ3JhZCkiIC8+CiAgICAgICAgPHJlY3QgeD0iLTMuNSIgeT0iLTE5IiB3aWR0aD0iNyIgaGVpZ2h0PSIzOCIgcng9IjIiIGZpbGw9InVybCgjZ2Vhci1ncmFkKSIgdHJhbnNmb3JtPSJyb3RhdGUoNDUpIiAvPgogICAgICAgIDxyZWN0IHg9Ii0zLjUiIHk9Ii0xOSIgd2lkdGg9IjciIGhlaWdodD0iMzgiIHJ4PSIyIiBmaWxsPSJ1cmwoI2dlYXItZ3JhZCkiIHRyYW5zZm9ybT0icm90YXRlKDkwKSIgLz4KICAgICAgICA8cmVjdCB4PSItMy41IiB5PSItMTkiIHdpZHRoPSI3IiBoZWlnaHQ9IjM4IiByeD0iMiIgZmlsbD0idXJsKCNnZWFyLWdyYWQpIiB0cmFuc2Zvcm09InJvdGF0ZSgxMzUpIiAvPgogICAgICAgIAogICAgICAgIDwhLS0gR2VhciBPdXRlciBDaXJjbGUgLS0+CiAgICAgICAgPGNpcmNsZSBjeD0iMCIgY3k9IjAiIHI9IjE0IiBmaWxsPSJ1cmwoI2dlYXItZ3JhZCkiIC8+CiAgICAgICAgCiAgICAgICAgPCEtLSBHZWFyIENlbnRlciBIb2xlIC0tPgogICAgICAgIDxjaXJjbGUgY3g9IjAiIGN5PSIwIiByPSI2IiBmaWxsPSIjMWUyOTNiIiAvPgogICAgICA8L2c+CiAgICA8L2c+CiAgPC9nPgoKICA8cmVjdCB3aWR0aD0iNTYiIGhlaWdodD0iNTYiIHg9IjQiIHk9IjQiIHJ4PSIxNCIgcnk9IjE0IiBmaWxsPSJub25lIiBzdHJva2U9InVybCgjaW5uZXItYmV2ZWwpIiBzdHJva2Utd2lkdGg9IjEuNSIgLz4KPC9zdmc+" x="0" y="0" width="64" height="64" />
+    <g transform="translate(32 32) scale(0.94) translate(-32 -32)">
+      <g fill="url(#g-inner)" stroke="#e8edf4" stroke-width="0.17" filter="url(#g-depth)">
+        <use href="#g-inner-tooth" transform="rotate(0 32 32)" />
+        <use href="#g-inner-tooth" transform="rotate(15 32 32)" />
+        <use href="#g-inner-tooth" transform="rotate(30 32 32)" />
+        <use href="#g-inner-tooth" transform="rotate(45 32 32)" />
+        <use href="#g-inner-tooth" transform="rotate(60 32 32)" />
+        <use href="#g-inner-tooth" transform="rotate(75 32 32)" />
+        <use href="#g-inner-tooth" transform="rotate(90 32 32)" />
+        <use href="#g-inner-tooth" transform="rotate(105 32 32)" />
+        <use href="#g-inner-tooth" transform="rotate(120 32 32)" />
+        <use href="#g-inner-tooth" transform="rotate(135 32 32)" />
+        <use href="#g-inner-tooth" transform="rotate(150 32 32)" />
+        <use href="#g-inner-tooth" transform="rotate(165 32 32)" />
+        <use href="#g-inner-tooth" transform="rotate(180 32 32)" />
+        <use href="#g-inner-tooth" transform="rotate(195 32 32)" />
+        <use href="#g-inner-tooth" transform="rotate(210 32 32)" />
+        <use href="#g-inner-tooth" transform="rotate(225 32 32)" />
+        <use href="#g-inner-tooth" transform="rotate(240 32 32)" />
+        <use href="#g-inner-tooth" transform="rotate(255 32 32)" />
+        <use href="#g-inner-tooth" transform="rotate(270 32 32)" />
+        <use href="#g-inner-tooth" transform="rotate(285 32 32)" />
+        <use href="#g-inner-tooth" transform="rotate(300 32 32)" />
+        <use href="#g-inner-tooth" transform="rotate(315 32 32)" />
+        <use href="#g-inner-tooth" transform="rotate(330 32 32)" />
+        <use href="#g-inner-tooth" transform="rotate(345 32 32)" />
+        <circle cx="32" cy="32" r="11.9" />
+        <circle cx="32" cy="32" r="9.6" fill="url(#g-disc)" stroke="#dce2ea" stroke-width="0.2" />
+      </g>
+      <g fill="url(#g-metal)" stroke="#747d89" stroke-width="0.22"
+         stroke-linejoin="round" filter="url(#g-depth)" mask="url(#g-cutouts)">
+        <use href="#g-outer-tooth" transform="rotate(0.0000 32 32)" />
+        <use href="#g-outer-tooth" transform="rotate(8.1818 32 32)" />
+        <use href="#g-outer-tooth" transform="rotate(16.3636 32 32)" />
+        <use href="#g-outer-tooth" transform="rotate(24.5455 32 32)" />
+        <use href="#g-outer-tooth" transform="rotate(32.7273 32 32)" />
+        <use href="#g-outer-tooth" transform="rotate(40.9091 32 32)" />
+        <use href="#g-outer-tooth" transform="rotate(49.0909 32 32)" />
+        <use href="#g-outer-tooth" transform="rotate(57.2727 32 32)" />
+        <use href="#g-outer-tooth" transform="rotate(65.4545 32 32)" />
+        <use href="#g-outer-tooth" transform="rotate(73.6364 32 32)" />
+        <use href="#g-outer-tooth" transform="rotate(81.8182 32 32)" />
+        <use href="#g-outer-tooth" transform="rotate(90.0000 32 32)" />
+        <use href="#g-outer-tooth" transform="rotate(98.1818 32 32)" />
+        <use href="#g-outer-tooth" transform="rotate(106.3636 32 32)" />
+        <use href="#g-outer-tooth" transform="rotate(114.5455 32 32)" />
+        <use href="#g-outer-tooth" transform="rotate(122.7273 32 32)" />
+        <use href="#g-outer-tooth" transform="rotate(130.9091 32 32)" />
+        <use href="#g-outer-tooth" transform="rotate(139.0909 32 32)" />
+        <use href="#g-outer-tooth" transform="rotate(147.2727 32 32)" />
+        <use href="#g-outer-tooth" transform="rotate(155.4545 32 32)" />
+        <use href="#g-outer-tooth" transform="rotate(163.6364 32 32)" />
+        <use href="#g-outer-tooth" transform="rotate(171.8182 32 32)" />
+        <use href="#g-outer-tooth" transform="rotate(180.0000 32 32)" />
+        <use href="#g-outer-tooth" transform="rotate(188.1818 32 32)" />
+        <use href="#g-outer-tooth" transform="rotate(196.3636 32 32)" />
+        <use href="#g-outer-tooth" transform="rotate(204.5455 32 32)" />
+        <use href="#g-outer-tooth" transform="rotate(212.7273 32 32)" />
+        <use href="#g-outer-tooth" transform="rotate(220.9091 32 32)" />
+        <use href="#g-outer-tooth" transform="rotate(229.0909 32 32)" />
+        <use href="#g-outer-tooth" transform="rotate(237.2727 32 32)" />
+        <use href="#g-outer-tooth" transform="rotate(245.4545 32 32)" />
+        <use href="#g-outer-tooth" transform="rotate(253.6364 32 32)" />
+        <use href="#g-outer-tooth" transform="rotate(261.8182 32 32)" />
+        <use href="#g-outer-tooth" transform="rotate(270.0000 32 32)" />
+        <use href="#g-outer-tooth" transform="rotate(278.1818 32 32)" />
+        <use href="#g-outer-tooth" transform="rotate(286.3636 32 32)" />
+        <use href="#g-outer-tooth" transform="rotate(294.5455 32 32)" />
+        <use href="#g-outer-tooth" transform="rotate(302.7273 32 32)" />
+        <use href="#g-outer-tooth" transform="rotate(310.9091 32 32)" />
+        <use href="#g-outer-tooth" transform="rotate(319.0909 32 32)" />
+        <use href="#g-outer-tooth" transform="rotate(327.2727 32 32)" />
+        <use href="#g-outer-tooth" transform="rotate(335.4545 32 32)" />
+        <use href="#g-outer-tooth" transform="rotate(343.6364 32 32)" />
+        <use href="#g-outer-tooth" transform="rotate(351.8182 32 32)" />
+        <circle cx="32" cy="32" r="20.25" />
+      </g>
+      <g fill="none" stroke="#090b0f" stroke-width="0.32" opacity="0.9">
+        <use href="#g-hole" transform="rotate(60 32 32)" />
+        <use href="#g-hole" transform="rotate(180 32 32)" />
+        <use href="#g-hole" transform="rotate(300 32 32)" />
+      </g>
+      <circle cx="32" cy="32" r="1.58" fill="#12151a" stroke="#030407" stroke-width="0.28" />
+      <circle cx="31.55" cy="31.5" r="0.6" fill="#ffffff" opacity="0.1" />
+    </g>
   </g>
 
   <rect width="55.5" height="55.5" x="4.25" y="4.25" rx="13.75" ry="13.75" fill="none" stroke="#000000" stroke-opacity="0.34" stroke-width="0.5" />

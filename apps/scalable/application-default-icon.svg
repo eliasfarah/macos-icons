@@ -1,48 +1,171 @@
 <svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <filter id="glass-shadow" x="-20%" y="-20%" width="140%" height="140%">
-      <feDropShadow dx="0" dy="2.5" stdDeviation="2.5" flood-color="#000000" flood-opacity="0.3" />
-    </filter>
-    <linearGradient id="inner-bevel" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.6" />
-      <stop offset="25%" stop-color="#ffffff" stop-opacity="0.0" />
-      <stop offset="75%" stop-color="#000000" stop-opacity="0.0" />
-      <stop offset="100%" stop-color="#000000" stop-opacity="0.25" />
+    <linearGradient id="settings-bg" x1="18%" y1="0%" x2="82%" y2="100%">
+      <stop offset="0%" stop-color="#b4b5ba" />
+      <stop offset="42%" stop-color="#9fa0a6" />
+      <stop offset="100%" stop-color="#898a91" />
     </linearGradient>
-    <linearGradient id="settings-bg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#64748b" />
-      <stop offset="50%" stop-color="#334155" />
-      <stop offset="100%" stop-color="#1e293b" />
+    <radialGradient id="settings-glow" cx="30%" cy="8%" r="92%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.15" />
+      <stop offset="48%" stop-color="#ffffff" stop-opacity="0.025" />
+      <stop offset="100%" stop-color="#25272d" stop-opacity="0.12" />
+    </radialGradient>
+    <linearGradient id="tile-rim" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.92" />
+      <stop offset="24%" stop-color="#ffffff" stop-opacity="0.18" />
+      <stop offset="72%" stop-color="#45474e" stop-opacity="0.10" />
+      <stop offset="100%" stop-color="#3a3c43" stop-opacity="0.42" />
     </linearGradient>
-    <linearGradient id="gear-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+    <linearGradient id="steel-white" x1="18%" y1="0%" x2="82%" y2="100%">
       <stop offset="0%" stop-color="#ffffff" />
-      <stop offset="100%" stop-color="#cbd5e1" />
+      <stop offset="48%" stop-color="#f8f8f9" />
+      <stop offset="100%" stop-color="#e7e8eb" />
     </linearGradient>
+    <linearGradient id="steel-edge" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="45%" stop-color="#dfe0e4" />
+      <stop offset="100%" stop-color="#4d4f57" />
+    </linearGradient>
+    <linearGradient id="inner-steel" x1="20%" y1="0%" x2="80%" y2="100%">
+      <stop offset="0%" stop-color="#c4c5ca" />
+      <stop offset="52%" stop-color="#a7a8ae" />
+      <stop offset="100%" stop-color="#85868d" />
+    </linearGradient>
+    <linearGradient id="inner-disc" x1="20%" y1="0%" x2="80%" y2="100%">
+      <stop offset="0%" stop-color="#aaaab0" />
+      <stop offset="100%" stop-color="#8b8c93" />
+    </linearGradient>
+
+    <filter id="tile-shadow" x="-22%" y="-22%" width="144%" height="150%">
+      <feDropShadow dx="0" dy="2.2" stdDeviation="2.5" flood-color="#000000" flood-opacity="0.34" />
+    </filter>
+    <filter id="gear-shadow" x="-16%" y="-16%" width="132%" height="136%">
+      <feDropShadow dx="0.25" dy="0.65" stdDeviation="0.45" flood-color="#26272d" flood-opacity="0.72" />
+      <feDropShadow dx="-0.1" dy="-0.16" stdDeviation="0.12" flood-color="#ffffff" flood-opacity="0.5" />
+    </filter>
+    <filter id="inner-shadow" x="-20%" y="-20%" width="140%" height="145%">
+      <feDropShadow dx="0.18" dy="0.52" stdDeviation="0.34" flood-color="#35363d" flood-opacity="0.62" />
+      <feDropShadow dx="-0.12" dy="-0.18" stdDeviation="0.16" flood-color="#ffffff" flood-opacity="0.62" />
+    </filter>
+
     <clipPath id="squircle-clip">
-      <rect width="56" height="56" x="4" y="4" rx="14" ry="14" />
+      <rect x="4" y="4" width="56" height="56" rx="14" />
     </clipPath>
+    <rect id="outer-tooth" x="30.9" y="8.15" width="2.2" height="8.1" rx="1.1" />
+    <rect id="inner-tooth" x="31.1" y="17.45" width="1.8" height="5.4" rx="0.9" />
+    <path id="rotor-hole" d="M 35.18 28.82 L 44.02 19.98 A 17 17 0 0 1 44.02 44.02 L 35.18 35.18 A 4.5 4.5 0 0 0 35.18 28.82 Z" />
+    <mask id="rotor-cutouts" maskUnits="userSpaceOnUse" x="0" y="0" width="64" height="64">
+      <rect width="64" height="64" fill="#ffffff" />
+      <g fill="#000000">
+        <use href="#rotor-hole" transform="rotate(60 32 32)" />
+        <use href="#rotor-hole" transform="rotate(180 32 32)" />
+        <use href="#rotor-hole" transform="rotate(300 32 32)" />
+      </g>
+    </mask>
   </defs>
 
-  <g filter="url(#glass-shadow)">
+  <g filter="url(#tile-shadow)">
     <g clip-path="url(#squircle-clip)">
-      <rect width="56" height="56" x="4" y="4" fill="url(#settings-bg)" />
-      
-      <!-- Central Gear wheel -->
-      <g transform="translate(32, 32)">
-        <!-- 8 Gear Teeth -->
-        <rect x="-3.5" y="-19" width="7" height="38" rx="2" fill="url(#gear-grad)" />
-        <rect x="-3.5" y="-19" width="7" height="38" rx="2" fill="url(#gear-grad)" transform="rotate(45)" />
-        <rect x="-3.5" y="-19" width="7" height="38" rx="2" fill="url(#gear-grad)" transform="rotate(90)" />
-        <rect x="-3.5" y="-19" width="7" height="38" rx="2" fill="url(#gear-grad)" transform="rotate(135)" />
-        
-        <!-- Gear Outer Circle -->
-        <circle cx="0" cy="0" r="14" fill="url(#gear-grad)" />
-        
-        <!-- Gear Center Hole -->
-        <circle cx="0" cy="0" r="6" fill="#1e293b" />
-      </g>
+      <rect x="4" y="4" width="56" height="56" fill="url(#settings-bg)" />
+      <rect x="4" y="4" width="56" height="56" fill="url(#settings-glow)" />
+      <path d="M 6 47 C 18 56 46 58 58 47 L 58 60 L 6 60 Z" fill="#5d5f67" opacity="0.06" />
     </g>
   </g>
 
-  <rect width="56" height="56" x="4" y="4" rx="14" ry="14" fill="none" stroke="url(#inner-bevel)" stroke-width="1.5" />
+  <g transform="translate(32 32) scale(0.94) translate(-32 -32)">
+  <!-- The smaller movement remains visible through the three rotor openings. -->
+  <g fill="url(#inner-steel)" stroke="#dfe0e4" stroke-width="0.18" filter="url(#inner-shadow)">
+    <g>
+      <use href="#inner-tooth" transform="rotate(0 32 32)" />
+      <use href="#inner-tooth" transform="rotate(15 32 32)" />
+      <use href="#inner-tooth" transform="rotate(30 32 32)" />
+      <use href="#inner-tooth" transform="rotate(45 32 32)" />
+      <use href="#inner-tooth" transform="rotate(60 32 32)" />
+      <use href="#inner-tooth" transform="rotate(75 32 32)" />
+      <use href="#inner-tooth" transform="rotate(90 32 32)" />
+      <use href="#inner-tooth" transform="rotate(105 32 32)" />
+      <use href="#inner-tooth" transform="rotate(120 32 32)" />
+      <use href="#inner-tooth" transform="rotate(135 32 32)" />
+      <use href="#inner-tooth" transform="rotate(150 32 32)" />
+      <use href="#inner-tooth" transform="rotate(165 32 32)" />
+      <use href="#inner-tooth" transform="rotate(180 32 32)" />
+      <use href="#inner-tooth" transform="rotate(195 32 32)" />
+      <use href="#inner-tooth" transform="rotate(210 32 32)" />
+      <use href="#inner-tooth" transform="rotate(225 32 32)" />
+      <use href="#inner-tooth" transform="rotate(240 32 32)" />
+      <use href="#inner-tooth" transform="rotate(255 32 32)" />
+      <use href="#inner-tooth" transform="rotate(270 32 32)" />
+      <use href="#inner-tooth" transform="rotate(285 32 32)" />
+      <use href="#inner-tooth" transform="rotate(300 32 32)" />
+      <use href="#inner-tooth" transform="rotate(315 32 32)" />
+      <use href="#inner-tooth" transform="rotate(330 32 32)" />
+      <use href="#inner-tooth" transform="rotate(345 32 32)" />
+    </g>
+    <circle cx="32" cy="32" r="11.9" />
+    <circle cx="32" cy="32" r="9.6" fill="url(#inner-disc)" stroke="#e4e5e8" stroke-width="0.2" />
+  </g>
+
+  <!-- Forty-four fine rounded teeth and a continuous three-spoke rotor. -->
+  <g fill="url(#steel-white)" stroke="url(#steel-edge)" stroke-width="0.22"
+     stroke-linejoin="round" filter="url(#gear-shadow)" mask="url(#rotor-cutouts)">
+    <g>
+      <use href="#outer-tooth" transform="rotate(0 32 32)" />
+      <use href="#outer-tooth" transform="rotate(8.1818 32 32)" />
+      <use href="#outer-tooth" transform="rotate(16.3636 32 32)" />
+      <use href="#outer-tooth" transform="rotate(24.5455 32 32)" />
+      <use href="#outer-tooth" transform="rotate(32.7273 32 32)" />
+      <use href="#outer-tooth" transform="rotate(40.9091 32 32)" />
+      <use href="#outer-tooth" transform="rotate(49.0909 32 32)" />
+      <use href="#outer-tooth" transform="rotate(57.2727 32 32)" />
+      <use href="#outer-tooth" transform="rotate(65.4545 32 32)" />
+      <use href="#outer-tooth" transform="rotate(73.6364 32 32)" />
+      <use href="#outer-tooth" transform="rotate(81.8182 32 32)" />
+      <use href="#outer-tooth" transform="rotate(90 32 32)" />
+      <use href="#outer-tooth" transform="rotate(98.1818 32 32)" />
+      <use href="#outer-tooth" transform="rotate(106.3636 32 32)" />
+      <use href="#outer-tooth" transform="rotate(114.5455 32 32)" />
+      <use href="#outer-tooth" transform="rotate(122.7273 32 32)" />
+      <use href="#outer-tooth" transform="rotate(130.9091 32 32)" />
+      <use href="#outer-tooth" transform="rotate(139.0909 32 32)" />
+      <use href="#outer-tooth" transform="rotate(147.2727 32 32)" />
+      <use href="#outer-tooth" transform="rotate(155.4545 32 32)" />
+      <use href="#outer-tooth" transform="rotate(163.6364 32 32)" />
+      <use href="#outer-tooth" transform="rotate(171.8182 32 32)" />
+      <use href="#outer-tooth" transform="rotate(180 32 32)" />
+      <use href="#outer-tooth" transform="rotate(188.1818 32 32)" />
+      <use href="#outer-tooth" transform="rotate(196.3636 32 32)" />
+      <use href="#outer-tooth" transform="rotate(204.5455 32 32)" />
+      <use href="#outer-tooth" transform="rotate(212.7273 32 32)" />
+      <use href="#outer-tooth" transform="rotate(220.9091 32 32)" />
+      <use href="#outer-tooth" transform="rotate(229.0909 32 32)" />
+      <use href="#outer-tooth" transform="rotate(237.2727 32 32)" />
+      <use href="#outer-tooth" transform="rotate(245.4545 32 32)" />
+      <use href="#outer-tooth" transform="rotate(253.6364 32 32)" />
+      <use href="#outer-tooth" transform="rotate(261.8182 32 32)" />
+      <use href="#outer-tooth" transform="rotate(270 32 32)" />
+      <use href="#outer-tooth" transform="rotate(278.1818 32 32)" />
+      <use href="#outer-tooth" transform="rotate(286.3636 32 32)" />
+      <use href="#outer-tooth" transform="rotate(294.5455 32 32)" />
+      <use href="#outer-tooth" transform="rotate(302.7273 32 32)" />
+      <use href="#outer-tooth" transform="rotate(310.9091 32 32)" />
+      <use href="#outer-tooth" transform="rotate(319.0909 32 32)" />
+      <use href="#outer-tooth" transform="rotate(327.2727 32 32)" />
+      <use href="#outer-tooth" transform="rotate(335.4545 32 32)" />
+      <use href="#outer-tooth" transform="rotate(343.6364 32 32)" />
+      <use href="#outer-tooth" transform="rotate(351.8182 32 32)" />
+    </g>
+    <circle cx="32" cy="32" r="20.25" />
+  </g>
+
+  <g fill="none" stroke="#55565d" stroke-width="0.3" opacity="0.86">
+    <use href="#rotor-hole" transform="rotate(60 32 32)" />
+    <use href="#rotor-hole" transform="rotate(180 32 32)" />
+    <use href="#rotor-hole" transform="rotate(300 32 32)" />
+  </g>
+  <circle cx="32" cy="32" r="1.58" fill="url(#inner-disc)" stroke="#414249" stroke-width="0.28" />
+  <circle cx="31.55" cy="31.5" r="0.62" fill="#ffffff" opacity="0.16" />
+  </g>
+
+  <rect x="4.55" y="4.55" width="54.9" height="54.9" rx="13.45"
+        fill="none" stroke="url(#tile-rim)" stroke-width="0.68" />
 </svg>

@@ -717,32 +717,66 @@ def _wedge(cx, cy, r_in, r_out, a_mid, half):
 def dark_gear_svg():
     """Brushed-steel cog on a graphite tile — same watch movement as light mode.
 
-    The light icon's character is in the *count*: forty fine teeth and a thin
-    three-spoke rotor with big openings.  Fewer, chunkier teeth turn the same
-    drawing into a cartoon.
+    The light icon's character is in the *count*: forty-four fine rounded
+    teeth, a smaller movement underneath and a thin three-spoke rotor with
+    big openings.  Fewer, chunkier teeth turn the drawing into a cartoon.
     """
     defs = """
     <linearGradient id="g-metal" x1="15%" y1="0%" x2="85%" y2="100%">
-      <stop offset="0%" stop-color="#eef1f5" />
-      <stop offset="45%" stop-color="#c2c9d3" />
-      <stop offset="100%" stop-color="#8b929c" />
+      <stop offset="0%" stop-color="#f5f7fa" />
+      <stop offset="48%" stop-color="#d4dae2" />
+      <stop offset="100%" stop-color="#9ca5b1" />
     </linearGradient>
     <linearGradient id="g-inner" x1="15%" y1="0%" x2="85%" y2="100%">
       <stop offset="0%" stop-color="#dfe4ea" />
       <stop offset="55%" stop-color="#aab2bd" />
       <stop offset="100%" stop-color="#767d87" />
-    </linearGradient>"""
-    holes = "".join(f'<path d="{_wedge(32, 32, 6.5, 17.2, a, 46)}" />'
-                    for a in (90, 210, 330))
-    body = f"""    <g>
-      <path d="{_gear_path(32, 32, 27, 25, teeth=46, tooth=0.55)}" fill="url(#g-metal)" />
-      <circle cx="32" cy="32" r="25" fill="url(#g-metal)" />
-      <circle cx="32" cy="32" r="21.5" fill="#14171b" />
-      <circle cx="32" cy="32" r="19.5" fill="url(#g-inner)" />
-      <g fill="#14171b">{holes}</g>
-      <circle cx="32" cy="32" r="2.2" fill="#14171b" />
-      <path d="M 8 30 A 24 24 0 0 1 36 8.4 L 35 12.6 A 20 20 0 0 0 12 31 Z"
-            fill="#ffffff" opacity="0.3" />
+    </linearGradient>
+    <linearGradient id="g-disc" x1="20%" y1="0%" x2="80%" y2="100%">
+      <stop offset="0%" stop-color="#aeb6c1" />
+      <stop offset="100%" stop-color="#68717d" />
+    </linearGradient>
+    <filter id="g-depth" x="-18%" y="-18%" width="136%" height="140%">
+      <feDropShadow dx="0.22" dy="0.62" stdDeviation="0.42" flood-color="#020307" flood-opacity="0.78" />
+      <feDropShadow dx="-0.10" dy="-0.16" stdDeviation="0.12" flood-color="#ffffff" flood-opacity="0.38" />
+    </filter>
+    <rect id="g-outer-tooth" x="30.9" y="8.15" width="2.2" height="8.1" rx="1.1" />
+    <rect id="g-inner-tooth" x="31.1" y="17.45" width="1.8" height="5.4" rx="0.9" />
+    <path id="g-hole" d="M 35.18 28.82 L 44.02 19.98 A 17 17 0 0 1 44.02 44.02 L 35.18 35.18 A 4.5 4.5 0 0 0 35.18 28.82 Z" />
+    <mask id="g-cutouts" maskUnits="userSpaceOnUse" x="0" y="0" width="64" height="64">
+      <rect width="64" height="64" fill="#ffffff" />
+      <g fill="#000000">
+        <use href="#g-hole" transform="rotate(60 32 32)" />
+        <use href="#g-hole" transform="rotate(180 32 32)" />
+        <use href="#g-hole" transform="rotate(300 32 32)" />
+      </g>
+    </mask>"""
+    outer_teeth = "\n".join(
+        f'        <use href="#g-outer-tooth" transform="rotate({i * 360 / 44:.4f} 32 32)" />'
+        for i in range(44)
+    )
+    inner_teeth = "\n".join(
+        f'        <use href="#g-inner-tooth" transform="rotate({i * 15} 32 32)" />'
+        for i in range(24)
+    )
+    body = f"""    <g transform="translate(32 32) scale(0.94) translate(-32 -32)">
+      <g fill="url(#g-inner)" stroke="#e8edf4" stroke-width="0.17" filter="url(#g-depth)">
+{inner_teeth}
+        <circle cx="32" cy="32" r="11.9" />
+        <circle cx="32" cy="32" r="9.6" fill="url(#g-disc)" stroke="#dce2ea" stroke-width="0.2" />
+      </g>
+      <g fill="url(#g-metal)" stroke="#747d89" stroke-width="0.22"
+         stroke-linejoin="round" filter="url(#g-depth)" mask="url(#g-cutouts)">
+{outer_teeth}
+        <circle cx="32" cy="32" r="20.25" />
+      </g>
+      <g fill="none" stroke="#090b0f" stroke-width="0.32" opacity="0.9">
+        <use href="#g-hole" transform="rotate(60 32 32)" />
+        <use href="#g-hole" transform="rotate(180 32 32)" />
+        <use href="#g-hole" transform="rotate(300 32 32)" />
+      </g>
+      <circle cx="32" cy="32" r="1.58" fill="#12151a" stroke="#030407" stroke-width="0.28" />
+      <circle cx="31.55" cy="31.5" r="0.6" fill="#ffffff" opacity="0.1" />
     </g>"""
     return tile(body, top="#2b2e33", bottom="#101215",
                 defs=defs, glow=("#c3cad4", 0.09))
