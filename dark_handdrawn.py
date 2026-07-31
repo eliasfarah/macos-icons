@@ -81,6 +81,19 @@ def tile(body, top="#2e2e33", bottom="#101013", defs="", glow=None, filter_shado
 </svg>"""
 
 
+def _light_image_href(filename):
+    """Return the self-contained image data URI from a light source icon."""
+    import re
+    from pathlib import Path
+
+    source = (Path(__file__).resolve().parent / "apps" / "scalable" / filename)
+    content = source.read_text(encoding="utf-8")
+    match = re.search(r'<image\b[^>]*\bhref="(data:image/[^\"]+)"', content)
+    if not match:
+        raise ValueError(f"no embedded image found in {source}")
+    return match.group(1)
+
+
 # --------------------------------------------------------------------------
 # finder / remote connections
 # --------------------------------------------------------------------------
@@ -683,103 +696,25 @@ def dark_tour_svg():
 
 
 # --------------------------------------------------------------------------
-# settings gear (extension manager, system settings)
+# settings gear (system settings)
 # --------------------------------------------------------------------------
 
-def _gear_path(cx, cy, r_out, r_in, teeth=10, tooth=0.5):
-    """Cog outline: `teeth` trapezoid teeth around a circle."""
-    import math
-    step = 2 * math.pi / teeth
-    pts = []
-    for i in range(teeth):
-        a = i * step
-        for radius, off in ((r_in, -step * 0.5), (r_in, -step * tooth * 0.72),
-                            (r_out, -step * tooth * 0.46), (r_out, step * tooth * 0.46),
-                            (r_in, step * tooth * 0.72), (r_in, step * 0.5)):
-            pts.append((cx + radius * math.cos(a + off), cy + radius * math.sin(a + off)))
-    return "M " + " L ".join(f"{x:.2f} {y:.2f}" for x, y in pts) + " Z"
-
-
-def _wedge(cx, cy, r_in, r_out, a_mid, half):
-    """One spoke of the rotor, as an annular sector."""
-    import math
-    a0, a1 = math.radians(a_mid - half), math.radians(a_mid + half)
-    p = lambda r, a: (cx + r * math.cos(a), cy + r * math.sin(a))
-    x0, y0 = p(r_in, a0)
-    x1, y1 = p(r_out, a0)
-    x2, y2 = p(r_out, a1)
-    x3, y3 = p(r_in, a1)
-    return (f"M {x0:.2f} {y0:.2f} L {x1:.2f} {y1:.2f} "
-            f"A {r_out} {r_out} 0 0 1 {x2:.2f} {y2:.2f} L {x3:.2f} {y3:.2f} "
-            f"A {r_in} {r_in} 0 0 0 {x0:.2f} {y0:.2f} Z")
-
-
 def dark_gear_svg():
-    """Brushed-steel cog on a graphite tile — same watch movement as light mode.
-
-    The light icon's character is in the *count*: forty-four fine rounded
-    teeth, a smaller movement underneath and a thin three-spoke rotor with
-    big openings.  Fewer, chunkier teeth turn the drawing into a cartoon.
-    """
-    defs = """
-    <linearGradient id="g-metal" x1="15%" y1="0%" x2="85%" y2="100%">
-      <stop offset="0%" stop-color="#f5f7fa" />
-      <stop offset="48%" stop-color="#d4dae2" />
-      <stop offset="100%" stop-color="#9ca5b1" />
-    </linearGradient>
-    <linearGradient id="g-inner" x1="15%" y1="0%" x2="85%" y2="100%">
-      <stop offset="0%" stop-color="#dfe4ea" />
-      <stop offset="55%" stop-color="#aab2bd" />
-      <stop offset="100%" stop-color="#767d87" />
-    </linearGradient>
-    <linearGradient id="g-disc" x1="20%" y1="0%" x2="80%" y2="100%">
-      <stop offset="0%" stop-color="#aeb6c1" />
-      <stop offset="100%" stop-color="#68717d" />
-    </linearGradient>
-    <filter id="g-depth" x="-18%" y="-18%" width="136%" height="140%">
-      <feDropShadow dx="0.22" dy="0.62" stdDeviation="0.42" flood-color="#020307" flood-opacity="0.78" />
-      <feDropShadow dx="-0.10" dy="-0.16" stdDeviation="0.12" flood-color="#ffffff" flood-opacity="0.38" />
+    """The supplied Apple artwork, with only its neutral card remapped dark."""
+    art = _light_image_href("settings.svg")
+    return f"""<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="settings-dark" x="0" y="0" width="100%" height="100%"
+            color-interpolation-filters="sRGB">
+      <feComponentTransfer>
+        <feFuncR type="table" tableValues=".02 .035 .055 .075 .095 .12 .85 1" />
+        <feFuncG type="table" tableValues=".022 .038 .058 .078 .10 .125 .86 1" />
+        <feFuncB type="table" tableValues=".026 .045 .068 .09 .115 .14 .90 1" />
+      </feComponentTransfer>
     </filter>
-    <rect id="g-outer-tooth" x="30.9" y="8.15" width="2.2" height="8.1" rx="1.1" />
-    <rect id="g-inner-tooth" x="31.1" y="17.45" width="1.8" height="5.4" rx="0.9" />
-    <path id="g-hole" d="M 35.18 28.82 L 44.02 19.98 A 17 17 0 0 1 44.02 44.02 L 35.18 35.18 A 4.5 4.5 0 0 0 35.18 28.82 Z" />
-    <mask id="g-cutouts" maskUnits="userSpaceOnUse" x="0" y="0" width="64" height="64">
-      <rect width="64" height="64" fill="#ffffff" />
-      <g fill="#000000">
-        <use href="#g-hole" transform="rotate(60 32 32)" />
-        <use href="#g-hole" transform="rotate(180 32 32)" />
-        <use href="#g-hole" transform="rotate(300 32 32)" />
-      </g>
-    </mask>"""
-    outer_teeth = "\n".join(
-        f'        <use href="#g-outer-tooth" transform="rotate({i * 360 / 44:.4f} 32 32)" />'
-        for i in range(44)
-    )
-    inner_teeth = "\n".join(
-        f'        <use href="#g-inner-tooth" transform="rotate({i * 15} 32 32)" />'
-        for i in range(24)
-    )
-    body = f"""    <g transform="translate(32 32) scale(0.94) translate(-32 -32)">
-      <g fill="url(#g-inner)" stroke="#e8edf4" stroke-width="0.17" filter="url(#g-depth)">
-{inner_teeth}
-        <circle cx="32" cy="32" r="11.9" />
-        <circle cx="32" cy="32" r="9.6" fill="url(#g-disc)" stroke="#dce2ea" stroke-width="0.2" />
-      </g>
-      <g fill="url(#g-metal)" stroke="#747d89" stroke-width="0.22"
-         stroke-linejoin="round" filter="url(#g-depth)" mask="url(#g-cutouts)">
-{outer_teeth}
-        <circle cx="32" cy="32" r="20.25" />
-      </g>
-      <g fill="none" stroke="#090b0f" stroke-width="0.32" opacity="0.9">
-        <use href="#g-hole" transform="rotate(60 32 32)" />
-        <use href="#g-hole" transform="rotate(180 32 32)" />
-        <use href="#g-hole" transform="rotate(300 32 32)" />
-      </g>
-      <circle cx="32" cy="32" r="1.58" fill="#12151a" stroke="#030407" stroke-width="0.28" />
-      <circle cx="31.55" cy="31.5" r="0.6" fill="#ffffff" opacity="0.1" />
-    </g>"""
-    return tile(body, top="#2b2e33", bottom="#101215",
-                defs=defs, glow=("#c3cad4", 0.09))
+  </defs>
+  <image href="{art}" x="0" y="0" width="64" height="64" filter="url(#settings-dark)" />
+</svg>"""
 
 
 def dark_contacts_svg():
@@ -1021,64 +956,60 @@ def dark_scanner_svg():
 # --------------------------------------------------------------------------
 
 def dark_help_svg():
-    """A large realistic red life buoy with diagonal bands and braided rope."""
-    defs = """
-    <filter id="help-buoy-shadow" x="-45%" y="-45%" width="190%" height="195%">
-      <feDropShadow dx="0" dy="2.5" stdDeviation="2.2" flood-color="#000000" flood-opacity="0.72" />
+    """Apple Tips bulb: exact silhouette, amber-black card in dark mode."""
+    art = _light_image_href("help.svg")
+    return f"""<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="tips-dark" x="0" y="0" width="100%" height="100%"
+            color-interpolation-filters="sRGB">
+      <feColorMatrix in="SourceGraphic" type="matrix"
+        values=".10 0 0 0 .018  0 .07 0 0 .010  0 0 .025 0 .004  0 0 0 1 0"
+        result="dark" />
+      <feColorMatrix in="SourceGraphic" type="matrix"
+        values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 2.8 0 -.65"
+        result="bulb-mask" />
+      <feComposite in="SourceGraphic" in2="bulb-mask" operator="in" result="lit-bulb" />
+      <feBlend in="lit-bulb" in2="dark" mode="normal" />
     </filter>
-    <radialGradient id="help-hole" cx="38%" cy="28%" r="78%">
-      <stop offset="0%" stop-color="#246d82" />
-      <stop offset="100%" stop-color="#061823" />
-    </radialGradient>
-    <radialGradient id="help-red" cx="32%" cy="20%" r="82%">
-      <stop offset="0%" stop-color="#ff9b83" />
-      <stop offset="34%" stop-color="#f54d46" />
-      <stop offset="70%" stop-color="#d51e32" />
-      <stop offset="100%" stop-color="#8f091f" />
-    </radialGradient>
-    <linearGradient id="help-band" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#fffefb" />
-      <stop offset="58%" stop-color="#e9e4dc" />
-      <stop offset="100%" stop-color="#a9a197" />
+  </defs>
+  <image href="{art}" x="0" y="0" width="64" height="64" filter="url(#tips-dark)" />
+</svg>"""
+
+
+def dark_ludusavi_svg():
+    """Keep Ludusavi's white glyph intact on clean, deep rose glass."""
+    art = _light_image_href("com.github.mtkennerly.ludusavi.svg")
+    return f"""<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="ludu-shadow" x="-25%" y="-25%" width="150%" height="150%">
+      <feDropShadow dx="0" dy="2.4" stdDeviation="2.8" flood-color="#000000" flood-opacity="0.42" />
+      <feDropShadow dx="0" dy="1" stdDeviation="0.8" flood-color="#000000" flood-opacity="0.58" />
+    </filter>
+    <filter id="ludu-dark" x="0" y="0" width="100%" height="100%"
+            color-interpolation-filters="sRGB">
+      <feColorMatrix in="SourceGraphic" type="matrix"
+        values=".12 0 0 0 .018  0 .05 0 0 .006  0 0 .065 0 .010  0 0 0 1 0"
+        result="dark" />
+      <feColorMatrix in="SourceGraphic" type="matrix"
+        values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 3.5 0 0 -2.5"
+        result="mark-mask" />
+      <feComposite in="SourceGraphic" in2="mark-mask" operator="in" result="white-mark" />
+      <feBlend in="white-mark" in2="dark" mode="normal" />
+    </filter>
+    <linearGradient id="ludu-rim" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.34" />
+      <stop offset="35%" stop-color="#ffffff" stop-opacity="0.08" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.02" />
     </linearGradient>
-    <linearGradient id="help-rope" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#ffedbc" />
-      <stop offset="48%" stop-color="#c9a866" />
-      <stop offset="100%" stop-color="#795322" />
-    </linearGradient>
-    <mask id="help-ring">
-      <rect width="64" height="64" fill="#000000" />
-      <circle cx="32" cy="31.5" r="17.4" fill="#ffffff" />
-      <circle cx="32" cy="31.5" r="8.7" fill="#000000" />
-    </mask>"""
-    body = """    <g filter="url(#help-buoy-shadow)">
-      <ellipse cx="32" cy="50.5" rx="16" ry="3.2" fill="#000000" opacity="0.36" />
-      <circle cx="32" cy="31.5" r="20.7" fill="none" stroke="#65451d"
-              stroke-width="2.4" opacity="0.68" />
-      <circle cx="32" cy="31.5" r="20.7" fill="none" stroke="url(#help-rope)"
-              stroke-width="1.55" stroke-dasharray="1.25 1.05" />
-      <circle cx="32" cy="31.5" r="18.3" fill="#590719" opacity="0.62" />
-      <g mask="url(#help-ring)">
-        <circle cx="32" cy="31.5" r="17.4" fill="url(#help-red)" />
-        <g stroke="url(#help-band)" stroke-width="8.2" stroke-linecap="butt">
-          <path d="M39 24.5L48.5 15" /><path d="M39 38.5L48.5 48" />
-          <path d="M25 38.5L15.5 48" /><path d="M25 24.5L15.5 15" />
-        </g>
-        <ellipse cx="27" cy="22.5" rx="12" ry="8" fill="#ffffff" opacity="0.13"
-                 transform="rotate(-26 27 22.5)" />
-        <path d="M15.5 39C24 46 39 47 49 36" fill="none" stroke="#650719"
-              stroke-opacity="0.34" stroke-width="3" />
-      </g>
-      <circle cx="32" cy="31.5" r="8.55" fill="url(#help-hole)" />
-      <circle cx="32" cy="31.5" r="8.75" fill="none" stroke="#520617"
-              stroke-opacity="0.76" stroke-width="1" />
-      <path d="M32 10.8V15M52.7 31.5H48.5M32 52.2V48M11.3 31.5H15.5"
-            stroke="#8f6934" stroke-width="2.6" stroke-linecap="round" />
-      <path d="M18.8 20A16.8 16.8 0 0 1 34 14.3" fill="none" stroke="#ffffff"
-            stroke-opacity="0.22" stroke-width="1.2" stroke-linecap="round" />
-    </g>"""
-    return tile(body, top="#16394d", bottom="#050b10",
-                defs=defs, glow=("#2ccce5", 0.13))
+  </defs>
+  <rect x="4" y="4" width="56" height="56" rx="13" fill="#2a0c12"
+        filter="url(#ludu-shadow)" />
+  <image href="{art}" x="0" y="0" width="64" height="64" filter="url(#ludu-dark)" />
+  <rect x="4.25" y="4.25" width="55.5" height="55.5" rx="13.75"
+        fill="none" stroke="#000000" stroke-opacity="0.32" stroke-width="0.5" />
+  <rect x="4.75" y="4.75" width="54.5" height="54.5" rx="13.25"
+        fill="none" stroke="url(#ludu-rim)" stroke-width="0.75" />
+</svg>"""
 
 
 # --------------------------------------------------------------------------
@@ -1875,6 +1806,7 @@ HANDDRAWN = {
     "settings.svg": dark_gear_svg,
     "scanner.svg": dark_scanner_svg,
     "help.svg": dark_help_svg,
+    "com.github.mtkennerly.ludusavi.svg": dark_ludusavi_svg,
     "extensions.svg": dark_extensions_svg,
     "com.mattjakeman.ExtensionManager.svg": dark_extension_manager_svg,
     "org.gnome.Totem.svg": dark_video_svg,
