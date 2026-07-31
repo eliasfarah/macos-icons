@@ -1,35 +1,53 @@
-<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <!-- Elegant Apple-style Drop Shadow -->
-    <filter id="glass-shadow" x="-20%" y="-20%" width="140%" height="140%">
-      <feDropShadow dx="0" dy="2.5" stdDeviation="2.5" flood-color="#000000" flood-opacity="0.25" />
+    <filter id="log-shadow" x="-25%" y="-25%" width="150%" height="155%">
+      <feDropShadow dx="0" dy="2.4" stdDeviation="2.65" flood-color="#000000" flood-opacity="0.42"/>
     </filter>
-    
-    <!-- 3D Bevel/Glass Highlights -->
-    <linearGradient id="inner-bevel" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.6" />
-      <stop offset="25%" stop-color="#ffffff" stop-opacity="0.0" />
-      <stop offset="75%" stop-color="#000000" stop-opacity="0.0" />
-      <stop offset="100%" stop-color="#000000" stop-opacity="0.25" />
+    <filter id="log-gold-glow" x="-20%" y="-35%" width="140%" height="170%">
+      <feDropShadow dx="0" dy="0" stdDeviation="1.15" flood-color="#ffd341" flood-opacity="0.54"/>
+      <feDropShadow dx="0" dy="0.35" stdDeviation="0.35" flood-color="#fff0a1" flood-opacity="0.34"/>
+    </filter>
+    <linearGradient id="log-bg" gradientUnits="userSpaceOnUse" x1="32" y1="4" x2="32" y2="60">
+      <stop offset="0%" stop-color="#252526"/>
+      <stop offset="48%" stop-color="#19191a"/>
+      <stop offset="100%" stop-color="#0e0e0f"/>
     </linearGradient>
-    
-    <!-- Premium Soft Background Gradient -->
-    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#accbee" />
-      <stop offset="100%" stop-color="#e7f0fd" />
+    <radialGradient id="log-sheen" cx="27%" cy="1%" r="95%" fx="27%" fy="1%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.07"/>
+      <stop offset="50%" stop-color="#ffffff" stop-opacity="0.018"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="log-gold" gradientUnits="userSpaceOnUse" x1="32" y1="19" x2="32" y2="46">
+      <stop offset="0%" stop-color="#ffda55"/>
+      <stop offset="52%" stop-color="#ffd044"/>
+      <stop offset="100%" stop-color="#f3bb24"/>
     </linearGradient>
-
-    <!-- Unified Squircle Mask -->
-    <clipPath id="squircle-clip">
-      <rect width="56" height="56" x="4" y="4" rx="14" ry="14" />
+    <linearGradient id="log-fade" gradientUnits="userSpaceOnUse" x1="51" y1="0" x2="60" y2="0">
+      <stop offset="0%" stop-color="#171718" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#171718" stop-opacity="0.96"/>
+    </linearGradient>
+    <linearGradient id="log-rim" gradientUnits="userSpaceOnUse" x1="32" y1="4" x2="32" y2="60">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.56"/>
+      <stop offset="30%" stop-color="#ffffff" stop-opacity="0.10"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.74"/>
+    </linearGradient>
+    <clipPath id="log-clip">
+      <rect x="4" y="4" width="56" height="56" rx="14"/>
     </clipPath>
   </defs>
-  <g filter="url(#glass-shadow)">
-    <g clip-path="url(#squircle-clip)">
-      <image href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDEwMjQgMTAyNCIgaW1hZ2UtcmVuZGVyaW5nPSJvcHRpbWl6ZVNwZWVkIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSI0Mi4xMzciIHgyPSI0NS4yNTIiIHkxPSI0NS40OTIiIHkyPSI0Mi40NDEiIGdyYWRpZW50VHJhbnNmb3JtPSJ0cmFuc2xhdGUoMjYuMTk4IDI1LjkwOSlzY2FsZSguNjgwODIpIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjMjQyNDI0IiAvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzZhNmE2YSIgLz48L2xpbmVhckdyYWRpZW50PjxsaW5lYXJHcmFkaWVudCBpZD0iaCIgeDE9IjI2Ljc1MiIgeDI9IjI3LjU1NSIgeTE9IjQzLjUzOSIgeTI9IjE0LjEwNSIgZ3JhZGllbnRUcmFuc2Zvcm09InRyYW5zbGF0ZSgyNi4xOTggMjUuOTA5KXNjYWxlKC42ODA4MikiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiM2OTY5NjkiIC8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjOTc5Nzk3IiAvPjwvbGluZWFyR3JhZGllbnQ+PGxpbmVhckdyYWRpZW50IGlkPSJiIiB4MT0iNy45MzciIHgyPSI3LjkzNyIgeTE9IjE1LjA4MSIgeTI9IjEuODUyIiBncmFkaWVudFRyYW5zZm9ybT0ic2NhbGUoMy43Nzk2KSIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPjxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iI2YzZjFlZSIgLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNmZmYiIC8+PC9saW5lYXJHcmFkaWVudD48bGluZWFyR3JhZGllbnQgeGxpbms6aHJlZj0iI2EiIGlkPSJkIiB4MT0iMTAuMDU0IiB4Mj0iMTAuMDU0IiB5MT0iNC43NjIiIHkyPSI1LjAyNyIgZ3JhZGllbnRUcmFuc2Zvcm09InRyYW5zbGF0ZSgtMSlzY2FsZSgzLjc3OTYpIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgLz48bGluZWFyR3JhZGllbnQgaWQ9ImEiPjxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iIzg4ODg4YiIgLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNkNGQ0ZDgiIC8+PC9saW5lYXJHcmFkaWVudD48bGluZWFyR3JhZGllbnQgeGxpbms6aHJlZj0iI2EiIGlkPSJlIiB4MT0iMTAuMDU0IiB4Mj0iMTAuMDU0IiB5MT0iNC43NjIiIHkyPSI1LjAyNyIgZ3JhZGllbnRUcmFuc2Zvcm09InRyYW5zbGF0ZSgtMSAxNClzY2FsZSgzLjc3OTYpIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgLz48bGluZWFyR3JhZGllbnQgeGxpbms6aHJlZj0iI2EiIGlkPSJmIiB4MT0iMTAuMDU0IiB4Mj0iMTAuMDU0IiB5MT0iNC43NjIiIHkyPSI1LjAyNyIgZ3JhZGllbnRUcmFuc2Zvcm09InRyYW5zbGF0ZSgtMSAyOClzY2FsZSgzLjc3OTYpIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgLz48ZmlsdGVyIGlkPSJjIiB3aWR0aD0iMS4yMTYiIGhlaWdodD0iMS4yMTYiIHg9Ii0uMTA4IiB5PSItLjEwOCIgY29sb3ItaW50ZXJwb2xhdGlvbi1maWx0ZXJzPSJzUkdCIj48ZmVHYXVzc2lhbkJsdXIgc3RkRGV2aWF0aW9uPSIxLjA4IiAvPjwvZmlsdGVyPjwvZGVmcz48cmVjdCB3aWR0aD0iNTYuMDAyIiBoZWlnaHQ9IjU2LjAwMiIgeD0iNCIgeT0iMy45NjkiIGZpbGw9InVybCgjYikiIHJ4PSIxMy4wMDIiIHJ5PSIxMy4wMDIiIC8+PGNpcmNsZSBjeD0iMTUuNSIgY3k9IjE4LjUiIHI9IjQuNSIgZmlsbD0iIzAwNzlmZCIgLz48cGF0aCBmaWxsPSIjZmZmIiBkPSJNMTUuNSAxNWEzLjUgMy41IDAgMCAwLTMuNSAzLjUgMy41IDMuNSAwIDAgMCAzLjUgMy41IDMuNSAzLjUgMCAwIDAgMy41LTMuNSAzLjUgMy41IDAgMCAwLTMuNS0zLjVtMCAxYTIuNSAyLjUgMCAwIDEgMi41IDIuNSAyLjUgMi41IDAgMCAxLTIuNSAyLjUgMi41IDIuNSAwIDAgMS0yLjUtMi41IDIuNSAyLjUgMCAwIDEgMi41LTIuNSIgLz48cGF0aCBkPSJNNDUuNjMzIDM2LjA5NmMtNS40MDUgMC05LjgwNSA0LjM5OC05LjgwNSA5LjgwMyAwIDUuNDA0IDQuNCA5LjgwNCA5LjgwNSA5LjgwNGE5Ljc1IDkuNzUgMCAwIDAgNi4zMjItMi4zMjRsMS4zMzQgMS4zMzItLjI4OS4yOSA1LjA5NiA1LjA5NSAxLjczMi0xLjczNC01LjA5NS01LjA5Ni0uMjkuMjg5LTEuMzMxLTEuMzMyYTkuNzYgOS43NiAwIDAgMCAyLjMyNC02LjMyNGMwLTUuNDA1LTQuMzk4LTkuODAzLTkuODAzLTkuODAzbTAgMS42MzVjNC41MjIgMCA4LjE3IDMuNjQ2IDguMTcgOC4xNjhzLTMuNjQ4IDguMTctOC4xNyA4LjE3LTguMTctMy42NDktOC4xNy04LjE3IDMuNjQ4LTguMTY4IDguMTctOC4xNjgiIGNvbG9yPSIjMDAwIiBlbmFibGUtYmFja2dyb3VuZD0iYWNjdW11bGF0ZSIgZmlsdGVyPSJ1cmwoI2MpIiBpbWFnZS1yZW5kZXJpbmc9ImF1dG8iIG9wYWNpdHk9Ii4xNSIgc3R5bGU9ImZvbnQtZmVhdHVyZS1zZXR0aW5nczpub3JtYWw7Zm9udC12YXJpYW50LWFsdGVybmF0ZXM6bm9ybWFsO2ZvbnQtdmFyaWFudC1jYXBzOm5vcm1hbDtmb250LXZhcmlhbnQtZWFzdC1hc2lhbjpub3JtYWw7Zm9udC12YXJpYW50LWxpZ2F0dXJlczpub3JtYWw7Zm9udC12YXJpYW50LW51bWVyaWM6bm9ybWFsO2ZvbnQtdmFyaWFudC1wb3NpdGlvbjpub3JtYWw7Zm9udC12YXJpYXRpb24tc2V0dGluZ3M6bm9ybWFsO2lubGluZS1zaXplOjA7aXNvbGF0aW9uOmF1dG87bWl4LWJsZW5kLW1vZGU6bm9ybWFsO3NoYXBlLW1hcmdpbjowO3NoYXBlLXBhZGRpbmc6MDt0ZXh0LWRlY29yYXRpb24tY29sb3I6IzAwMDt0ZXh0LWRlY29yYXRpb24tbGluZTpub25lO3RleHQtZGVjb3JhdGlvbi1zdHlsZTpzb2xpZDt0ZXh0LWluZGVudDowO3RleHQtb3JpZW50YXRpb246bWl4ZWQ7dGV4dC10cmFuc2Zvcm06bm9uZTt3aGl0ZS1zcGFjZTpub3JtYWwiIC8+PGcgc3Ryb2tlLXdpZHRoPSIzLjc4Ij48Y2lyY2xlIGN4PSIxNS41IiBjeT0iMzIuNSIgcj0iNC41IiBmaWxsPSIjZmIzMDI3IiAvPjxwYXRoIGZpbGw9IiNmZmYiIGQ9Ik0xNS41IDI5YTMuNSAzLjUgMCAwIDAtMy41IDMuNSAzLjUgMy41IDAgMCAwIDMuNSAzLjUgMy41IDMuNSAwIDAgMCAzLjUtMy41IDMuNSAzLjUgMCAwIDAtMy41LTMuNW0wIDFhMi41IDIuNSAwIDAgMSAyLjUgMi41IDIuNSAyLjUgMCAwIDEtMi41IDIuNSAyLjUgMi41IDAgMCAxLTIuNS0yLjUgMi41IDIuNSAwIDAgMSAyLjUtMi41IiAvPjxjaXJjbGUgY3g9IjE1LjUiIGN5PSI0Ni41IiByPSI0LjUiIGZpbGw9IiNmNzk1MDAiIC8+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTE1LjUgNDMuMDAxYTMuNSAzLjUgMCAwIDAtMy41IDMuNSAzLjUgMy41IDAgMCAwIDMuNSAzLjUgMy41IDMuNSAwIDAgMCAzLjUtMy41IDMuNSAzLjUgMCAwIDAtMy41LTMuNW0wIDFhMi41IDIuNSAwIDAgMSAyLjUgMi41IDIuNSAyLjUgMCAwIDEtMi41IDIuNSAyLjUgMi41IDAgMCAxLTIuNS0yLjUgMi41IDIuNSAwIDAgMSAyLjUtMi41IiAvPjxyZWN0IHdpZHRoPSIyOCIgaGVpZ2h0PSIxIiB4PSIyNCIgeT0iMTgiIGZpbGw9InVybCgjZCkiIHJ5PSIuNSIgLz48cmVjdCB3aWR0aD0iMjgiIGhlaWdodD0iMSIgeD0iMjQiIHk9IjMyIiBmaWxsPSJ1cmwoI2UpIiByeT0iLjUiIC8+PHJlY3Qgd2lkdGg9IjI4IiBoZWlnaHQ9IjEiIHg9IjI0IiB5PSI0Ni4wMDIiIGZpbGw9InVybCgjZikiIHJ5PSIuNSIgLz48L2c+PHBhdGggZmlsbD0ibm9uZSIgc3Ryb2tlPSIjODg4IiBzdHJva2Utd2lkdGg9IjEuNjM0IiBkPSJtNTQuMTA3IDU0LjA3My0yLjAzOC0yLjAzOCIgY29sb3I9IiMwMDAiIGVuYWJsZS1iYWNrZ3JvdW5kPSJhY2N1bXVsYXRlIiAvPjxwYXRoIGZpbGw9Im5vbmUiIHN0cm9rZT0idXJsKCNnKSIgc3Ryb2tlLXdpZHRoPSIyLjQ1MSIgZD0ibTU4Ljg2MiA1OC44MjgtNS4wOTUtNS4wOTUiIGNvbG9yPSIjMDAwIiBlbmFibGUtYmFja2dyb3VuZD0iYWNjdW11bGF0ZSIgLz48Y2lyY2xlIGN4PSI0NS41MzMiIGN5PSI0NS40OTkiIHI9IjguOTg3IiBmaWxsPSIjZmZmIiBmaWxsLW9wYWNpdHk9Ii41NDMiIHN0cm9rZT0idXJsKCNoKSIgc3Ryb2tlLXdpZHRoPSIxLjYzNCIgY29sb3I9IiMwMDAiIGVuYWJsZS1iYWNrZ3JvdW5kPSJhY2N1bXVsYXRlIiAvPjwvc3ZnPg==" x="0" y="0" width="64" height="64" />
-    </g>
+
+  <g filter="url(#log-shadow)">
+    <rect x="4" y="4" width="56" height="56" rx="14" fill="url(#log-bg)"/>
   </g>
-  
-  <!-- Glass Bevel Overlay matching the clip boundary exactly -->
-  <rect width="56" height="56" x="4" y="4" rx="14" ry="14" fill="none" stroke="url(#inner-bevel)" stroke-width="1.5" />
+  <g clip-path="url(#log-clip)">
+    <rect x="4" y="4" width="56" height="56" fill="url(#log-sheen)"/>
+    <g fill="url(#log-gold)" filter="url(#log-gold-glow)">
+      <path transform="translate(0 28.6) scale(1 1.12) translate(0 -28.6)" d="M17.852 23.43L18.992 28.602L20.102 28.602L21.523 20.148L20.383 20.148L19.93 23.398L19.477 26.883L19.398 26.883L18.336 22.086L17.289 22.086L16.227 26.883L16.148 26.883L15.695 23.398L15.242 20.148L14.102 20.148L15.508 28.602L16.633 28.602L17.773 23.43ZM27.285 28.602L28.582 28.602L25.91 20.148L24.551 20.148L21.879 28.602L23.113 28.602L23.801 26.273L26.613 26.273ZM25.176 21.492L25.223 21.492L26.316 25.273L24.082 25.273ZM32.875 25.305L34.422 28.602L35.797 28.602L34.078 25.07C35.031 24.742 35.641 23.836 35.641 22.727C35.641 21.133 34.562 20.148 32.844 20.148L29.938 20.148L29.938 28.602L31.141 28.602L31.141 25.305ZM31.141 21.18L32.719 21.18C33.781 21.18 34.406 21.758 34.406 22.758C34.406 23.742 33.781 24.32 32.672 24.32L31.141 24.32ZM38.293 28.602L38.293 22.258L38.371 22.258L41.793 28.602L42.918 28.602L42.918 20.148L41.84 20.148L41.84 26.461L41.746 26.461L38.34 20.148L37.199 20.148L37.199 28.602ZM49.82 28.602L49.82 27.539L48.086 27.539L48.086 21.211L49.82 21.211L49.82 20.148L45.148 20.148L45.148 21.211L46.867 21.211L46.867 27.539L45.148 27.539L45.148 28.602ZM53.129 28.602L53.129 22.258L53.207 22.258L56.629 28.602L57.754 28.602L57.754 20.148L56.676 20.148L56.676 26.461L56.582 26.461L53.176 20.148L52.035 20.148L52.035 28.602ZM64.188 25.961C64.188 27.008 63.531 27.664 62.453 27.664C61.188 27.664 60.516 26.805 60.516 25.148L60.516 23.586C60.516 21.945 61.188 21.086 62.453 21.086C63.453 21.086 64.156 21.789 64.203 22.836L65.438 22.836C65.391 21.055 64.266 19.977 62.469 19.977C60.453 19.977 59.297 21.305 59.297 23.586L59.297 25.148C59.297 27.445 60.453 28.773 62.469 28.773C64.234 28.773 65.438 27.664 65.438 26.039L65.438 24.242L62.359 24.242L62.359 25.227L64.188 25.227Z"/>
+      <path transform="translate(0 45) scale(1 1.12) translate(0 -45)" d="M-3.414 41.875L-3.508 38.469L-3.43 38.469L-1.836 43.016L-0.945 43.016L0.648 38.469L0.727 38.469L0.633 41.875L0.633 45L1.695 45L1.695 36.547L0.367 36.547L-1.352 41.688L-1.43 41.688L-3.148 36.547L-4.477 36.547L-4.477 45L-3.414 45ZM8.082 45L9.379 45L6.707 36.547L5.348 36.547L2.676 45L3.91 45L4.598 42.672L7.41 42.672ZM5.973 37.891L6.02 37.891L7.113 41.672L4.879 41.672ZM14.047 45L14.047 41.609L16.844 36.547L15.5 36.547L13.484 40.344L13.406 40.344L11.391 36.547L10.047 36.547L12.828 41.609L12.828 45Z"/>
+      <path transform="translate(0 45) scale(1 1.12) translate(0 -45)" d="M27.711 45L29.008 45L32.742 37.609L32.742 36.547L26.977 36.547L26.977 37.594L31.492 37.594L31.492 37.672ZM37.223 40.562C37.848 40.562 38.348 40.047 38.348 39.422C38.348 38.797 37.848 38.281 37.223 38.281C36.613 38.281 36.098 38.797 36.098 39.422C36.098 40.047 36.613 40.562 37.223 40.562ZM37.223 45.062C37.848 45.062 38.348 44.531 38.348 43.906C38.348 43.281 37.848 42.766 37.223 42.766C36.613 42.766 36.098 43.281 36.098 43.906C36.098 44.531 36.613 45.062 37.223 45.062ZM43.609 41.141L44.594 41.141C45.703 41.141 46.422 41.719 46.422 42.641C46.422 43.547 45.719 44.109 44.625 44.109C43.609 44.109 42.906 43.562 42.812 42.703L41.672 42.703C41.75 44.203 42.938 45.172 44.656 45.172C46.406 45.172 47.641 44.156 47.641 42.688C47.641 41.547 46.969 40.766 45.844 40.625L45.844 40.531C46.75 40.312 47.297 39.578 47.297 38.578C47.297 37.281 46.188 36.375 44.625 36.375C42.984 36.375 41.922 37.297 41.844 38.797L42.984 38.797C43.047 37.922 43.656 37.391 44.578 37.391C45.5 37.391 46.109 37.922 46.109 38.75C46.109 39.578 45.469 40.172 44.562 40.172L43.609 40.172ZM55.074 42.25C55.074 40.703 53.965 39.562 52.465 39.562C51.934 39.562 51.34 39.797 51.074 40.125L50.98 40.094C51.027 39.984 51.027 39.984 51.293 39.609L53.543 36.547L52.152 36.547C52.043 36.688 50.418 38.922 50.293 39.141C49.465 40.312 49.137 41.219 49.137 42.234C49.137 43.953 50.371 45.172 52.105 45.172C53.824 45.172 55.074 43.938 55.074 42.25ZM52.105 44.125C51.09 44.125 50.324 43.344 50.324 42.312C50.324 41.266 51.09 40.5 52.105 40.5C53.121 40.5 53.887 41.266 53.887 42.312C53.887 43.344 53.121 44.125 52.105 44.125Z"/>
+    </g>
+    <rect x="51" y="17" width="9" height="14" fill="url(#log-fade)"/>
+  </g>
+
+  <rect x="4.45" y="4.45" width="55.1" height="55.1" rx="13.55" fill="none" stroke="url(#log-rim)" stroke-width="0.9"/>
 </svg>

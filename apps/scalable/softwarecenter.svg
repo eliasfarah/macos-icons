@@ -1,68 +1,84 @@
 <svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <filter id="shadow" x="-25%" y="-25%" width="150%" height="155%">
-      <feDropShadow dx="0" dy="2.6" stdDeviation="2.7" flood-color="#102a72" flood-opacity="0.34"/>
-      <feDropShadow dx="0" dy="0.8" stdDeviation="0.7" flood-color="#ffffff" flood-opacity="0.25"/>
+    <filter id="store-shadow" x="-25%" y="-25%" width="150%" height="155%">
+      <feDropShadow dx="0" dy="2.4" stdDeviation="2.6" flood-color="#0751b8" flood-opacity="0.34"/>
     </filter>
-    <filter id="glyph-shadow" x="-35%" y="-35%" width="170%" height="180%">
-      <feDropShadow dx="0" dy="2" stdDeviation="1.7" flood-color="#5b2d04" flood-opacity="0.46"/>
-      <feDropShadow dx="0" dy="0.5" stdDeviation="0.5" flood-color="#fff8cf" flood-opacity="0.42"/>
+    <filter id="store-glyph-shadow" x="-30%" y="-25%" width="160%" height="165%">
+      <feDropShadow dx="0" dy="1.05" stdDeviation="0.8" flood-color="#034aa3" flood-opacity="0.62"/>
+      <feDropShadow dx="0" dy="0" stdDeviation="0.32" flood-color="#ffffff" flood-opacity="0.62"/>
     </filter>
-    <linearGradient id="tile" x1="8%" y1="0%" x2="88%" y2="100%">
-      <stop offset="0%" stop-color="#74e2ff"/>
-      <stop offset="48%" stop-color="#4298ff"/>
-      <stop offset="100%" stop-color="#2748e5"/>
+    <linearGradient id="store-bg" gradientUnits="userSpaceOnUse" x1="32" y1="4" x2="32" y2="60">
+      <stop offset="0%" stop-color="#08a6f6"/>
+      <stop offset="43%" stop-color="#078af0"/>
+      <stop offset="100%" stop-color="#2364e8"/>
     </linearGradient>
-    <radialGradient id="tile-glow" cx="24%" cy="3%" r="86%">
-      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.58"/>
-      <stop offset="52%" stop-color="#ffffff" stop-opacity="0.07"/>
+    <radialGradient id="store-sheen" cx="24%" cy="2%" r="92%" fx="24%" fy="2%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.16"/>
+      <stop offset="54%" stop-color="#ffffff" stop-opacity="0.025"/>
       <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
     </radialGradient>
-    <linearGradient id="gold" gradientUnits="userSpaceOnUse" x1="32" y1="12" x2="32" y2="51">
-      <stop offset="0%" stop-color="#fff8cf"/>
-      <stop offset="24%" stop-color="#ffe78c"/>
-      <stop offset="58%" stop-color="#f3b93d"/>
-      <stop offset="100%" stop-color="#b9670d"/>
+    <linearGradient id="store-floor" gradientUnits="userSpaceOnUse" x1="32" y1="38" x2="32" y2="60">
+      <stop offset="0%" stop-color="#164ed3" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#164ed3" stop-opacity="0.22"/>
     </linearGradient>
-    <linearGradient id="gold-edge" gradientUnits="userSpaceOnUse" x1="32" y1="13" x2="32" y2="51">
-      <stop offset="0%" stop-color="#d99a25"/>
-      <stop offset="100%" stop-color="#7e3b05"/>
+    <linearGradient id="store-rim" gradientUnits="userSpaceOnUse" x1="32" y1="4" x2="32" y2="60">
+      <stop offset="0%" stop-color="#73efff" stop-opacity="0.90"/>
+      <stop offset="22%" stop-color="#ffffff" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#0a45c7" stop-opacity="0.58"/>
     </linearGradient>
-    <linearGradient id="rim" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.90"/>
-      <stop offset="47%" stop-color="#ffffff" stop-opacity="0.23"/>
-      <stop offset="100%" stop-color="#0b267b" stop-opacity="0.38"/>
+    <linearGradient id="store-bar-edge" gradientUnits="userSpaceOnUse" x1="32" y1="15" x2="32" y2="49">
+      <stop offset="0%" stop-color="#f8feff" stop-opacity="0.92"/>
+      <stop offset="46%" stop-color="#7fa7c3" stop-opacity="0.78"/>
+      <stop offset="100%" stop-color="#5a8db8" stop-opacity="0.82"/>
     </linearGradient>
-    <clipPath id="clip">
+    <linearGradient id="store-bar-horizontal" gradientUnits="userSpaceOnUse" x1="32" y1="35.4" x2="32" y2="41.1">
+      <stop offset="0%" stop-color="#fafdff"/>
+      <stop offset="42%" stop-color="#e5f0f7"/>
+      <stop offset="100%" stop-color="#cbdceb"/>
+    </linearGradient>
+    <linearGradient id="store-bar-down" gradientUnits="userSpaceOnUse" x1="28.9" y1="17.4" x2="46.2" y2="46.5">
+      <stop offset="0%" stop-color="#d6eaf3"/>
+      <stop offset="30%" stop-color="#edf8fc"/>
+      <stop offset="52%" stop-color="#c7dce8"/>
+      <stop offset="72%" stop-color="#fbfdff"/>
+      <stop offset="100%" stop-color="#d7e3f0"/>
+    </linearGradient>
+    <linearGradient id="store-bar-up" gradientUnits="userSpaceOnUse" x1="17.8" y1="46.6" x2="35.1" y2="17.1">
+      <stop offset="0%" stop-color="#d8e4f1"/>
+      <stop offset="34%" stop-color="#cbddea"/>
+      <stop offset="62%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#dcecf4"/>
+    </linearGradient>
+    <clipPath id="store-clip">
       <rect x="4" y="4" width="56" height="56" rx="14"/>
     </clipPath>
   </defs>
 
-  <g filter="url(#shadow)">
-    <rect x="4" y="4" width="56" height="56" rx="14" fill="url(#tile)"/>
+  <g filter="url(#store-shadow)">
+    <rect x="4" y="4" width="56" height="56" rx="14" fill="url(#store-bg)"/>
   </g>
-  <g clip-path="url(#clip)">
-    <rect x="4" y="4" width="56" height="56" fill="url(#tile-glow)"/>
-    <path d="M4 4H43C38 16 28 22 4 24Z" fill="#ffffff" opacity="0.12"/>
-    <path d="M4 46C21 52 42 50 60 39V60H4Z" fill="#112eb1" opacity="0.18"/>
+  <g clip-path="url(#store-clip)">
+    <rect x="4" y="4" width="56" height="56" fill="url(#store-sheen)"/>
+    <rect x="4" y="35" width="56" height="25" fill="url(#store-floor)"/>
 
-    <g filter="url(#glyph-shadow)" fill="none" stroke-linecap="round" stroke-linejoin="round">
-      <g stroke="url(#gold-edge)" stroke-width="8.2" opacity="0.55">
-        <path d="M16.5 47L34.5 15"/>
-        <path d="M47.5 47L29.5 15"/>
-        <path d="M14.5 38.5H49.5"/>
+    <g filter="url(#store-glyph-shadow)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <g>
+        <path d="M15.9 38.2H48.1" stroke="url(#store-bar-edge)" stroke-width="5.3"/>
+        <path d="M15.9 38.2H48.1" stroke="url(#store-bar-horizontal)" stroke-width="4.5"/>
+        <path d="M16.2 37.75H47.8" stroke="#ffffff" stroke-width="0.45" opacity="0.54"/>
       </g>
-      <g stroke="url(#gold)" stroke-width="6.25">
-        <path d="M16.5 47L34.5 15"/>
-        <path d="M47.5 47L29.5 15"/>
-        <path d="M14.5 38.5H49.5"/>
+      <g>
+        <path d="M29.1 17.8L45.1 45.6" stroke="url(#store-bar-edge)" stroke-width="5.3"/>
+        <path d="M29.1 17.8L45.1 45.6" stroke="url(#store-bar-down)" stroke-width="4.5"/>
+        <path d="M28.82 18.15L44.82 45.25" stroke="#ffffff" stroke-width="0.44" opacity="0.44"/>
+      </g>
+      <g>
+        <path d="M35 17.8L18.9 45.6" stroke="url(#store-bar-edge)" stroke-width="5.3"/>
+        <path d="M35 17.8L18.9 45.6" stroke="url(#store-bar-up)" stroke-width="4.5"/>
+        <path d="M34.7 17.65L18.6 45.3" stroke="#ffffff" stroke-width="0.48" opacity="0.60"/>
       </g>
     </g>
-    <path d="M32.8 16.6L17.5 43.8" fill="none" stroke="#fff9d9" stroke-width="1.05" stroke-linecap="round" opacity="0.52"/>
-    <path d="M15.5 37.6H48.4" fill="none" stroke="#fff6c0" stroke-width="0.85" stroke-linecap="round" opacity="0.44"/>
-    <circle cx="49.8" cy="16.2" r="1.4" fill="#fff7be" opacity="0.88"/>
-    <path d="M49.8 12.8V19.6M46.4 16.2H53.2" stroke="#fff7be" stroke-width="0.7" stroke-linecap="round" opacity="0.62"/>
   </g>
 
-  <rect x="4.5" y="4.5" width="55" height="55" rx="13.5" fill="none" stroke="url(#rim)" stroke-width="1"/>
+  <rect x="4.5" y="4.5" width="55" height="55" rx="13.5" fill="none" stroke="url(#store-rim)" stroke-width="1"/>
 </svg>

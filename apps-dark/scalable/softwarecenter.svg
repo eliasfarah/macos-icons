@@ -1,74 +1,93 @@
 <svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <filter id="d-shadow" x="-25%" y="-25%" width="150%" height="150%">
-      <feDropShadow dx="0" dy="2.4" stdDeviation="2.8" flood-color="#000000" flood-opacity="0.38"/>
-      <feDropShadow dx="0" dy="1" stdDeviation="0.8" flood-color="#000000" flood-opacity="0.62"/>
+      <feDropShadow dx="0" dy="2.4" stdDeviation="2.8" flood-color="#000000" flood-opacity="0.38" />
+      <feDropShadow dx="0" dy="1.0" stdDeviation="0.8" flood-color="#000000" flood-opacity="0.62" />
     </filter>
-    <filter id="glyph-shadow" x="-35%" y="-35%" width="170%" height="180%">
-      <feDropShadow dx="0" dy="2" stdDeviation="1.7" flood-color="#000000" flood-opacity="0.62"/>
-      <feDropShadow dx="0" dy="0.5" stdDeviation="0.5" flood-color="#fff4bb" flood-opacity="0.28"/>
-    </filter>
-    <linearGradient id="d-bg" x1="10%" y1="0%" x2="88%" y2="100%">
-      <stop offset="0%" stop-color="#17294d"/>
-      <stop offset="48%" stop-color="#0d1830"/>
-      <stop offset="100%" stop-color="#070a12"/>
-    </linearGradient>
-    <radialGradient id="d-glow" cx="50%" cy="44%" r="58%">
-      <stop offset="0%" stop-color="#2f7fff" stop-opacity="0.18"/>
-      <stop offset="58%" stop-color="#2f7fff" stop-opacity="0.05"/>
-      <stop offset="100%" stop-color="#2f7fff" stop-opacity="0"/>
-    </radialGradient>
-    <radialGradient id="d-sheen" cx="22%" cy="4%" r="82%" fx="22%" fy="4%">
-      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.105"/>
-      <stop offset="48%" stop-color="#ffffff" stop-opacity="0.022"/>
-      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
-    </radialGradient>
-    <linearGradient id="gold" gradientUnits="userSpaceOnUse" x1="32" y1="12" x2="32" y2="51">
-      <stop offset="0%" stop-color="#fff8cf"/>
-      <stop offset="24%" stop-color="#ffe78c"/>
-      <stop offset="58%" stop-color="#f3b93d"/>
-      <stop offset="100%" stop-color="#b9670d"/>
-    </linearGradient>
-    <linearGradient id="gold-edge" gradientUnits="userSpaceOnUse" x1="32" y1="13" x2="32" y2="51">
-      <stop offset="0%" stop-color="#d99a25"/>
-      <stop offset="100%" stop-color="#6e3103"/>
+    <linearGradient id="d-bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0d3470" />
+      <stop offset="100%" stop-color="#030816" />
     </linearGradient>
     <linearGradient id="d-rim" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.34"/>
-      <stop offset="34%" stop-color="#ffffff" stop-opacity="0.10"/>
-      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.025"/>
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.34" />
+      <stop offset="34%" stop-color="#ffffff" stop-opacity="0.10" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.025" />
     </linearGradient>
+    <linearGradient id="d-floor" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#000000" stop-opacity="0" />
+      <stop offset="58%" stop-color="#000000" stop-opacity="0" />
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.28" />
+    </linearGradient>
+    <radialGradient id="d-sheen" cx="22%" cy="4%" r="82%" fx="22%" fy="4%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.105" />
+      <stop offset="48%" stop-color="#ffffff" stop-opacity="0.022" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0" />
+    </radialGradient>
     <clipPath id="d-clip">
-      <rect x="4" y="4" width="56" height="56" rx="14"/>
+      <rect width="56" height="56" x="4" y="4" rx="14" ry="14" />
     </clipPath>
+    <radialGradient id="d-glow" cx="50%" cy="44%" r="56%">
+      <stop offset="0%" stop-color="#1687ff" stop-opacity="0.2" />
+      <stop offset="55%" stop-color="#1687ff" stop-opacity="0.0700" />
+      <stop offset="100%" stop-color="#1687ff" stop-opacity="0" />
+    </radialGradient>
+    <filter id="store-glyph-shadow" x="-30%" y="-25%" width="160%" height="165%">
+      <feDropShadow dx="0" dy="1.2" stdDeviation="1.05" flood-color="#000000" flood-opacity="0.78" />
+      <feDropShadow dx="0" dy="0" stdDeviation="0.38" flood-color="#75c8ff" flood-opacity="0.34" />
+    </filter>
+    <linearGradient id="store-bar-edge" gradientUnits="userSpaceOnUse" x1="32" y1="15" x2="32" y2="49">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.94" />
+      <stop offset="48%" stop-color="#7e9fbb" stop-opacity="0.84" />
+      <stop offset="100%" stop-color="#466b91" stop-opacity="0.88" />
+    </linearGradient>
+    <linearGradient id="store-bar-horizontal" gradientUnits="userSpaceOnUse" x1="32" y1="35.4" x2="32" y2="41.1">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="42%" stop-color="#e8f3f9" />
+      <stop offset="100%" stop-color="#bfd3e4" />
+    </linearGradient>
+    <linearGradient id="store-bar-down" gradientUnits="userSpaceOnUse" x1="28.9" y1="17.4" x2="46.2" y2="46.5">
+      <stop offset="0%" stop-color="#d9edf6" />
+      <stop offset="30%" stop-color="#f4fbfe" />
+      <stop offset="52%" stop-color="#bcd2e1" />
+      <stop offset="72%" stop-color="#ffffff" />
+      <stop offset="100%" stop-color="#cfdeeb" />
+    </linearGradient>
+    <linearGradient id="store-bar-up" gradientUnits="userSpaceOnUse" x1="17.8" y1="46.6" x2="35.1" y2="17.1">
+      <stop offset="0%" stop-color="#d0deec" />
+      <stop offset="34%" stop-color="#bdd2e2" />
+      <stop offset="62%" stop-color="#ffffff" />
+      <stop offset="100%" stop-color="#d9ebf4" />
+    </linearGradient>
   </defs>
 
   <g filter="url(#d-shadow)">
-    <rect x="4" y="4" width="56" height="56" rx="14" fill="url(#d-bg)"/>
+    <rect width="56" height="56" x="4" y="4" rx="14" ry="14" fill="url(#d-bg)" />
   </g>
-  <g clip-path="url(#d-clip)">
-    <rect x="4" y="4" width="56" height="56" fill="url(#d-glow)"/>
-    <rect x="4" y="4" width="56" height="56" fill="url(#d-sheen)"/>
-    <path d="M4 46C21 52 42 50 60 39V60H4Z" fill="#000000" opacity="0.22"/>
 
-    <g filter="url(#glyph-shadow)" fill="none" stroke-linecap="round" stroke-linejoin="round">
-      <g stroke="url(#gold-edge)" stroke-width="8.2" opacity="0.58">
-        <path d="M16.5 47L34.5 15"/>
-        <path d="M47.5 47L29.5 15"/>
-        <path d="M14.5 38.5H49.5"/>
+  <g clip-path="url(#d-clip)">
+    <rect width="56" height="56" x="4" y="4" fill="url(#d-floor)" />
+    <rect width="56" height="56" x="4" y="4" fill="url(#d-glow)" />
+    <rect width="56" height="56" x="4" y="4" fill="url(#d-sheen)" />
+    <g filter="url(#store-glyph-shadow)" fill="none"
+           stroke-linecap="round" stroke-linejoin="round">
+      <g>
+        <path d="M15.9 38.2H48.1" stroke="url(#store-bar-edge)" stroke-width="5.3" />
+        <path d="M15.9 38.2H48.1" stroke="url(#store-bar-horizontal)" stroke-width="4.5" />
+        <path d="M16.2 37.75H47.8" stroke="#ffffff" stroke-width="0.45" opacity="0.58" />
       </g>
-      <g stroke="url(#gold)" stroke-width="6.25">
-        <path d="M16.5 47L34.5 15"/>
-        <path d="M47.5 47L29.5 15"/>
-        <path d="M14.5 38.5H49.5"/>
+      <g>
+        <path d="M29.1 17.8L45.1 45.6" stroke="url(#store-bar-edge)" stroke-width="5.3" />
+        <path d="M29.1 17.8L45.1 45.6" stroke="url(#store-bar-down)" stroke-width="4.5" />
+        <path d="M28.82 18.15L44.82 45.25" stroke="#ffffff" stroke-width="0.44" opacity="0.46" />
+      </g>
+      <g>
+        <path d="M35 17.8L18.9 45.6" stroke="url(#store-bar-edge)" stroke-width="5.3" />
+        <path d="M35 17.8L18.9 45.6" stroke="url(#store-bar-up)" stroke-width="4.5" />
+        <path d="M34.7 17.65L18.6 45.3" stroke="#ffffff" stroke-width="0.48" opacity="0.64" />
       </g>
     </g>
-    <path d="M32.8 16.6L17.5 43.8" fill="none" stroke="#fff9d9" stroke-width="1.05" stroke-linecap="round" opacity="0.52"/>
-    <path d="M15.5 37.6H48.4" fill="none" stroke="#fff6c0" stroke-width="0.85" stroke-linecap="round" opacity="0.44"/>
-    <circle cx="49.8" cy="16.2" r="1.4" fill="#fff7be" opacity="0.88"/>
-    <path d="M49.8 12.8V19.6M46.4 16.2H53.2" stroke="#fff7be" stroke-width="0.7" stroke-linecap="round" opacity="0.62"/>
   </g>
 
-  <rect x="4.25" y="4.25" width="55.5" height="55.5" rx="13.75" fill="none" stroke="#000000" stroke-opacity="0.34" stroke-width="0.5"/>
-  <rect x="4.75" y="4.75" width="54.5" height="54.5" rx="13.25" fill="none" stroke="url(#d-rim)" stroke-width="0.75"/>
+  <rect width="55.5" height="55.5" x="4.25" y="4.25" rx="13.75" ry="13.75" fill="none" stroke="#000000" stroke-opacity="0.34" stroke-width="0.5" />
+  <rect width="54.5" height="54.5" x="4.75" y="4.75" rx="13.25" ry="13.25" fill="none" stroke="url(#d-rim)" stroke-width="0.75" />
 </svg>

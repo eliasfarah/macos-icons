@@ -362,44 +362,55 @@ def dark_web_svg():
 # --------------------------------------------------------------------------
 
 def dark_appstore_svg():
-    """Software store: a sculpted gold A replaces the generic white glyph."""
+    """App Store: the official icy-white A on deep blue glass."""
     defs = """
-    <filter id="store-glyph-shadow" x="-35%" y="-35%" width="170%" height="180%">
-      <feDropShadow dx="0" dy="2" stdDeviation="1.7" flood-color="#000000" flood-opacity="0.62" />
-      <feDropShadow dx="0" dy="0.5" stdDeviation="0.5" flood-color="#fff4bb" flood-opacity="0.28" />
+    <filter id="store-glyph-shadow" x="-30%" y="-25%" width="160%" height="165%">
+      <feDropShadow dx="0" dy="1.2" stdDeviation="1.05" flood-color="#000000" flood-opacity="0.78" />
+      <feDropShadow dx="0" dy="0" stdDeviation="0.38" flood-color="#75c8ff" flood-opacity="0.34" />
     </filter>
-    <linearGradient id="store-gold" gradientUnits="userSpaceOnUse" x1="32" y1="12" x2="32" y2="51">
-      <stop offset="0%" stop-color="#fff8cf" />
-      <stop offset="24%" stop-color="#ffe78c" />
-      <stop offset="58%" stop-color="#f3b93d" />
-      <stop offset="100%" stop-color="#b9670d" />
+    <linearGradient id="store-bar-edge" gradientUnits="userSpaceOnUse" x1="32" y1="15" x2="32" y2="49">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.94" />
+      <stop offset="48%" stop-color="#7e9fbb" stop-opacity="0.84" />
+      <stop offset="100%" stop-color="#466b91" stop-opacity="0.88" />
     </linearGradient>
-    <linearGradient id="store-gold-edge" gradientUnits="userSpaceOnUse" x1="32" y1="13" x2="32" y2="51">
-      <stop offset="0%" stop-color="#d99a25" />
-      <stop offset="100%" stop-color="#6e3103" />
+    <linearGradient id="store-bar-horizontal" gradientUnits="userSpaceOnUse" x1="32" y1="35.4" x2="32" y2="41.1">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="42%" stop-color="#e8f3f9" />
+      <stop offset="100%" stop-color="#bfd3e4" />
+    </linearGradient>
+    <linearGradient id="store-bar-down" gradientUnits="userSpaceOnUse" x1="28.9" y1="17.4" x2="46.2" y2="46.5">
+      <stop offset="0%" stop-color="#d9edf6" />
+      <stop offset="30%" stop-color="#f4fbfe" />
+      <stop offset="52%" stop-color="#bcd2e1" />
+      <stop offset="72%" stop-color="#ffffff" />
+      <stop offset="100%" stop-color="#cfdeeb" />
+    </linearGradient>
+    <linearGradient id="store-bar-up" gradientUnits="userSpaceOnUse" x1="17.8" y1="46.6" x2="35.1" y2="17.1">
+      <stop offset="0%" stop-color="#d0deec" />
+      <stop offset="34%" stop-color="#bdd2e2" />
+      <stop offset="62%" stop-color="#ffffff" />
+      <stop offset="100%" stop-color="#d9ebf4" />
     </linearGradient>"""
     body = """    <g filter="url(#store-glyph-shadow)" fill="none"
            stroke-linecap="round" stroke-linejoin="round">
-      <g stroke="url(#store-gold-edge)" stroke-width="8.2" opacity="0.58">
-        <path d="M16.5 47L34.5 15" />
-        <path d="M47.5 47L29.5 15" />
-        <path d="M14.5 38.5H49.5" />
+      <g>
+        <path d="M15.9 38.2H48.1" stroke="url(#store-bar-edge)" stroke-width="5.3" />
+        <path d="M15.9 38.2H48.1" stroke="url(#store-bar-horizontal)" stroke-width="4.5" />
+        <path d="M16.2 37.75H47.8" stroke="#ffffff" stroke-width="0.45" opacity="0.58" />
       </g>
-      <g stroke="url(#store-gold)" stroke-width="6.25">
-        <path d="M16.5 47L34.5 15" />
-        <path d="M47.5 47L29.5 15" />
-        <path d="M14.5 38.5H49.5" />
+      <g>
+        <path d="M29.1 17.8L45.1 45.6" stroke="url(#store-bar-edge)" stroke-width="5.3" />
+        <path d="M29.1 17.8L45.1 45.6" stroke="url(#store-bar-down)" stroke-width="4.5" />
+        <path d="M28.82 18.15L44.82 45.25" stroke="#ffffff" stroke-width="0.44" opacity="0.46" />
       </g>
-    </g>
-    <path d="M32.8 16.6L17.5 43.8" fill="none" stroke="#fff9d9"
-          stroke-width="1.05" stroke-linecap="round" opacity="0.52" />
-    <path d="M15.5 37.6H48.4" fill="none" stroke="#fff6c0"
-          stroke-width="0.85" stroke-linecap="round" opacity="0.44" />
-    <circle cx="49.8" cy="16.2" r="1.4" fill="#fff7be" opacity="0.88" />
-    <path d="M49.8 12.8V19.6M46.4 16.2H53.2" stroke="#fff7be"
-          stroke-width="0.7" stroke-linecap="round" opacity="0.62" />"""
-    return tile(body, top="#17294d", bottom="#070a12",
-                defs=defs, glow=("#2f7fff", 0.18))
+      <g>
+        <path d="M35 17.8L18.9 45.6" stroke="url(#store-bar-edge)" stroke-width="5.3" />
+        <path d="M35 17.8L18.9 45.6" stroke="url(#store-bar-up)" stroke-width="4.5" />
+        <path d="M34.7 17.65L18.6 45.3" stroke="#ffffff" stroke-width="0.48" opacity="0.64" />
+      </g>
+    </g>"""
+    return tile(body, top="#0d3470", bottom="#030816",
+                defs=defs, glow=("#1687ff", 0.20))
 
 
 # --------------------------------------------------------------------------
@@ -1776,6 +1787,41 @@ def dark_shadps4_svg():
 
 
 # --------------------------------------------------------------------------
+# system log viewer / Console
+# --------------------------------------------------------------------------
+
+_LOG_WARNING_PATH = """M17.852 23.43L18.992 28.602L20.102 28.602L21.523 20.148L20.383 20.148L19.93 23.398L19.477 26.883L19.398 26.883L18.336 22.086L17.289 22.086L16.227 26.883L16.148 26.883L15.695 23.398L15.242 20.148L14.102 20.148L15.508 28.602L16.633 28.602L17.773 23.43ZM27.285 28.602L28.582 28.602L25.91 20.148L24.551 20.148L21.879 28.602L23.113 28.602L23.801 26.273L26.613 26.273ZM25.176 21.492L25.223 21.492L26.316 25.273L24.082 25.273ZM32.875 25.305L34.422 28.602L35.797 28.602L34.078 25.07C35.031 24.742 35.641 23.836 35.641 22.727C35.641 21.133 34.562 20.148 32.844 20.148L29.938 20.148L29.938 28.602L31.141 28.602L31.141 25.305ZM31.141 21.18L32.719 21.18C33.781 21.18 34.406 21.758 34.406 22.758C34.406 23.742 33.781 24.32 32.672 24.32L31.141 24.32ZM38.293 28.602L38.293 22.258L38.371 22.258L41.793 28.602L42.918 28.602L42.918 20.148L41.84 20.148L41.84 26.461L41.746 26.461L38.34 20.148L37.199 20.148L37.199 28.602ZM49.82 28.602L49.82 27.539L48.086 27.539L48.086 21.211L49.82 21.211L49.82 20.148L45.148 20.148L45.148 21.211L46.867 21.211L46.867 27.539L45.148 27.539L45.148 28.602ZM53.129 28.602L53.129 22.258L53.207 22.258L56.629 28.602L57.754 28.602L57.754 20.148L56.676 20.148L56.676 26.461L56.582 26.461L53.176 20.148L52.035 20.148L52.035 28.602ZM64.188 25.961C64.188 27.008 63.531 27.664 62.453 27.664C61.188 27.664 60.516 26.805 60.516 25.148L60.516 23.586C60.516 21.945 61.188 21.086 62.453 21.086C63.453 21.086 64.156 21.789 64.203 22.836L65.438 22.836C65.391 21.055 64.266 19.977 62.469 19.977C60.453 19.977 59.297 21.305 59.297 23.586L59.297 25.148C59.297 27.445 60.453 28.773 62.469 28.773C64.234 28.773 65.438 27.664 65.438 26.039L65.438 24.242L62.359 24.242L62.359 25.227L64.188 25.227Z"""
+_LOG_MAY_PATH = """M-3.414 41.875L-3.508 38.469L-3.43 38.469L-1.836 43.016L-0.945 43.016L0.648 38.469L0.727 38.469L0.633 41.875L0.633 45L1.695 45L1.695 36.547L0.367 36.547L-1.352 41.688L-1.43 41.688L-3.148 36.547L-4.477 36.547L-4.477 45L-3.414 45ZM8.082 45L9.379 45L6.707 36.547L5.348 36.547L2.676 45L3.91 45L4.598 42.672L7.41 42.672ZM5.973 37.891L6.02 37.891L7.113 41.672L4.879 41.672ZM14.047 45L14.047 41.609L16.844 36.547L15.5 36.547L13.484 40.344L13.406 40.344L11.391 36.547L10.047 36.547L12.828 41.609L12.828 45Z"""
+_LOG_TIME_PATH = """M27.711 45L29.008 45L32.742 37.609L32.742 36.547L26.977 36.547L26.977 37.594L31.492 37.594L31.492 37.672ZM37.223 40.562C37.848 40.562 38.348 40.047 38.348 39.422C38.348 38.797 37.848 38.281 37.223 38.281C36.613 38.281 36.098 38.797 36.098 39.422C36.098 40.047 36.613 40.562 37.223 40.562ZM37.223 45.062C37.848 45.062 38.348 44.531 38.348 43.906C38.348 43.281 37.848 42.766 37.223 42.766C36.613 42.766 36.098 43.281 36.098 43.906C36.098 44.531 36.613 45.062 37.223 45.062ZM43.609 41.141L44.594 41.141C45.703 41.141 46.422 41.719 46.422 42.641C46.422 43.547 45.719 44.109 44.625 44.109C43.609 44.109 42.906 43.562 42.812 42.703L41.672 42.703C41.75 44.203 42.938 45.172 44.656 45.172C46.406 45.172 47.641 44.156 47.641 42.688C47.641 41.547 46.969 40.766 45.844 40.625L45.844 40.531C46.75 40.312 47.297 39.578 47.297 38.578C47.297 37.281 46.188 36.375 44.625 36.375C42.984 36.375 41.922 37.297 41.844 38.797L42.984 38.797C43.047 37.922 43.656 37.391 44.578 37.391C45.5 37.391 46.109 37.922 46.109 38.75C46.109 39.578 45.469 40.172 44.562 40.172L43.609 40.172ZM55.074 42.25C55.074 40.703 53.965 39.562 52.465 39.562C51.934 39.562 51.34 39.797 51.074 40.125L50.98 40.094C51.027 39.984 51.027 39.984 51.293 39.609L53.543 36.547L52.152 36.547C52.043 36.688 50.418 38.922 50.293 39.141C49.465 40.312 49.137 41.219 49.137 42.234C49.137 43.953 50.371 45.172 52.105 45.172C53.824 45.172 55.074 43.938 55.074 42.25ZM52.105 44.125C51.09 44.125 50.324 43.344 50.324 42.312C50.324 41.266 51.09 40.5 52.105 40.5C53.121 40.5 53.887 41.266 53.887 42.312C53.887 43.344 53.121 44.125 52.105 44.125Z"""
+
+
+def dark_system_log_svg():
+    """System log viewer: cropped amber log lines on near-black glass."""
+    defs = """
+    <filter id="log-gold-glow" x="-20%" y="-35%" width="140%" height="170%">
+      <feDropShadow dx="0" dy="0" stdDeviation="1.15" flood-color="#ffd341" flood-opacity="0.58" />
+      <feDropShadow dx="0" dy="0.35" stdDeviation="0.35" flood-color="#fff0a1" flood-opacity="0.30" />
+    </filter>
+    <linearGradient id="log-gold" gradientUnits="userSpaceOnUse" x1="32" y1="19" x2="32" y2="46">
+      <stop offset="0%" stop-color="#ffdc59" />
+      <stop offset="52%" stop-color="#ffd044" />
+      <stop offset="100%" stop-color="#eeb31c" />
+    </linearGradient>
+    <linearGradient id="log-fade" gradientUnits="userSpaceOnUse" x1="51" y1="0" x2="60" y2="0">
+      <stop offset="0%" stop-color="#080809" stop-opacity="0" />
+      <stop offset="100%" stop-color="#080809" stop-opacity="0.98" />
+    </linearGradient>"""
+    body = f"""    <g fill="url(#log-gold)" filter="url(#log-gold-glow)">
+      <path d="{_LOG_WARNING_PATH}" transform="translate(0 28.6) scale(1 1.12) translate(0 -28.6)" />
+      <path d="{_LOG_MAY_PATH}" transform="translate(0 45) scale(1 1.12) translate(0 -45)" />
+      <path d="{_LOG_TIME_PATH}" transform="translate(0 45) scale(1 1.12) translate(0 -45)" />
+    </g>
+    <rect x="51" y="17" width="9" height="14" fill="url(#log-fade)" />"""
+    return tile(body, top="#1b1b1d", bottom="#050506",
+                defs=defs, glow=("#ffc52f", 0.045))
+
+
+# --------------------------------------------------------------------------
 # registry: light source file -> builder for its dark counterpart
 # --------------------------------------------------------------------------
 
@@ -1785,6 +1831,7 @@ HANDDRAWN = {
     "google-chrome.svg": dark_chrome_svg,
     "web-browser.svg": dark_web_svg,
     "softwarecenter.svg": dark_appstore_svg,
+    "logview.svg": dark_system_log_svg,
     "system-software-install.svg": dark_package_manager_svg,
     "eog.svg": dark_image_viewer_svg,
     "org.gnome.Loupe.svg": dark_loupe_svg,
