@@ -1705,6 +1705,76 @@ def dark_ricochlime_svg():
                 defs=defs, glow=("#71e650", 0.17))
 
 
+def dark_shadps4_svg():
+    """shadPS4: its official symbol family, rebuilt as sapphire Liquid Glass."""
+    defs = """
+    <filter id="shad-mark-shadow" x="-30%" y="-30%" width="160%" height="180%">
+      <feDropShadow dx="0" dy="1.35" stdDeviation="1.05" flood-color="#00020e" flood-opacity="0.82" />
+      <feDropShadow dx="0" dy="0" stdDeviation="0.48" flood-color="#b9dcff" flood-opacity="0.14" />
+    </filter>
+    <filter id="shad-symbol-glow" x="-55%" y="-55%" width="210%" height="220%">
+      <feDropShadow dx="0" dy="0.75" stdDeviation="0.7" flood-color="#00020e" flood-opacity="0.82" />
+      <feDropShadow dx="0" dy="0" stdDeviation="0.95" flood-color="#26d3ff" flood-opacity="0.42" />
+    </filter>
+    <linearGradient id="shad-symbol" gradientUnits="userSpaceOnUse" x1="13" y1="10" x2="52" y2="57">
+      <stop offset="0%" stop-color="#8cf4ff" />
+      <stop offset="45%" stop-color="#28d3ff" />
+      <stop offset="100%" stop-color="#168eff" />
+    </linearGradient>
+    <linearGradient id="shad-four" gradientUnits="userSpaceOnUse" x1="20" y1="15" x2="39" y2="50">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="50%" stop-color="#eef7ff" />
+      <stop offset="100%" stop-color="#a9c8f4" />
+    </linearGradient>
+    <linearGradient id="shad-stripe" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#1b4fba" stop-opacity="0.02" />
+      <stop offset="50%" stop-color="#2380ed" stop-opacity="0.17" />
+      <stop offset="100%" stop-color="#2bbcff" stop-opacity="0.025" />
+    </linearGradient>"""
+    body = """    <path d="M4 21 C18 14.8 44 13.2 60 18.5 V27 C42 22.3 19 23.2 4 29 Z"
+          fill="#6eb8ff" opacity="0.035" />
+    <path d="M4 34.5 C20 30.7 44 30.2 60 34 V41.2 C43 38 21 38.8 4 43.2 Z"
+          fill="url(#shad-stripe)" />
+
+    <g fill="none" stroke-linecap="round" stroke-linejoin="round" filter="url(#shad-symbol-glow)">
+      <g stroke="#01051d" stroke-opacity="0.80" stroke-width="4.5" transform="translate(0 0.75)">
+        <circle cx="17.3" cy="18.7" r="6.35" />
+        <path d="M46.8 10.6 L55.6 21.1 L43.2 24.2 Z" />
+        <path d="M7.05 44.3 L18.4 48.25 L14.5 59.6 L3.15 55.65 Z" />
+        <path d="M45.5 39.5 L54.4 51 M54.15 39.6 L45.25 50.9" />
+      </g>
+      <g stroke="url(#shad-symbol)" stroke-width="2.8">
+        <circle cx="17.3" cy="18.7" r="6.35" />
+        <path d="M46.8 10.6 L55.6 21.1 L43.2 24.2 Z" />
+        <path d="M7.05 44.3 L18.4 48.25 L14.5 59.6 L3.15 55.65 Z" />
+        <path d="M45.5 39.5 L54.4 51 M54.15 39.6 L45.25 50.9" />
+      </g>
+      <g stroke="#e4fcff" stroke-opacity="0.40" stroke-width="0.65" transform="translate(-0.28 -0.32)">
+        <circle cx="17.3" cy="18.7" r="6.35" />
+        <path d="M46.8 10.6 L55.6 21.1 L43.2 24.2 Z" />
+        <path d="M7.05 44.3 L18.4 48.25 L14.5 59.6 L3.15 55.65 Z" />
+        <path d="M45.5 39.5 L54.4 51 M54.15 39.6 L45.25 50.9" />
+      </g>
+    </g>
+
+    <g fill="none" stroke-linecap="round" stroke-linejoin="round" filter="url(#shad-mark-shadow)">
+      <g stroke="#010318" stroke-opacity="0.82" stroke-width="8.2" transform="translate(0 0.8)">
+        <path d="M34.35 16.2 L16.55 38.7 H43.1" />
+        <path d="M34.35 16.2 V49.2" />
+      </g>
+      <g stroke="url(#shad-four)" stroke-width="6.25">
+        <path d="M34.35 16.2 L16.55 38.7 H43.1" />
+        <path d="M34.35 16.2 V49.2" />
+      </g>
+      <g stroke="#ffffff" stroke-opacity="0.48" stroke-width="0.85" transform="translate(-0.42 -0.45)">
+        <path d="M34.35 16.2 L16.55 38.7 H43.1" />
+        <path d="M34.35 16.2 V49.2" />
+      </g>
+    </g>"""
+    return tile(body, top="#1b2c63", bottom="#06081b",
+                defs=defs, glow=("#1e79ff", 0.14))
+
+
 # --------------------------------------------------------------------------
 # registry: light source file -> builder for its dark counterpart
 # --------------------------------------------------------------------------
@@ -1734,6 +1804,7 @@ HANDDRAWN = {
     "addressbook.svg": dark_contacts_svg,
     "gnome-maps.svg": dark_maps_svg,
     "accessories-camera.svg": dark_camera_svg,
+    "net.shadps4.shadps4-qtlauncher.svg": dark_shadps4_svg,
 }
 
 # Artwork that must survive into dark mode untouched.
